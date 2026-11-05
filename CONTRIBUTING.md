@@ -4,13 +4,14 @@ Este archivo resume cómo trabajamos. La sección 2.1 del Documento de Ingenier�
 
 ## Comunicación
 
-- **Canal del equipo:** _por confirmar_ (para lo urgente).
+- **Canal del equipo:** grupo de WhatsApp (mensajes y llamadas, para lo urgente). No se comparten ahí datos reales de clientes.
 - **GitHub** (issues y Pull Requests) para todo lo técnico: requisitos, código, documentos y revisiones.
 - **Tiempo máximo de respuesta:** 24 horas en días hábiles.
 
 ## Reuniones
 
-- **Daily:** breve, de lunes a viernes, presencial o por mensaje (qué hice, qué haré, qué me bloquea).
+- **Modalidad:** presencial o por llamada en el grupo de WhatsApp. Lo que se decide se registra en GitHub.
+- **Daily:** breve, de lunes a viernes (qué hice, qué haré, qué me bloquea).
 - **Eventos de Scrum:** Planning al inicio de cada sprint de dos semanas; Review y Retrospectiva al cierre.
 
 ## Decisiones

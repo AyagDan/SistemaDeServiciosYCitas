@@ -33,7 +33,7 @@ Servicio Automotriz Hermanos Ruiz, S.A. de C.V.
 | Prototipo de UI (Figma / Penpot) | Pendiente |
 | Ambiente de pruebas (staging) | Pendiente |
 | Release v0.1.0 | Pendiente |
-| Canal de comunicación del equipo | Pendiente |
+| Canal de comunicación del equipo | Grupo de WhatsApp del equipo (mensajes y llamadas); reuniones presenciales en la escuela. |
 ## 1.3 Resumen ejecutivo
 Servicio Automotriz Hermanos Ruiz opera hoy con cuadernos, órdenes en papel y llamadas. Esto provoca disputas por cobros que el cliente dice no haber autorizado, reclamos por daños sin evidencia del estado en que llegó el vehículo, muchas llamadas para preguntar por el avance y poca visibilidad de qué vehículo ocupa cada una de las 4 bahías.
 El Sistema de Órdenes de Servicio y Citas digitaliza el ciclo de atención: la cita, la recepción del vehículo con checklist y fotografías, el diagnóstico y la asignación de bahía, la cotización que el cliente autoriza desde su celular con un código de verificación, y el cobro y la entrega. El cliente consulta el estado de su vehículo con un enlace seguro, sin instalar aplicaciones.
@@ -41,8 +41,8 @@ Estado actual (v0.1): se levantaron los requisitos con el cliente (entrevista de
 # 2. Gestión del proyecto con Scrum
 ## 2.1 Acuerdos de trabajo
 Los acuerdos completos están en CONTRIBUTING.md del repositorio. En resumen:
-• Comunicación: canal del equipo (Pendiente) para lo urgente y GitHub (issues y Pull Requests) para todo lo técnico. Tiempo máximo de respuesta: 24 horas en días hábiles.
-• Reuniones: Daily breve de lunes a viernes (presencial o por mensaje) y los eventos de Scrum al inicio y al cierre de cada sprint de dos semanas.
+• Comunicación: grupo de WhatsApp del equipo para lo urgente y GitHub (issues y Pull Requests) para todo lo técnico. Tiempo máximo de respuesta: 24 horas en días hábiles.
+• Reuniones: se hacen de manera presencial o por llamada en el grupo de WhatsApp: Daily breve de lunes a viernes y los eventos de Scrum al inicio y al cierre de cada sprint de dos semanas. Lo que se decide en una reunión se registra en GitHub (issue, minuta o documento).
 • Decisiones: por consenso; si no se logra, decide el Product Owner en temas de alcance y prioridad, y el Scrum Master en temas de proceso.
 • Ramas: main está protegida; hay una rama por rol de Scrum (rol/product-owner, rol/scrum-master, rol/qa-lead, rol/developers) y cada rol integra a main con un merge que deja visible su rama, mediante Pull Request con al menos una revisión de otro integrante. Las ramas personales anteriores (rama/<NOMBRE>) quedan en el historial.
 • Commits: en español y en presente, con el formato «Rol: mensaje» y referencia a la historia cuando aplique (por ejemplo, «Developers: implementa recepción con checklist (HU-01)»).
