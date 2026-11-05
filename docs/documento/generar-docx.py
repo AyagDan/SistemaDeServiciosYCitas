@@ -26,9 +26,10 @@ PREAMBULO_PANDOC = r"""\documentclass{article}
   \begin{figure}\centering\includegraphics{#1}
   \caption{\textbf{Figura #3.} #4. Fuente: \texttt{#5}}\end{figure}}
 \newcommand{\figurapendiente}[4]{%
-  \begin{quote}\textbf{Contenido:} #3\par \textbf{Archivo fuente:} \texttt{#4}\end{quote}
+  \begin{quote}\textcolor{red}{\textbf{Pendiente}}\par \textbf{Descripción:} #3\par
+  \textbf{Archivo fuente:} \texttt{#4}\end{quote}
   \textbf{Figura #1.} #2. Fuente: \texttt{#4}\par}
-\newcommand{\pendiente}[1]{por definir: #1}
+\newcommand{\pendiente}{\textcolor{red}{Pendiente}}
 """
 
 CELDA_NUMERICA = re.compile(r"(&[ \t]*)(\d[\d.,]*)(?=[ \t]*(?:&|\\\\))")

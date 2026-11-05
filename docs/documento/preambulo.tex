@@ -65,10 +65,11 @@
 \newcommand{\figurapendiente}[4]{%
   \begin{figure}[H]\centering
   \fcolorbox{black!40}{black!3}{\parbox{0.92\linewidth}{\small
-    \textbf{Contenido:} #3\par\smallskip
+    \textcolor{red}{\textbf{Pendiente}}\par\smallskip
+    \textbf{Descripción:} #3\par\smallskip
     \textbf{Archivo fuente:} \ruta{#4}}}
   \caption[Figura #1. #2]{\textbf{Figura #1.} #2. Fuente: \ruta{#4}}
   \end{figure}}
 
-% Dato por definir (sin corchetes ni color, para la versión de entrega).
-\newcommand{\pendiente}[1]{por definir: #1}
+% Dato que falta: solo dice «Pendiente», en rojo.
+\newcommand{\pendiente}{\textcolor{red}{Pendiente}}

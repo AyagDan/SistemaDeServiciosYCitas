@@ -1,7 +1,7 @@
 # Graph Report - Florentino  (2026-11-05)
 
 ## Corpus Check
-- 34 files · ~77,385 words
+- 34 files · ~76,923 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 25 file(s) not represented in the graph (top: .tex 17, .puml 5, (none) 1)
 
@@ -11,7 +11,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `f963b4f9`
+- Built from commit: `6a98f1af`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -27,7 +27,7 @@
 - ordenes.py
 - 4. Especificación de requisitos de software (SRS)
 - cobro.py
-- IS1-Fase1-EquipoB-v1.1_5717b748.md
+- IS1-Fase1-EquipoB-v0.1_95255212.md
 - 7. Arquitectura y diseño
 - 2. Gestión del proyecto con Scrum
 - 3. Visión y viabilidad del producto
@@ -111,7 +111,7 @@ Nodes (16): 4.10 Prototipos de baja fidelidad, 4.11 Validación de requisitos co
 Cohesion: 0.11
 Nodes (13): Garantia, Pago, Mensaje, ultimo_mensaje(), ahora(), hoy(), utc(), autorizar_credito() (+5 more)
 
-### Community 12 - "IS1-Fase1-EquipoB-v1.1_5717b748.md"
+### Community 12 - "IS1-Fase1-EquipoB-v0.1_95255212.md"
 Cohesion: 0.18
 Nodes (10): 11. Paquete de transferencia a la Fase 2, 12.1 Retrospectiva del proyecto, 12.2 Contribución individual, 12. Retrospectiva del proyecto y contribución individual, 13. Referencias, 5.1 Plan de pruebas, 5.2 Casos de prueba de aceptación, 5.3 Matriz de trazabilidad (+2 more)
 

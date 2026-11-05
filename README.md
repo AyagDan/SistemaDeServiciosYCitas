@@ -63,7 +63,7 @@ Las figuras que todavía no tienen imagen aparecen en un recuadro gris con su co
 | Integrante | GitHub | Rol |
 |---|---|---|
 | Ángel Yael Avendaño Guzmán | AyagDan | Product Owner |
-| Abdías Daniel Chávez Cruz | AbdiasChavez | Scrum Master / Tech Lead |
-| Dulce María Estudillo Rosado | rosadomar.qx | QA Lead / Developer |
+| Abdías Daniel Chávez Cruz | absdan | Scrum Master / Tech Lead |
+| Dulce María Estudillo Rosado | DulceRosado | QA Lead / Developer |
 | Isis Alhelí González Maldonado | IsisAlheliGonzalezMaldonado | Developer |
 | Isis Yamilet Meléndez Hernández | IsisMelendezHernandez | Developer (interfaz, datos y documentación) |

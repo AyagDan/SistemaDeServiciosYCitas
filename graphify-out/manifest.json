@@ -1,8 +1,8 @@
 {
   "README.md": {
-    "mtime": 1793910528.5640786,
-    "seen": 1793910752.9357202,
-    "ast_hash": "5c01b2e62b2e6d79008324c9e0e740eb",
+    "mtime": 1793911186.218367,
+    "seen": 1793911283.7683237,
+    "ast_hash": "be4d6da83b08226cdb4f112842d6c862",
     "semantic_hash": ""
   },
   "CONTRIBUTING.md": {
@@ -197,12 +197,6 @@
     "ast_hash": "55de4d41a5038c5d97da060f5f2c89c9",
     "semantic_hash": ""
   },
-  "docs/entregas/IS1-Fase1-EquipoB-v1.1.pdf": {
-    "mtime": 1793910584.4161077,
-    "seen": 1793910752.9358392,
-    "ast_hash": "2986f81cea8142c9382fdba627522da4",
-    "semantic_hash": ""
-  },
   "docs/06-analisis/clases/diagrama-clases-v4-1.png": {
     "mtime": 1793322052.6671736,
     "seen": 1793322214.7400298,
@@ -222,15 +216,21 @@
     "semantic_hash": ""
   },
   "docs/documento/generar-docx.py": {
-    "mtime": 1793910728.2845426,
-    "seen": 1793910752.9354901,
-    "ast_hash": "986ff8c176f9c260eae2b6155b8b9c3c",
+    "mtime": 1793911263.9596918,
+    "seen": 1793911283.7679174,
+    "ast_hash": "a3610b9c20ed4aebd7201741e660a53c",
     "semantic_hash": ""
   },
-  "graphify-out/converted/IS1-Fase1-EquipoB-v1.1_5717b748.md": {
-    "mtime": 1793910750.0590222,
-    "seen": 1793910752.9358375,
-    "ast_hash": "61f74546463e1045437841b48ad69a15",
+  "graphify-out/converted/IS1-Fase1-EquipoB-v0.1_95255212.md": {
+    "mtime": 1793911280.3734174,
+    "seen": 1793911283.7685199,
+    "ast_hash": "4272c3709fbb56f85501de62b5672e18",
+    "semantic_hash": ""
+  },
+  "docs/entregas/IS1-Fase1-EquipoB-v0.1.pdf": {
+    "mtime": 1793911251.0004892,
+    "seen": 1793911283.7685232,
+    "ast_hash": "efec184befe7e7af39c7857c8c802409",
     "semantic_hash": ""
   }
 }

@@ -40,7 +40,7 @@ RNF-07 & Toda la pila es de código abierto: Python, FastAPI, SQLAlchemy, Postgr
 ADR-003). \\
 RNF-08 y RNF-09 & Las entidades «OfflineSync» llevan \texttt{uuid\_local} único, generado en el dispositivo:
 reenviar un registro ya sincronizado no lo duplica (sincronización idempotente). La captura sin conexión
-vivirá en la PWA con IndexedDB. El endpoint de sincronización por lotes se construye en el Sprint 4. \\
+vivirá en la PWA con IndexedDB. Endpoint de sincronización por lotes: \pendiente{}. \\
 RNF-10 & Las operaciones del portal son seguras de reintentar: pedir un código nuevo expira el anterior y
 un código solo se acepta una vez (CPA-15), así que un reintento automático no duplica autorizaciones. \\
 RNF-01 & El portal del cliente es web y responsivo; no requiere instalar nada ni conceder permisos. \\
@@ -123,7 +123,7 @@ Contexto & Se necesita un ambiente de pruebas con HTTPS, PostgreSQL y almacenami
 costo (RNF-07). \\
 Alternativas evaluadas & 1. Render (servicio web gratuito) + PostgreSQL gestionado gratuito (Neon o
 Supabase). 2. Fly.io. 3. Servidor dentro del taller. \\
-Decisión & En revisión por el equipo; la recomendación inicial es la opción 1 por su HTTPS
+Decisión & \pendiente{}. Recomendación inicial: opción 1 por su HTTPS
 automático y despliegue desde GitHub. \\
 Consecuencias & Opción 1: \textbf{+} sin servidor que mantener; \textbf{--} el plan gratuito suspende el
 servicio tras inactividad y limita el almacenamiento (R-06). \\
