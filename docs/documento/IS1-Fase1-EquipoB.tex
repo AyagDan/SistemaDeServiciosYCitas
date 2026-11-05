@@ -2,6 +2,7 @@
 % Compilar desde docs/documento/:
 %   pdflatex -interaction=nonstopmode IS1-Fase1-EquipoB.tex   (dos veces, por el índice)
 % Cada sección vive en secciones/ para que cada rol la edite en su rama sin conflictos.
+% Entregables (formato del profesor): docs/entregas/IS1-Fase1-EquipoB-v<versión>.pdf y .docx
 \newcommand{\versiondoc}{1.1}
 \newcommand{\fechadoc}{29/10/2026}
 \input{preambulo}
@@ -26,14 +27,13 @@ Servicio Automotriz Hermanos Ruiz, S.A. de C.V.\par
 \textbf{Producto:} & Sistema de Órdenes de Servicio y Citas\\
 \textbf{Versión del documento:} & v\versiondoc\\
 \textbf{Fecha:} & \fechadoc\\
+\textbf{Repositorio:} & \url{https://github.com/AbdiasChavez/Florentino}\\
 \end{tabular}
 \end{titlepage}
 
 \tableofcontents
 \clearpage
 
-\input{secciones/00-como-usar}
-\input{secciones/00-portada}
 \input{secciones/01-informacion-general}
 \input{secciones/02-gestion-scrum}
 \input{secciones/03-vision-viabilidad}
@@ -48,6 +48,5 @@ Servicio Automotriz Hermanos Ruiz, S.A. de C.V.\par
 \input{secciones/12-retrospectiva}
 \input{secciones/13-referencias}
 \input{secciones/14-anexos}
-\input{secciones/15-lista-verificacion}
 
 \end{document}

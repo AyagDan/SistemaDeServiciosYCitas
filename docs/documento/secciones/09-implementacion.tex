@@ -11,11 +11,11 @@ v0.1.0}\label{implementaciuxf3n-del-release-v0.1.0}
 \endhead
 \bottomrule
 \endlastfoot
-Interfaz & \pendiente{PWA por definir en el Sprint 3}. Hoy: documentación interactiva OpenAPI de FastAPI
+Interfaz & PWA (se define en el Sprint 3). Hoy: documentación interactiva OpenAPI de FastAPI
 (\texttt{/docs}) & ADR-001, ADR-002 \\
 Lógica de negocio / API & Python 3.12, FastAPI 0.115+, Pydantic 2, SQLAlchemy 2.0, Uvicorn & ADR-002 \\
 Base de datos & PostgreSQL 16 (esquema \texttt{db/schema.sql}); SQLite para desarrollo y pruebas & ADR-003 \\
-Hospedaje del ambiente de pruebas & \pendiente{por decidir} & ADR-004 \\
+Hospedaje del ambiente de pruebas & En decisión (ver ADR-004) & ADR-004 \\
 Integración continua & GitHub Actions (\texttt{.github/workflows/ci.yml}) & --- \\
 \end{longtable}
 }
@@ -57,8 +57,8 @@ Pull Request, con tres trabajos:
 \textbf{Flujo de trabajo:} cada rol trabaja en su rama (\texttt{rol/product-owner}, \texttt{rol/scrum-master},
 \texttt{rol/qa-lead}, \texttt{rol/developers}); los commits llevan el formato «Rol: mensaje» y se integran
 a \texttt{main} con un merge sin fast-forward, para que quede visible qué integró cada rol.
-\pendiente{activar la protección de main (Pull Request con al menos una revisión y CI aprobada) y
-registrar aquí las estadísticas de Pull Requests revisados.}
+Por acuerdo del equipo, la rama main se integra mediante Pull Request con al menos una revisión y la CI aprobada
+(CONTRIBUTING.md).
 
 \figurapendiente{9.1}{Ejecución exitosa del pipeline de integración continua}{captura de la pestaña
 Actions de GitHub con los tres trabajos (Pruebas del backend, Esquema en PostgreSQL, Documento de
@@ -67,9 +67,9 @@ Ingeniería) en verde para el último commit de main.}{.github/workflows/ci.yml}
 \subsection{9.4 Evidencia del flujo
 núcleo}\label{evidencia-del-flujo-nuxfacleo}
 
-\textcolor{red}{Pendiente hasta tener el ambiente de pruebas (Sprint 4) y la interfaz web (Sprint 5).
+Las capturas se obtienen con el ambiente de pruebas (Sprint 4) y la interfaz web (Sprint 5).
 Mientras tanto, el flujo completo está cubierto por las pruebas automatizadas CPA-01, CPA-13, CPA-22 y
-CPA-35.}
+CPA-35.
 
 \figurapendiente{9.2}{Apertura de orden con checklist y fotografías}{pantalla de recepción en el
 ambiente de pruebas con datos ficticios: kilometraje, combustible, checklist completo, las 4 fotografías

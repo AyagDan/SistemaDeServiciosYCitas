@@ -15,7 +15,7 @@ El avance detallado, paso a paso y por rol, está en [`Avances.txt`](Avances.txt
 | `backend/` | API REST (Python, FastAPI) del flujo núcleo y sus pruebas automatizadas |
 | `db/schema.sql` | Esquema de la base de datos (PostgreSQL), derivado del diagrama de clases v4 |
 | `docs/documento/` | Documento de Ingeniería del Proyecto en LaTeX, un archivo por sección |
-| `docs/entregas/` | PDF de cada entrega (`IS1-Fase1-EquipoB-v<versión>.pdf`) |
+| `docs/entregas/` | Cada entrega en PDF y Word (`IS1-Fase1-EquipoB-v<versión>.pdf` y `.docx`) |
 | `docs/propuesta/` | Propuesta de Solución Tecnológica (LaTeX) |
 | `docs/03-vision/`, `docs/06-analisis/` | Fuentes de los diagramas (PlantUML) e imágenes del diagrama de clases |
 | `.github/workflows/ci.yml` | Integración continua: pruebas, esquema en PostgreSQL y compilación del documento |
@@ -56,16 +56,14 @@ cd docs/documento
 pdflatex -interaction=nonstopmode IS1-Fase1-EquipoB.tex   # dos veces, por el índice
 ```
 
-Las figuras que todavía no existen aparecen en rojo con su descripción y la ruta de su archivo fuente.
+Las figuras que todavía no tienen imagen aparecen en un recuadro gris con su contenido y la ruta de su archivo fuente.
 
 ## Equipo
 
 | Integrante | GitHub | Rol |
 |---|---|---|
-| Abdías Daniel Chávez Cruz | AbdiasChavez | Product Owner, Developer |
-| Ángel Yael Avendaño Guzmán | AyagDan | Scrum Master, Developer |
-| Dulce María Estudillo Rosado | DulceRosado | Developer |
+| Ángel Yael Avendaño Guzmán | AyagDan | Product Owner |
+| Abdías Daniel Chávez Cruz | AbdiasChavez | Scrum Master / Tech Lead |
+| Dulce María Estudillo Rosado | rosadomar.qx | QA Lead / Developer |
 | Isis Alhelí González Maldonado | IsisAlheliGonzalezMaldonado | Developer |
-| Isis Yamilet Meléndez Hernández | IsisMelendezHernandez | Developer |
-
-El rol de QA Lead está por asignar.
+| Isis Yamilet Meléndez Hernández | IsisMelendezHernandez | Developer (interfaz, datos y documentación) |

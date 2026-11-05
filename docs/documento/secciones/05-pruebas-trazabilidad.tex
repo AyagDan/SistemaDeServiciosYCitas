@@ -29,7 +29,7 @@ Manual para usabilidad y dispositivos (RNF-01 a RNF-03). Herramientas: pytest, h
 GitHub Actions; Lighthouse/axe para accesibilidad (Sprint 5). \\
 Entornos & \textbf{Local:} SQLite en memoria, reloj controlable para probar vigencias.
 \textbf{CI:} GitHub Actions ejecuta las pruebas, carga \texttt{db/schema.sql} en PostgreSQL 16 y compila este
-documento. \textbf{Staging:} \pendiente{definir hospedaje (ADR-004) y URL}. Siempre datos ficticios (RNF-05). \\
+documento. \textbf{Staging:} hospedaje y URL según ADR-004 (Sprint 4). Siempre datos ficticios (RNF-05). \\
 Criterios de entrada & La historia cumple la DoR; existe su caso CPA en 5.2; el código está en un Pull
 Request hacia \texttt{main}. \\
 Criterios de salida & 100\,\% de las pruebas automatizadas pasan en CI; 0 defectos S1/S2 abiertos; todos
@@ -122,8 +122,8 @@ RF-04 (Must) & HU-01, HU-25, HU-26 & CU-02 & CPA-01 a CPA-04 & servicios/ordenes
 RF-05 (Must) & HU-07, HU-08, HU-09, HU-11 & CU-05 & CPA-05 a CPA-09, CPA-35 & servicios/ordenes.py & Pasa \\
 RF-06 (Must) & HU-02, HU-12 a HU-15 & CU-03, CU-05, CU-11 & CPA-10 a CPA-17 & servicios/cotizaciones.py & Pasa \\
 RF-07 (Must) & HU-16 & CU-07 & CPA-18, CPA-19 & servicios/cotizaciones.py, cobro.py & Pasa \\
-RF-08.1 (Should) & HU-10, HU-19 & CU-06 & \pendiente{CPA por diseñar} & --- & No iniciado \\
-RF-08.2 (Should) & HU-17, HU-18 & CU-08 & \pendiente{CPA por diseñar} & --- & No iniciado \\
+RF-08.1 (Should) & HU-10, HU-19 & CU-06 & CPA por diseñar (Sprint 4) & --- & No iniciado \\
+RF-08.2 (Should) & HU-17, HU-18 & CU-08 & CPA por diseñar (Sprint 4) & --- & No iniciado \\
 RF-08.3 (Could) & HU-18 & CU-08 & --- & --- & No iniciado \\
 RF-09 (Should) & HU-03, HU-04, HU-06 & CU-01, CU-09 & CPA-31 a CPA-34 & servicios/citas.py & Pasa \\
 RF-10 (Must) & HU-21, HU-22, HU-23 & CU-04, CU-13 & CPA-21 a CPA-25 & servicios/cobro.py & Pasa \\

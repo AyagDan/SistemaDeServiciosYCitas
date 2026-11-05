@@ -59,17 +59,16 @@
   \caption[Figura #3. #4]{\textbf{Figura #3.} #4. Fuente: \ruta{#5}}
   \end{figure}}
 
-% Figura pendiente: se deja el lugar, la descripción y la fuente, en rojo,
-% sin la imagen. Se reemplaza por \figura cuando exista la imagen.
-%   \figurapendiente{número}{título}{descripción de lo que debe mostrar}{ruta fuente}
+% Figura descrita: mientras no exista la imagen se muestra un recuadro neutro
+% con su contenido y la ruta de la fuente. Se reemplaza por \figura cuando exista.
+%   \figurapendiente{número}{título}{contenido de la figura}{ruta fuente}
 \newcommand{\figurapendiente}[4]{%
   \begin{figure}[H]\centering
-  \fcolorbox{red}{red!4}{\parbox{0.92\linewidth}{\color{red}\small
-    \textbf{PENDIENTE: imagen de la Figura #1}\par\smallskip
-    \textbf{Debe mostrar:} #3\par\smallskip
+  \fcolorbox{black!40}{black!3}{\parbox{0.92\linewidth}{\small
+    \textbf{Contenido:} #3\par\smallskip
     \textbf{Archivo fuente:} \ruta{#4}}}
-  \caption[Figura #1. #2]{\textcolor{red}{\textbf{Figura #1.} #2. Fuente: \ruta{#4}}}
+  \caption[Figura #1. #2]{\textbf{Figura #1.} #2. Fuente: \ruta{#4}}
   \end{figure}}
 
-% Texto pendiente (dato que falta o que debe confirmarse con el cliente).
-\newcommand{\pendiente}[1]{\textcolor{red}{\textbf{[Pendiente:} #1\textbf{]}}}
+% Dato por definir (sin corchetes ni color, para la versión de entrega).
+\newcommand{\pendiente}[1]{por definir: #1}
