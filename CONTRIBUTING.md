@@ -54,6 +54,10 @@ Seguimos **GitHub Flow**: `main` siempre está estable y cada historia o tarea s
   para la entrega (`python docs/documento/generar-docx.py`).
 - Compila con `pdflatex -interaction=nonstopmode IS1-Fase1-EquipoB.tex` (dos veces) y revisa el `.log`
   si hay errores. El PDF entregable va en `docs/entregas/IS1-Fase1-EquipoB-v<versión>.pdf`.
+- **Versión de las correcciones:** cada corrección aumenta en uno el tercer dígito de la versión del
+  documento (`v0.2` sin correcciones, `v0.2.1` con la primera, `v0.2.2` con la segunda…). La versión se
+  indica en todos lados: `\versiondoc` (portada y encabezado), control de versiones, Anexo F, README y
+  una etiqueta de Git `v<versión>` en el commit que integra la corrección.
 - Los diagramas se guardan con su archivo fuente (PlantUML, draw.io, Mermaid o script) junto a la imagen.
 - Una figura que todavía no existe se deja con `\figurapendiente{número}{título}{qué debe mostrar}{ruta}`:
   sale en rojo con su descripción hasta que alguien la reemplace por `\figura{...}`.

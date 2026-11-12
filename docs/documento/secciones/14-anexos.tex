@@ -172,25 +172,32 @@ observación tiene su issue con las etiquetas \texttt{tipo:defecto-doc},
 severidad y \texttt{origen:cliente}, y se corrige en su propia rama con
 un Pull Request que cierra el issue.
 
+Cada corrección aumenta en uno el tercer dígito de la versión del
+documento: la v0.2 es la entrega de la Review 1 sin correcciones, la
+v0.2.1 incluye la primera corrección, la v0.2.2 la segunda, y así
+sucesivamente. La versión se registra en la portada, en el control de
+versiones, en esta tabla y con una etiqueta de Git del mismo nombre.
+
 {\small
 \begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{0.06\linewidth}
+  >{\raggedright\arraybackslash}p{0.09\linewidth}
   >{\raggedright\arraybackslash}p{0.07\linewidth}
-  >{\raggedright\arraybackslash}p{0.08\linewidth}
-  >{\raggedright\arraybackslash}p{0.07\linewidth}
-  >{\raggedright\arraybackslash}p{0.72\linewidth}@{}}
+  >{\raggedright\arraybackslash}p{0.06\linewidth}
+  >{\raggedright\arraybackslash}p{0.61\linewidth}@{}}
 \toprule
-\textbf{ID} & \textbf{Issue} & \textbf{PR} & \textbf{Cómo se resolvió} \\
+\textbf{ID} & \textbf{Versión} & \textbf{Issue} & \textbf{PR} & \textbf{Cómo se resolvió} \\
 \midrule
 \endhead
 \bottomrule
 \endlastfoot
-B11 & \#9 & \#15 & Se retiraron de 3.4 y de la Figura 3.1 al equipo de
+B11 & v0.2.1 & \#9 & \#15 & Se retiraron de 3.4 y de la Figura 3.1 al equipo de
 desarrollo y al docente evaluador, que no son stakeholders del producto.
 El documento se versiona según la tabla 0.2 del machote: la v0.1
 (Review 0) contiene solo portada, 1, 2.1--2.4 y 3, y la v0.2 (Review 1)
 agrega 4.1--4.7; cada entrega incluye únicamente las secciones de su
 corte. \\
-B5 & \#10 & \#16 & Se cambió la estrategia de ramas a GitHub Flow: una
+B5 & v0.2.2 & \#10 & \#16 & Se cambió la estrategia de ramas a GitHub Flow: una
 rama por historia o tarea con la convención
 \texttt{tipo/número-descripción}. Se actualizaron CONTRIBUTING.md, el
 README y la sección 2.1; las ramas por integrante
@@ -198,7 +205,7 @@ README y la sección 2.1; las ramas por integrante
 de esta revisión ya usan la convención
 (\texttt{fix/9-version-stakeholders}, \texttt{docs/10-ramas-por-historia},
 \texttt{docs/20-anexo-entrevista}). \\
-B3 & \#20 & \#21 & Se agregó el Anexo A con el guion de la entrevista
+B3 & v0.2.3 & \#20 & \#21 & Se agregó el Anexo A con el guion de la entrevista
 (22 preguntas) y la minuta del 19/10/2026, con los hallazgos E-01 a E-11.
 Cada regla de 4.7 que proviene de la entrevista cita en su fuente el
 hallazgo de la minuta. Los anexos ya no contienen texto del machote. La
