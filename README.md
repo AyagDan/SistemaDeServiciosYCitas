@@ -23,7 +23,7 @@ Cada historia o tarea se trabaja en su propia rama `tipo/número-descripción` (
 
 | Corte | Versión | Secciones | Archivos |
 |---|---|---|---|
-| Review 0 | v0.1 | Portada, 1, 2.1–2.4, 3 | `IS1_Fase1_EquipoB_Documento_Ingenieria-v0.1.docx` (versión en Word, antes de migrar a LaTeX) |
+| Review 0 | v0.1 | Portada, 1, 2.1–2.4, 3 | `docs/entregas/IS1-Fase1-EquipoB-v0.1.docx` (versión en Word, antes de migrar a LaTeX) |
 | Review 1 | v0.2 | + 4.1–4.5 (borrador), 4.6, 4.7 | Se genera desde `docs/documento/` en `docs/entregas/IS1-Fase1-EquipoB-v0.2.pdf` y `.docx` |
 
 Cada corrección aumenta en uno el tercer dígito de la versión y tiene una etiqueta de Git con ese nombre.
@@ -43,7 +43,7 @@ Versión vigente: **v0.2.3**.
 | `docs/entregas/` | Cada entrega en PDF y Word (`IS1-Fase1-EquipoB-v<versión>`) |
 | `docs/03-vision/` | Fuentes de las figuras de la sección 3 (proceso actual y mapa de poder/interés) |
 | `docs/04-requisitos/` | Fuente del story map de la sección 4.5 |
-| `informacion/` | Material de referencia del curso: machote del documento, observaciones de la Review 1 y su plan de atención, reglas de negocio y de datos, propuesta de solución e indicaciones de clase |
+| `informacion/` | Material de referencia del curso: machote del documento, observaciones de la Review 1 y su plan de atención, reglas de negocio y de datos, propuesta de solución (resumen en `contexto.md` y original en Word) e indicaciones de clase |
 | `CONTRIBUTING.md` | Acuerdos de trabajo del equipo |
 
 ## Compilar el documento
