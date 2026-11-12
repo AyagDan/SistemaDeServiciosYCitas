@@ -238,3 +238,71 @@ cliente & Media & Alto & Mitigar: decidir el hospedaje del ambiente de pruebas a
 responsable: Developers & Abierto \\
 \end{longtable}
 }
+
+\subsection{2.6 Declaración de uso de inteligencia
+artificial}\label{declaracion-de-uso-de-ia}
+
+El equipo usó un asistente de inteligencia artificial para pasar el
+documento a LaTeX, atender las observaciones de la Review 1 y organizar el
+repositorio. La tabla indica en qué se usó, cómo se verificó el resultado
+y quién responde por él.
+
+{\small
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{0.13\linewidth}
+  >{\raggedright\arraybackslash}p{0.21\linewidth}
+  >{\raggedright\arraybackslash}p{0.20\linewidth}
+  >{\raggedright\arraybackslash}p{0.22\linewidth}
+  >{\raggedright\arraybackslash}p{0.13\linewidth}@{}}
+\toprule
+\textbf{Herramienta} & \textbf{Sección o artefacto} & \textbf{Para qué se usó} & \textbf{Cómo se verificó} & \textbf{Responsable} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+Claude Code (Anthropic) & Documento en LaTeX (\ruta{docs/documento/}):
+migración desde el Word v0.1, plantilla, preámbulo y
+\ruta{generar-docx.py} & Pasar a LaTeX el contenido que el equipo ya
+había redactado en Word, con un archivo por sección & El documento
+compila con pdflatex sin errores & Abdías Daniel Chávez Cruz \\
+Claude Code (Anthropic) & Correcciones B11 y B5: 3.4, Figura 3.1,
+portada, control de versiones, CONTRIBUTING.md, README, 2.1 y Anexo F &
+Redactar los cambios que pide cada observación & Compilación sin errores
+y comprobación de que no quedan los stakeholders retirados ni las ramas
+por rol & Abdías Daniel Chávez Cruz \\
+Claude Code (Anthropic) & Corrección B3: Anexo A (guion y minuta de la
+entrevista) y fuentes de las reglas de 4.7 & Redactar el guion y la
+minuta, y ligar cada regla con su hallazgo & Cada regla de entrevista de
+4.7 cita un hallazgo de la minuta. La minuta está pendiente de validar
+por el Product Owner contra sus notas de la entrevista & Abdías Daniel
+Chávez Cruz \\
+Claude Code (Anthropic) & Corrección B4: issues de las 30 historias,
+números en 4.5, 2.3, minuta de la Review 1 y 12.2 & Registrar los issues
+a partir de 4.5, resumir la retroalimentación del profesor y contar
+commits, PR y revisiones & Datos comprobados contra GitHub y contra
+\ruta{informacion/correcionesContexto.md} & Abdías Daniel Chávez Cruz \\
+Claude Code (Anthropic) & Propuesta de alcance del Release v0.1.0
+(observación B2) & Redactar la propuesta a partir de 4.5 y del
+anteproyecto & Sumas de historias y puntos comprobadas contra 4.5.
+Pendiente de revisión por el Product Owner y de negociación con el
+cliente & Abdías Daniel Chávez Cruz \\
+Claude Code (Anthropic) & Versiones v0.2.1 a v0.2.3, etiquetas de Git,
+issues, ramas, Pull Requests, carpeta \ruta{informacion/} y esta
+declaración & Aplicar los acuerdos de CONTRIBUTING.md en el repositorio &
+Estado del repositorio comprobado en GitHub después de cada cambio &
+Abdías Daniel Chávez Cruz \\
+\pendiente{} & Contenido original de las secciones 1 a 4, redactado en
+Word en octubre de 2026 & \pendiente{} & \pendiente{} & Cada autor declara
+su parte \\
+\end{longtable}
+}
+
+\textbf{Datos personales.} No se ingresaron datos de clientes en la
+herramienta: el proyecto solo usa datos ficticios. El asistente trabajó
+sobre el contenido del repositorio, que incluye los nombres y las
+matrículas de los integrantes (sección 1.1).
+
+\textbf{Concentración del trabajo.} Todo el uso del asistente estuvo a
+cargo de un solo integrante. Para repartir ese conocimiento, el Tech Lead
+explicará al equipo los cambios hechos en una sesión interna con minuta
+(observación B6, fecha límite 18/11/2026).
