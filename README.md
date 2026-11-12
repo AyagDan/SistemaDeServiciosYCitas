@@ -44,7 +44,11 @@ Versión vigente: **v0.2.3**.
 | `docs/03-vision/` | Fuentes de las figuras de la sección 3 (proceso actual y mapa de poder/interés) |
 | `docs/04-requisitos/` | Fuente del story map de la sección 4.5 |
 | `informacion/` | Material de referencia del curso: machote del documento, observaciones de la Review 1 y su plan de atención, reglas de negocio y de datos, propuesta de solución (resumen en `contexto.md` y original en Word) e indicaciones de clase |
+| `docs/minutas/` | Minutas de las Sprint Reviews |
 | `CONTRIBUTING.md` | Acuerdos de trabajo del equipo |
+
+Las historias de usuario (HU-01 a HU-30) están registradas como issues del repositorio (#31 a #60),
+con las etiquetas `historia de usuario` y su prioridad (`Must`, `Should` o `Could`).
 
 ## Compilar el documento
 
