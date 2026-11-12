@@ -23,11 +23,21 @@ Se toman por consenso. Si no se logra:
 
 ## Ramas y Pull Requests
 
+Seguimos **GitHub Flow**: `main` siempre está estable y cada historia o tarea se trabaja en su propia rama.
+
 - `main` está protegida: solo se integra mediante Pull Request.
-- Hay una rama por rol de Scrum: `rol/product-owner`, `rol/scrum-master`, `rol/qa-lead` y `rol/developers`.
-  Cada rol trabaja en la suya y la integra a `main` con un merge sin fast-forward (`git merge --no-ff`),
-  para que quede visible qué integró cada rol.
+- **Una rama por historia o tarea**, creada desde `main` actualizado, con la convención
+  **`tipo/número-descripción`**:
+  - `tipo`: `feat` (funcionalidad), `fix` (corrección), `docs` (documento), `test` (pruebas) o `ci`.
+  - `número`: el issue que atiende (historia HU, observación o tarea).
+  - `descripción`: dos a cuatro palabras en minúsculas separadas por guiones.
+  - Ejemplos: `fix/9-version-stakeholders` (observación B11, issue #9), `docs/10-ramas-por-historia`
+    (observación B5, issue #10); una historia HU registrada como issue #n va en `feat/n-<descripción>`.
+- Una rama contiene el trabajo de una sola historia o tarea. Si algo no pertenece a ella, va en otra rama.
+- El Pull Request cierra su issue (`Closes #n`), se integra con merge y la rama se borra al integrarse.
 - Todo Pull Request necesita **al menos una revisión de otro integrante** y la CI en verde antes de integrarse.
+- Las ramas por rol (`rol/*`) y las personales (`rama/<NOMBRE>`) quedan en el historial y ya no reciben
+  trabajo nuevo.
 - Antes de abrir un PR, revisa que no haya datos personales reales, contraseñas ni llaves.
 
 ## Commits
