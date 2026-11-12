@@ -1,0 +1,75 @@
+% Preámbulo del Documento de Ingeniería del Proyecto – Fase 1 (Equipo B).
+% Formato del machote 0.3: carta, márgenes de 2.5 cm, 11 pt, páginas numeradas.
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[11pt,letterpaper,spanish]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{textcomp}
+\usepackage{lmodern}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\usepackage{microtype}
+\usepackage{parskip}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc}
+\newcounter{none} % tablas sin número (formato heredado de la conversión)
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}} % columna de ancho fijo alineada a la izquierda
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+\usepackage{footnotehyper}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[labelformat=empty,font=small]{caption}
+\usepackage{soul}
+\usepackage[bidi=default,shorthands=off]{babel}
+\usepackage{newunicodechar}
+\newunicodechar{☐}{$\square$}
+\newunicodechar{✓}{\checkmark}
+\newunicodechar{≤}{$\leq$}
+\newunicodechar{≥}{$\geq$}
+\newunicodechar{→}{$\rightarrow$}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small IS1 · Equipo B · Sistema de Órdenes de Servicio y Citas}
+\fancyhead[R]{\small v\versiondoc}
+\fancyfoot[C]{\thepage}
+\setlength{\emergencystretch}{3em}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % la numeración va en el título, como en el machote
+\setcounter{tocdepth}{2}
+\usepackage{bookmark}
+\usepackage{xurl}
+\urlstyle{same}
+\hypersetup{pdflang={es}, hidelinks, pdftitle={IS1-Fase1-EquipoB-v\versiondoc}}
+
+% ---------------------------------------------------------------------------
+% Figuras. El machote pide número, título y ruta del archivo fuente.
+%   \figura{archivo}{opciones de tamaño}{número}{título}{ruta fuente}
+\DeclareUrlCommand\ruta{\urlstyle{tt}} % rutas del repositorio, con cortes de línea
+\captionsetup{justification=raggedright,singlelinecheck=true}
+\newcommand{\figura}[5]{%
+  \begin{figure}[H]\centering
+  \includegraphics[#2,keepaspectratio]{#1}
+  \caption[Figura #3. #4]{\textbf{Figura #3.} #4. Fuente: \ruta{#5}}
+  \end{figure}}
+
+% Figura descrita: mientras no exista la imagen se muestra un recuadro neutro
+% con su contenido y la ruta de la fuente. Se reemplaza por \figura cuando exista.
+%   \figurapendiente{número}{título}{contenido de la figura}{ruta fuente}
+\newcommand{\figurapendiente}[4]{%
+  \begin{figure}[H]\centering
+  \fcolorbox{black!40}{black!3}{\parbox{0.92\linewidth}{\small
+    \textcolor{red}{\textbf{Pendiente}}\par\smallskip
+    \textbf{Descripción:} #3\par\smallskip
+    \textbf{Archivo fuente:} \ruta{#4}}}
+  \caption[Figura #1. #2]{\textbf{Figura #1.} #2. Fuente: \ruta{#4}}
+  \end{figure}}
+
+% Dato que falta: solo dice «Pendiente», en rojo.
+\newcommand{\pendiente}{\textcolor{red}{Pendiente}}
