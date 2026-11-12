@@ -3,8 +3,8 @@
 %   pdflatex -interaction=nonstopmode IS1-Fase1-EquipoB.tex   (dos veces, por el índice)
 % Cada sección vive en secciones/ para que cada rol la edite en su rama sin conflictos.
 % Entregables (formato del profesor): docs/entregas/IS1-Fase1-EquipoB-v<versión>.pdf y .docx
-\newcommand{\versiondoc}{0.1}
-\newcommand{\fechadoc}{29/10/2026}
+\newcommand{\versiondoc}{0.2}
+\newcommand{\fechadoc}{11/11/2026}
 \input{preambulo}
 
 \begin{document}
@@ -22,6 +22,8 @@ Ingeniería de Software I (IDSSI-27) · Quinto semestre\par
 Servicio Automotriz Hermanos Ruiz, S.A. de C.V.\par
 \vfill
 \begin{tabular}{rl}
+\textbf{Asignatura:} & Ingeniería de Software I (IDSSI-27)\\
+\textbf{Documento:} & Documento de Ingeniería del Proyecto -- Fase 1\\
 \textbf{Equipo:} & B (5 integrantes)\\
 \textbf{Cliente:} & Servicio Automotriz Hermanos Ruiz\\
 \textbf{Producto:} & Sistema de Órdenes de Servicio y Citas\\
@@ -31,6 +33,48 @@ Servicio Automotriz Hermanos Ruiz, S.A. de C.V.\par
 \end{tabular}
 \end{titlepage}
 
+\section*{Control de versiones}
+
+La versión sigue la tabla de entrega acumulativa del machote (0.2): v0.1 en la Review 0, v0.2 en la
+Review 1, v1.0 con el SRS firmado en la Review 2, y así sucesivamente.
+
+{\small
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{0.07\linewidth}
+  >{\raggedright\arraybackslash}p{0.12\linewidth}
+  >{\raggedright\arraybackslash}p{0.12\linewidth}
+  >{\raggedright\arraybackslash}p{0.43\linewidth}
+  >{\raggedright\arraybackslash}p{0.16\linewidth}@{}}
+\toprule
+\textbf{Versión} & \textbf{Fecha} & \textbf{Autor(es)} & \textbf{Descripción del cambio} & \textbf{Revisó} \\
+\midrule
+v0.1 & 29/10/2026 & Equipo B & Primera entrega del documento, revisada en la Review 1 (incluía avance de secciones de cortes posteriores). & \pendiente{} \\
+v0.2 & \fechadoc & Equipo B & Atención a las observaciones de la Review 1. & \pendiente{} \\
+\bottomrule
+\end{longtable}
+}
+
+\section*{Aprobación del cliente}
+
+Se llena en la Review 2 (firma del SRS) y en la Demo final (aceptación del Release v0.1.0).
+
+{\small
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{0.2\linewidth}
+  >{\raggedright\arraybackslash}p{0.2\linewidth}
+  >{\raggedright\arraybackslash}p{0.22\linewidth}
+  >{\raggedright\arraybackslash}p{0.16\linewidth}
+  >{\raggedright\arraybackslash}p{0.1\linewidth}@{}}
+\toprule
+\textbf{Hito} & \textbf{Resultado (aceptado / aceptado con observaciones / rechazado)} & \textbf{Observaciones} & \textbf{Firma del cliente} & \textbf{Fecha} \\
+\midrule
+SRS v1.0 (Review 2) & & & & \\
+Release v0.1.0 (Demo final) & & & & \\
+\bottomrule
+\end{longtable}
+}
+
+\clearpage
 \tableofcontents
 \clearpage
 
