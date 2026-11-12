@@ -23,10 +23,21 @@ Se toman por consenso. Si no se logra:
 
 ## Ramas y Pull Requests
 
+Seguimos **GitHub Flow**: `main` siempre está estable y cada historia o tarea se trabaja en su propia rama.
+
 - `main` está protegida: solo se integra mediante Pull Request.
-- Hay una rama por integrante: `rama/ANGEL`, `rama/ABDIAS`, `rama/DULCE`, `rama/ALHELI` y `rama/ISIS`.
-  Cada quien trabaja en la suya y la integra a `main` mediante Pull Request.
-- Todo Pull Request necesita **al menos una revisión de otro integrante** antes de integrarse.
+- **Una rama por historia o tarea**, creada desde `main` actualizado, con la convención
+  **`tipo/número-descripción`**:
+  - `tipo`: `feat` (funcionalidad), `fix` (corrección), `docs` (documento), `test` (pruebas) o `ci`.
+  - `número`: el issue que atiende (historia HU, observación o tarea).
+  - `descripción`: dos a cuatro palabras en minúsculas separadas por guiones.
+  - Ejemplos: `feat/<n>-recepcion-con-fotos` (HU-01, con el número de su issue), `fix/9-version-stakeholders`
+    (observación B11, issue #9), `docs/10-ramas-por-historia` (observación B5, issue #10).
+- Una rama contiene el trabajo de una sola historia o tarea. Si algo no pertenece a ella, va en otra rama.
+- El Pull Request cierra su issue (`Closes #n`), se integra con merge y la rama se borra al integrarse.
+- Todo Pull Request necesita **al menos una revisión de otro integrante** y, cuando exista, la
+  integración continua en verde antes de integrarse.
+- Las ramas por integrante (`rama/<NOMBRE>`) se usaron hasta la entrega v0.2 y ya no reciben trabajo nuevo.
 - Antes de abrir un PR, revisa que no haya datos personales reales, contraseñas ni llaves.
 
 ## Commits
