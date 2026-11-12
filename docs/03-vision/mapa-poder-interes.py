@@ -19,8 +19,6 @@ STAKEHOLDERS = [
     ("Dueños del taller", 8.6, 9.2),
     ("Gerente", 8.0, 8.2),
     ("Jefe de mecánicos", 8.8, 6.7),
-    ("Docente evaluador", 6.6, 8.8),
-    ("Equipo de desarrollo", 6.4, 6.3),
     ("Recepcionista", 9.0, 3.9),
     ("Mecánicos de bahía\ny de apoyo", 6.4, 1.7),
     ("Encargado de almacén", 7.6, 2.9),
