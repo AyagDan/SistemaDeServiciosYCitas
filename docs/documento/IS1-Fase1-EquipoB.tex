@@ -3,8 +3,9 @@
 %   pdflatex -interaction=nonstopmode IS1-Fase1-EquipoB.tex   (dos veces, por el índice)
 % Cada sección vive en secciones/ para que cada rol la edite en su rama sin conflictos.
 % Entregables (formato del profesor): docs/entregas/IS1-Fase1-EquipoB-v<versión>.pdf y .docx
-\newcommand{\versiondoc}{0.2}
-\newcommand{\fechadoc}{11/11/2026}
+% Cada corrección aumenta en uno el tercer dígito (0.2 -> 0.2.1 -> 0.2.2 ...); ver CONTRIBUTING.md.
+\newcommand{\versiondoc}{0.2.3}
+\newcommand{\fechadoc}{12/11/2026}
 \input{preambulo}
 
 \begin{document}
@@ -37,16 +38,19 @@ Servicio Automotriz Hermanos Ruiz, S.A. de C.V.\par
 
 {\small
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{0.07\linewidth}
+  >{\raggedright\arraybackslash}p{0.08\linewidth}
   >{\raggedright\arraybackslash}p{0.12\linewidth}
-  >{\raggedright\arraybackslash}p{0.12\linewidth}
-  >{\raggedright\arraybackslash}p{0.43\linewidth}
+  >{\raggedright\arraybackslash}p{0.13\linewidth}
+  >{\raggedright\arraybackslash}p{0.40\linewidth}
   >{\raggedright\arraybackslash}p{0.16\linewidth}@{}}
 \toprule
 \textbf{Versión} & \textbf{Fecha} & \textbf{Autor(es)} & \textbf{Descripción del cambio} & \textbf{Revisó} \\
 \midrule
 v0.1 & 29/10/2026 & Equipo B & Versión inicial: portada, información general (1), gestión con Scrum (2.1--2.4) y visión y viabilidad (3). Sprint 0. & Abdías Daniel Chávez Cruz \\
-v0.2 & 11/11/2026 & Equipo B & SRS en borrador: 4.1--4.5, requisitos no funcionales (4.6) y reglas de negocio (4.7); se actualizan 1.3 y 2.3. Sprint 1. Atención a las observaciones de la Review 1 (Anexo F). & Abdías Daniel Chávez Cruz \\
+v0.2 & 11/11/2026 & Equipo B & SRS en borrador: 4.1--4.5, requisitos no funcionales (4.6) y reglas de negocio (4.7); se actualizan 1.3 y 2.3. Sprint 1. & Abdías Daniel Chávez Cruz \\
+v0.2.1 & 11/11/2026 & Abdías Daniel Chávez Cruz & Atención a las observaciones de la Review 1 (Anexo F), corrección B11: versión según el machote y stakeholders de 3.4. & Ángel Yael Avendaño Guzmán \\
+v0.2.2 & 11/11/2026 & Abdías Daniel Chávez Cruz & Corrección B5: una rama por historia o tarea (CONTRIBUTING.md, README y 2.1). & Ángel Yael Avendaño Guzmán \\
+v0.2.3 & 12/11/2026 & Ángel Yael Avendaño Guzmán & Corrección B3: guion y minuta de la entrevista (Anexo A) y fuente de las reglas de 4.7. & Abdías Daniel Chávez Cruz \\
 \bottomrule
 \end{longtable}
 }
