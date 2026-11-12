@@ -1,0 +1,26 @@
+# Credenciales y datos personales
+.env
+.env.*
+*.pem
+*.key
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# LaTeX: archivos auxiliares de compilación y PDF intermedios
+# (el PDF entregable se copia a docs/entregas/)
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+docs/documento/*.pdf
+
+# Word: archivos temporales
+~$*

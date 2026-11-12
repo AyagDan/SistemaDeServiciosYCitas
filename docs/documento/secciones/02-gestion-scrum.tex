@@ -1,0 +1,228 @@
+\section{2. Gestión del proyecto con
+Scrum}\label{gestiuxf3n-del-proyecto-con-scrum}
+
+\subsection{2.1 Acuerdos de trabajo}\label{acuerdos-de-trabajo}
+
+Los acuerdos completos están en CONTRIBUTING.md del repositorio. En
+resumen:
+
+\textbf{• Comunicación:} grupo de WhatsApp del equipo para lo
+urgente y GitHub (issues y Pull Requests) para todo lo técnico. Tiempo
+máximo de respuesta: 24 horas en días hábiles.
+
+\textbf{• Reuniones:} se hacen de manera presencial o por llamada en el
+grupo de WhatsApp: Daily breve de lunes a viernes y los eventos de Scrum
+al inicio y al cierre de cada sprint de dos semanas. Lo que se decide en
+una reunión se registra en GitHub (issue, minuta o documento).
+
+\textbf{• Decisiones:} por consenso; si no se logra, decide el Product
+Owner en temas de alcance y prioridad, y el Scrum Master en temas de
+proceso.
+
+\textbf{• Ramas:} main está protegida; hay una rama por integrante
+(\texttt{rama/ANGEL}, \texttt{rama/ABDIAS}, \texttt{rama/DULCE},
+\texttt{rama/ALHELI}, \texttt{rama/ISIS}) y cada quien integra a main
+mediante Pull Request con al menos una revisión de otro integrante.
+
+\textbf{• Commits:} en español y en presente, con el formato
+«Rol: mensaje» y referencia a la historia cuando aplique (por ejemplo,
+«Developers: implementa recepción con checklist (HU-01)»).
+
+\textbf{• Documentos:} el Documento de Ingeniería se escribe en LaTeX,
+un archivo por sección en \texttt{docs/documento/secciones/}, para que
+git pueda fusionar los cambios de varios roles. El entregable se publica en
+\texttt{docs/entregas/} en PDF y en Word (.docx) con el nombre
+\texttt{IS1-Fase1-EquipoB-v<versión>} (por ejemplo, IS1-Fase1-EquipoB-v0.1.pdf).
+
+\textbf{• Incumplimiento:} se registra en la retrospectiva; a la segunda
+falta en el mismo sprint, el Scrum Master lo informa al profesor.
+
+\subsection{2.2 Definición de Listo (DoR) y Definición de Terminado
+(DoD)}\label{definiciuxf3n-de-listo-dor-y-definiciuxf3n-de-terminado-dod}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5001}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.4999}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Definición de Listo}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Definición de Terminado}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+• La historia sigue el formato Como\ldots{} quiero\ldots{} para\ldots{}
+y tiene ID e issue en el tablero.
+
+• Tiene al menos 2 criterios de aceptación en formato
+Dado/Cuando/Entonces.
+
+• El equipo la estimó en puntos y cabe en un sprint (8 puntos o menos).
+
+• Sus reglas de negocio (RN) y requisitos (RF/RNF) relacionados están
+identificados.
+
+• Sus dependencias (otras historias, datos, wireframe) están resueltas o
+planificadas.
+
+• El Product Owner la priorizó (MoSCoW). & • El código está en main
+mediante un Pull Request revisado por otro integrante.
+
+• Cumple todos sus criterios de aceptación y el Product Owner lo
+verificó.
+
+• Tiene pruebas automatizadas y la integración continua pasa sin
+errores.
+
+• Se probó solo con datos ficticios; no hay datos personales reales ni
+contraseñas en el repositorio.
+
+• La documentación afectada (SRS, modelos, README) está actualizada.
+
+• Está desplegada en el ambiente de pruebas (desde el Sprint 4). \\
+\end{longtable}
+}
+
+\subsection{2.3 Resumen de sprints}\label{resumen-de-sprints}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.0856}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1495}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.3270}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1601}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1389}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1389}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Sprint}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Fechas}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Objetivo del sprint}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{¿Se cumplió? (sí / parcial / no)}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Puntos comprometidos}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Puntos terminados}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+S0 & \pendiente{} & Conocer al cliente, levantar los requisitos
+iniciales y preparar el repositorio y el documento base. &
+Sí & --- & --- \\
+S1 & \pendiente{} & SRS en borrador (4.1--4.7) para validarlo con el
+cliente. & Sí: el borrador se valida con el cliente en la Review 1 &
+\pendiente{} & \pendiente{} \\
+\end{longtable}
+}
+
+\subsubsection{Evidencia de los eventos}\label{evidencia-de-los-eventos}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.0962}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2136}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2137}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.3162}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.1604}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Sprint}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Minuta de Review}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Retrospectiva}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Acciones de mejora acordadas}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{¿Se aplicaron?}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+S0 & \pendiente{} & \pendiente{} & --- & --- \\
+S1 & \pendiente{} & \pendiente{} & --- & --- \\
+\end{longtable}
+}
+
+\subsection{2.4 Registro de riesgos}\label{registro-de-riesgos}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.0856}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.2990}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1282}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1069}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.2735}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 10\tabcolsep) * \real{0.1067}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{ID}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Riesgo}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Probabilidad}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Impacto}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Respuesta y responsable}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Estado}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+R-01 & Un integrante abandona el curso a mitad del semestre & Media &
+Alto & Mitigar: conocimiento compartido mediante revisión cruzada de PR;
+responsable: SM & Abierto \\
+R-02 & La operación sin conexión y la sincronización posterior (RNF-08,
+RNF-09) resultan más complejas de lo estimado & Alta & Alto & Mitigar:
+prototipo técnico en el Sprint 1 y limitar lo offline a recepción y
+diagnóstico; responsable: equipo de desarrollo & Abierto \\
+R-03 & El cliente no está disponible para validar requisitos o asistir a
+las Reviews & Media & Alto & Mitigar: agendar sesiones con anticipación
+y validar por correo cuando no pueda asistir; responsable: PO &
+Abierto \\
+R-04 & Cambios de alcance frecuentes por parte del cliente & Media &
+Medio & Mitigar: registrar cada solicitud de cambio (2.5) con análisis
+de impacto; responsable: PO & Abierto \\
+R-05 & El servicio gratuito de correo limita el envío de enlaces y
+códigos 2FA & Media & Alto & Mitigar: probar los límites del plan
+gratuito en el Sprint 1 y dejar SMS como opción (RF-02.3); responsable:
+equipo de desarrollo & Abierto \\
+R-06 & Las fotografías de recepción saturan el almacenamiento del
+hospedaje gratuito & Media & Medio & Mitigar: comprimir las imágenes en
+el dispositivo y fijar un tamaño máximo por foto; responsable: equipo de
+desarrollo & Abierto \\
+R-07 & Poca experiencia del equipo con FastAPI y PWA & Alta & Medio &
+Mitigar: capacitación en S0--S1 y trabajo en pares en las primeras
+historias; responsable: SM & Abierto \\
+R-08 & Conflictos al editar en paralelo el documento .docx en ramas
+distintas & Alta & Medio & Evitar: el documento se migró a LaTeX con un
+archivo por sección; responsable: SM & Cerrado \\
+R-09 & Se publican datos personales reales en el repositorio público &
+Media & Alto & Evitar: solo datos ficticios y revisión de datos
+personales en cada PR; .gitignore excluye .env y credenciales;
+responsable: todos & Abierto \\
+R-10 & Código o texto generado con IA que el equipo no entiende o no
+revisó & Media & Alto & Mitigar: declarar el uso de IA en el documento, revisión de
+cada PR por otro integrante y pruebas automatizadas como evidencia;
+responsable: SM & Abierto \\
+R-11 & Diferencias entre SQLite (pruebas) y PostgreSQL (staging) ocultan
+defectos & Media & Medio & Mitigar: cargar el esquema en PostgreSQL
+en la integración continua desde que exista el backend (S2);
+responsable: QA Lead & Abierto \\
+R-12 & Sin ambiente de pruebas no se puede mostrar el flujo núcleo al
+cliente & Media & Alto & Mitigar: decidir el hospedaje del ambiente de pruebas antes del Sprint 4;
+responsable: Developers & Abierto \\
+\end{longtable}
+}
