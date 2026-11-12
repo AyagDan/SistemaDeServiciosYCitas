@@ -4,6 +4,167 @@ Los anexos se numeran con letras. Los anexos B a E (minutas de las Sprint
 Reviews, detalle de historias y casos de prueba, manual de uso y aviso de
 privacidad) se agregan en el corte que los requiere.
 
+\subsection{Anexo A. Guion y minuta de la entrevista con el cliente}\label{anexo-a}
+
+\subsubsection{A.1 Guion de la entrevista inicial}\label{anexo-a1}
+
+Objetivo: entender cómo opera hoy el taller, qué problemas le cuestan
+dinero o clientes y qué reglas sigue aunque no estén escritas. Las
+preguntas se agrupan por etapa del servicio; en cada una se pide un
+ejemplo reciente y se pregunta por las excepciones (quién puede romper la
+regla y si queda registro).
+
+\paragraph{Negocio y operación general}
+\begin{enumerate}
+\tightlist
+\item ¿Qué tipos de vehículos atienden y cuáles no reciben?
+\item ¿Cuántas bahías de trabajo tienen y cuántos vehículos caben en
+espera? ¿Qué pasa cuando todo está ocupado?
+\item ¿Quiénes trabajan en el taller y qué hace cada uno durante el día?
+\item ¿Qué problemas les cuestan hoy más dinero o más clientes?
+\end{enumerate}
+
+\paragraph{Citas}
+\begin{enumerate}
+\tightlist
+\setcounter{enumi}{4}
+\item ¿Cómo agenda hoy un cliente su cita y quién la registra?
+\item Si un cliente pidiera la cita en línea, ¿debe apartar lugar de
+inmediato o alguien la confirma?
+\end{enumerate}
+
+\paragraph{Recepción del vehículo}
+\begin{enumerate}
+\tightlist
+\setcounter{enumi}{6}
+\item ¿Qué datos del vehículo y del cliente anotan al recibirlo?
+\item ¿Han tenido reclamos por golpes o faltantes? ¿Cómo los resolvieron
+y qué evidencia tenían?
+\item ¿Qué hacen cuando no funciona el indicador de combustible?
+\end{enumerate}
+
+\paragraph{Diagnóstico, bahías y mecánicos}
+\begin{enumerate}
+\tightlist
+\setcounter{enumi}{9}
+\item ¿Quién decide a qué bahía y a qué mecánico va cada vehículo?
+\item ¿Pueden trabajar varios mecánicos en la misma orden? ¿Quién
+responde por el trabajo?
+\item Si una refacción tarda varios días en llegar, ¿qué pasa con el
+vehículo y con la bahía?
+\end{enumerate}
+
+\paragraph{Cotización y autorización}
+\begin{enumerate}
+\tightlist
+\setcounter{enumi}{12}
+\item ¿Cómo autoriza hoy el cliente una cotización y qué queda como
+prueba?
+\item ¿Han tenido disputas por cobros que el cliente dice no haber
+autorizado? ¿Cómo se resolvieron?
+\item ¿El cliente puede aceptar unos conceptos y rechazar otros?
+\item ¿Qué hacen si durante la reparación aparece un trabajo que sube el
+costo?
+\item ¿Cuánto tiempo es válida una cotización?
+\end{enumerate}
+
+\paragraph{Cobro, entrega y seguimiento}
+\begin{enumerate}
+\tightlist
+\setcounter{enumi}{17}
+\item ¿Se entrega alguna vez un vehículo sin pagar completo? ¿Quién lo
+autoriza y para qué clientes?
+\item ¿Cuántas llamadas reciben para preguntar por el avance y quién las
+atiende?
+\item ¿Durante cuánto tiempo debería el cliente poder consultar su
+vehículo en línea?
+\item ¿Qué garantía dan sobre los trabajos y cómo la consultan hoy?
+\end{enumerate}
+
+\paragraph{Infraestructura}
+\begin{enumerate}
+\tightlist
+\setcounter{enumi}{21}
+\item ¿Qué equipos tienen (computadoras, tabletas, internet) y qué tan
+seguido se va la luz o el internet?
+\end{enumerate}
+
+\subsubsection{A.2 Minuta de la entrevista del 19/10/2026}\label{anexo-a2}
+
+{\small
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{0.25\linewidth}
+  >{\raggedright\arraybackslash}p{0.7\linewidth}@{}}
+\toprule
+\textbf{Dato} & \textbf{Contenido} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+Fecha & 19/10/2026 \\
+Hora y modalidad & \pendiente{} \\
+Asistentes por el cliente & \pendiente{} \\
+Asistentes por el equipo & \pendiente{} \\
+Elaboró & Product Owner (Ángel Yael Avendaño Guzmán) \\
+Objetivo & Levantar los requisitos iniciales del sistema a partir del
+anteproyecto y del guion A.1. \\
+\end{longtable}
+}
+
+\textbf{Problemas expresados por el cliente.} Disputas por cobros que el
+cliente dice no haber autorizado («dijo que sí, pero cobra otra cosa»),
+porque las autorizaciones son verbales o por mensaje; reclamos por daños
+sin checklist ni fotografías del estado de llegada; muchas llamadas para
+preguntar por el avance, que interrumpen a la recepcionista; bahías y
+carga de trabajo asignadas de palabra, con vehículos detenidos sin
+justificación; e historial de reparaciones y garantías archivado en
+carpetas (sección 3.1).
+
+\textbf{Hallazgos y acuerdos.} Cada hallazgo tiene un identificador que
+se cita como fuente en las reglas de negocio de la sección 4.7.
+
+{\small
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{0.07\linewidth}
+  >{\raggedright\arraybackslash}p{0.62\linewidth}
+  >{\raggedright\arraybackslash}p{0.25\linewidth}@{}}
+\toprule
+\textbf{ID} & \textbf{Hallazgo o acuerdo} & \textbf{Se refleja en} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+E-01 & Toda autorización de cotización, remota o presencial, debe tener
+una doble verificación con un código de 6 dígitos. & RN-02 \\
+E-02 & El cliente puede aprobar o rechazar por separado los conceptos
+opcionales de una cotización; solo se ejecuta lo autorizado. & RN-03 \\
+E-03 & El enlace de seguimiento del cliente funciona mientras el vehículo
+está en el taller y vence al entregarlo y saldarlo. & RN-01 \\
+E-04 & El taller tiene 4 bahías (un vehículo por bahía) y un
+estacionamiento de espera para 5 vehículos. & RN-05 \\
+E-05 & Si una refacción tarda varios días, el vehículo pasa al
+estacionamiento para liberar la bahía. & RN-06 \\
+E-06 & Solo se atienden vehículos ligeros: automóviles, motocicletas y
+camionetas de hasta 3 toneladas. & RN-07 \\
+E-07 & Las citas pedidas en línea no apartan lugar hasta que la
+recepcionista las confirma. & RN-08 \\
+E-08 & Varios mecánicos pueden colaborar en una orden, pero siempre hay
+un responsable. & RN-09 \\
+E-09 & No se entrega un vehículo con saldo pendiente; solo el gerente
+puede autorizar la entrega a crédito a flotillas empresariales
+registradas. & RN-10 \\
+E-10 & Hay cortes de luz e internet; el personal necesita seguir
+capturando sin conexión. & RNF-08, RNF-09 \\
+E-11 & El jefe de mecánicos trabajará con 1 o 2 tabletas en un ambiente
+con ruido, polvo y manos sucias. & 4.3.1, RNF-02, RNF-03 \\
+\end{longtable}
+}
+
+\textbf{Pendientes para la siguiente sesión con el cliente.} Confirmar el
+mínimo de 4 fotografías al recibir el vehículo (RN-12) y la fuente de la
+garantía de 30 días sobre la mano de obra (RN-13). Responsable: Product
+Owner.
+
 \subsection{Anexo F. Atención de observaciones de la Review 1}\label{anexo-f}
 
 Observaciones recibidas el 10/11/2026 sobre la versión v0.1. Cada
@@ -35,6 +196,12 @@ rama por historia o tarea con la convención
 README y la sección 2.1; las ramas por integrante
 (\texttt{rama/<NOMBRE>}) ya no reciben trabajo nuevo. Las correcciones
 de esta revisión ya usan la convención
-(\texttt{fix/9-version-stakeholders}, \texttt{docs/10-ramas-por-historia}). \\
+(\texttt{fix/9-version-stakeholders}, \texttt{docs/10-ramas-por-historia},
+\texttt{docs/20-anexo-entrevista}). \\
+B3 & \#20 & \#21 & Se agregó el Anexo A con el guion de la entrevista
+(22 preguntas) y la minuta del 19/10/2026, con los hallazgos E-01 a E-11.
+Cada regla de 4.7 que proviene de la entrevista cita en su fuente el
+hallazgo de la minuta. Los anexos ya no contienen texto del machote. La
+sección 4.11 no forma parte de este corte y se actualiza en la Review 2. \\
 \end{longtable}
 }
