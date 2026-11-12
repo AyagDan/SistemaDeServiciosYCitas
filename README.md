@@ -27,13 +27,16 @@ Cada historia o tarea se trabaja en su propia rama `tipo/número-descripción` (
 | Review 1 | v0.2 | + 4.1–4.5 (borrador), 4.6, 4.7 | Se genera desde `docs/documento/` en `docs/entregas/IS1-Fase1-EquipoB-v0.2.pdf` y `.docx` |
 
 Cada corrección aumenta en uno el tercer dígito de la versión y tiene una etiqueta de Git con ese nombre.
-Versión vigente: **v0.2.3**.
+Versión vigente: **v0.2.6**.
 
 | Versión | Corrección de la Review 1 | Issue | PR |
 |---|---|---|---|
 | v0.2.1 | B11 · Versión y stakeholders | #9 | #15 |
 | v0.2.2 | B5 · Una rama por historia o tarea | #10 | #16 |
 | v0.2.3 | B3 · Guion y minuta de la entrevista | #20 | #21 |
+| v0.2.4 | B4 · Evidencia del proceso | #28 | #61 |
+| v0.2.5 | B2 · Propuesta de alcance del Release v0.1.0 (primera parte) | #29 | #62 |
+| v0.2.6 | B6 · Declaración de uso de IA (primera parte) | #30 | #63 |
 
 ## Contenido del repositorio
 
