@@ -19,11 +19,15 @@ una reunión se registra en GitHub (issue, minuta o documento).
 Owner en temas de alcance y prioridad, y el Scrum Master en temas de
 proceso.
 
-\textbf{• Ramas:} main está protegida; hay una rama por rol de Scrum
-(\texttt{rol/product-owner}, \texttt{rol/scrum-master}, \texttt{rol/qa-lead},
-\texttt{rol/developers}) y cada rol integra a main con un merge que deja
-visible su rama, mediante Pull Request con al menos una revisión de otro
-integrante. Las ramas personales anteriores
+\textbf{• Ramas:} seguimos GitHub Flow. main está protegida y cada
+historia o tarea se trabaja en su propia rama, creada desde main, con la
+convención \texttt{tipo/número-descripción}, donde el tipo es
+\texttt{feat}, \texttt{fix}, \texttt{docs}, \texttt{test} o \texttt{ci} y
+el número es el issue que atiende (por ejemplo,
+\texttt{fix/9-version-stakeholders} para la observación B11). Cada rama
+se integra a main mediante un Pull Request que cierra su issue y tiene al
+menos una revisión de otro integrante; después se borra. Las ramas por
+rol (\texttt{rol/*}) y las personales anteriores
 (rama/\textless NOMBRE\textgreater) quedan en el historial.
 
 \textbf{• Commits:} en español y en presente, con el formato

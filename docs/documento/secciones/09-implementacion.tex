@@ -43,8 +43,8 @@ toma de \texttt{SEED\_PASSWORD} o se genera e imprime una sola vez.
 \subsection{9.3 Integración continua y flujo de
 trabajo}\label{integraciuxf3n-continua-y-flujo-de-trabajo}
 
-El pipeline de GitHub Actions se ejecuta en cada push a \texttt{main} o a una rama \texttt{rol/*} y en cada
-Pull Request, con tres trabajos:
+El pipeline de GitHub Actions se ejecuta en cada push a \texttt{main} y en cada Pull Request, de modo que
+toda rama de historia o tarea se prueba antes de integrarse. Tiene tres trabajos:
 
 \begin{enumerate}
 \tightlist
@@ -54,9 +54,10 @@ Pull Request, con tres trabajos:
 \item \textbf{Documento de Ingeniería:} compila este documento LaTeX y publica el PDF como artefacto.
 \end{enumerate}
 
-\textbf{Flujo de trabajo:} cada rol trabaja en su rama (\texttt{rol/product-owner}, \texttt{rol/scrum-master},
-\texttt{rol/qa-lead}, \texttt{rol/developers}); los commits llevan el formato «Rol: mensaje» y se integran
-a \texttt{main} con un merge sin fast-forward, para que quede visible qué integró cada rol.
+\textbf{Flujo de trabajo:} GitHub Flow. Cada historia o tarea se trabaja en su propia rama
+\texttt{tipo/número-descripción} (por ejemplo, \texttt{fix/9-version-stakeholders}), creada desde
+\texttt{main}; los commits llevan el formato «Rol: mensaje» y la rama se integra con un Pull Request que
+cierra su issue.
 Por acuerdo del equipo, la rama main se integra mediante Pull Request con al menos una revisión y la CI aprobada
 (CONTRIBUTING.md).
 
