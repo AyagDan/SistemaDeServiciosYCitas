@@ -43,6 +43,7 @@ Versión vigente: **v0.2.3**.
 | `docs/entregas/` | Cada entrega en PDF y Word (`IS1-Fase1-EquipoB-v<versión>`) |
 | `docs/03-vision/` | Fuentes de las figuras de la sección 3 (proceso actual y mapa de poder/interés) |
 | `docs/04-requisitos/` | Fuente del story map de la sección 4.5 |
+| `informacion/` | Material de referencia del curso: machote del documento, observaciones de la Review 1 y su plan de atención, reglas de negocio y de datos, propuesta de solución e indicaciones de clase |
 | `CONTRIBUTING.md` | Acuerdos de trabajo del equipo |
 
 ## Compilar el documento

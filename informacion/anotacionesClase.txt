@@ -1,0 +1,1 @@
+para las correcciones se registra las versiones aumentado en 1 para el tercer dígito: 0.1.0 (sin correcciones) ---> 0.1.1 (con primera corrección)
