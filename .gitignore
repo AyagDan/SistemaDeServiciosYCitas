@@ -1,6 +1,7 @@
 # Credenciales y datos personales
 .env
 .env.*
+!.env.example
 *.pem
 *.key
 
