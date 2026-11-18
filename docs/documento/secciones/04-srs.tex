@@ -411,7 +411,7 @@ responsable, para iniciar formalmente los trabajos en el taller. & Must
 & 5 & v0.1.0 & Pendiente \\
 HU-09 / \#39 & Como jefe de mecánicos, quiero registrar el
 diagnóstico técnico y las observaciones iniciales en la tableta, para
-cambiar el estado de la orden a "En Diagnóstico". & Must & 3 & v0.1.0 &
+cambiar el estado de la orden a "Diagnosticada". & Must & 3 & v0.1.0 &
 Pendiente \\
 HU-10 / \#40 & Como jefe de mecánicos, quiero registrar las
 refacciones e insumos que los mecánicos detecten durante la revisión,
@@ -532,7 +532,7 @@ derecho). \\
 Criterio de aceptación 2 & Dado que se capturan las evidencias, cuando
 se finaliza el formulario de inspección, entonces el sistema genera una
 firma visual o sello digital con fecha y hora exacta de recepción,
-bloqueando el avance al estado "En Diagnóstico" si falta completar algún
+bloqueando el avance al estado "Diagnosticada" si falta completar algún
 punto del checklist obligatorio. \\
 Reglas de negocio & RN-12 (Evidencia fotográfica de recepción), RN-07
 (Clasificación de vehículos autorizados). \\
@@ -800,14 +800,14 @@ Casos de prueba & CPA-07, CPA-08 \\
 ID e issue & HU-09 \\
 Historia & Como jefe de mecánicos, quiero registrar el diagnóstico
 técnico y las observaciones iniciales en la tableta, para cambiar el
-estado de la orden a "En Diagnóstico". \\
+estado de la orden a "Diagnosticada". \\
 Criterio de aceptación 1 & Dado que el jefe de mecánicos se encuentra
 autenticado en la tableta, cuando selecciona una orden con vehículo en
 bahía, entonces visualiza un formulario táctil optimizado con campos
 amplios para el dictamen técnico. \\
 Criterio de aceptación 2 & Dado que se ingresan las observaciones de la
 revisión, cuando se presiona "Guardar Diagnóstico", entonces el sistema
-actualiza automáticamente el estado de la orden a "En Diagnóstico" y
+actualiza automáticamente el estado de la orden a "Diagnosticada" y
 habilita la creación de cotizaciones. \\
 Reglas de negocio & RN-12 (Evidencia fotográfica de recepción).
 Usabilidad en tableta: RNF-02 y RNF-03. \\
@@ -1208,7 +1208,7 @@ Historia & Como gerente del taller, quiero que el sistema impida
 registrar la entrega de un vehículo cuya orden tenga saldo pendiente,
 para evitar pérdidas financieras al taller. \\
 Criterio de aceptación 1 & Dado que un vehículo se encuentra en estado
-"Lista para Entrega", cuando la recepcionista intenta registrar la
+"ListaParaEntrega", cuando la recepcionista intenta registrar la
 salida y el balance de pago es mayor a cero, entonces el sistema bloquea
 la acción de liberación. \\
 Criterio de aceptación 2 & Dado que se activa el bloqueo por saldo
