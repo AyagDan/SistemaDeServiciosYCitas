@@ -1,0 +1,99 @@
+@startuml clases-2-cotizacion-cobro
+' Generado por docs/06-analisis/clases/generar_clases.py a partir de backend/app/models.py.
+title Diagrama de clases del dominio · Cotización, autorización, cobro y garantía
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam linetype polyline
+skinparam nodesep 60
+skinparam ranksep 70
+hide empty members
+
+class OrdenServicio <<ver diagrama 1>>
+class Cotizacion {
+  - id_cotizacion : int {PK}
+  - folio : String {FK}
+  - version : int
+  - fecha_emision : Date
+  - vigencia_dias : int
+  - estado : EstadoCotizacion
+  - id_cotizacion_reemplazada : int {FK}
+  --
+  + fecha_vencimiento() : Date
+  + esta_vigente() : Boolean
+  + total() : Decimal
+}
+class DetalleCotizacion {
+  - id_detalle : int {PK}
+  - id_cotizacion : int {FK}
+  - concepto : String
+  - tipo : TipoConcepto
+  - cantidad : int
+  - precio_unitario : Decimal
+  - opcional : Boolean
+  - seleccionado : Boolean
+  --
+  + subtotal() : Decimal
+}
+class Autorizacion {
+  - id_autorizacion : int {PK}
+  - id_cotizacion : int {FK}
+  - fecha_hora : DateTime
+  - ip : String
+  - medio : MedioAutorizacion
+  - tipo : TipoAutorizacion
+  - monto_aceptado : Decimal
+  - codigo_verificacion_hash : String
+  - estado : EstadoAutorizacion
+  - token_hash : String {FK}
+  - huella_sha256 : String
+}
+class Pago {
+  - id_pago : int {PK}
+  - id_cotizacion : int {FK}
+  - monto : Decimal
+  - fecha_hora : DateTime
+  - metodo : String
+}
+class Garantia {
+  - folio : String {PK, FK}
+  - fecha_inicio : Date
+  - duracion_dias : int
+  - alcance : String
+  --
+  + fecha_fin() : Date
+  + esta_vigente() : Boolean
+}
+
+enum EstadoCotizacion {
+  Pendiente
+  Autorizada
+  Rechazada
+  Vencida
+}
+enum TipoConcepto {
+  ManoDeObra
+  Refaccion
+  Insumo
+}
+enum MedioAutorizacion {
+  Remoto
+  Presencial
+}
+enum TipoAutorizacion {
+  Inicial
+  IncrementoMayor10
+}
+enum EstadoAutorizacion {
+  Pendiente
+  Confirmada
+  Rechazada
+  Expirada
+}
+
+Cotizacion "1" -- "0..*" Autorizacion : cotizacion
+OrdenServicio "1" -- "0..*" Cotizacion : orden
+Cotizacion "1" *-- "0..*" DetalleCotizacion : detalles
+Cotizacion "1" -- "0..*" Pago : pagos
+Cotizacion "0..1" -- "0..*" Cotizacion : id_cotizacion_reemplazada
+OrdenServicio "1" -- "0..1" Garantia : folio
+@enduml
