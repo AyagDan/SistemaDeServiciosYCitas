@@ -14,6 +14,7 @@ from app.rutas import personal, portal, taller
 
 @asynccontextmanager
 async def ciclo_de_vida(app: FastAPI):
+    """Prepara la base de datos (tablas y bahías) al arrancar la aplicación."""
     from app.semilla import preparar_base
     preparar_base()
     yield
@@ -26,11 +27,13 @@ app = FastAPI(title="Sistema de Órdenes de Servicio y Citas",
 
 @app.exception_handler(ReglaNegocioError)
 def regla_violada(_: Request, exc: ReglaNegocioError):
+    """Convierte una regla de negocio violada en una respuesta 409 con el identificador de la regla."""
     return JSONResponse(status_code=409, content={"detail": exc.mensaje, "regla": exc.regla})
 
 
 @app.exception_handler(NoEncontradoError)
 def no_encontrado(_: Request, exc: NoEncontradoError):
+    """Convierte un registro inexistente en una respuesta 404."""
     return JSONResponse(status_code=404, content={"detail": exc.mensaje})
 
 
@@ -41,4 +44,5 @@ app.include_router(portal.router)
 
 @app.get("/salud", tags=["Sistema"])
 def salud():
+    """Comprobación de que la API está activa."""
     return {"estado": "ok"}

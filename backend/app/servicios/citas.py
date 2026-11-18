@@ -57,6 +57,7 @@ def confirmar(db: Session, id_cita: int, recepcionista: Usuario, numero_bahia: i
 
 
 def cancelar(db: Session, id_cita: int) -> Cita:
+    """Cancela una cita."""
     cita = db.get(Cita, id_cita)
     if not cita:
         raise NoEncontradoError(f"No existe la cita {id_cita}")

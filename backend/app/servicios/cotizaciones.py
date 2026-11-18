@@ -17,6 +17,7 @@ EC = EstadoCotizacion
 
 
 def obtener_cotizacion(db: Session, id_cotizacion: int) -> Cotizacion:
+    """Busca una cotización por su identificador o avisa que no existe."""
     cot = db.get(Cotizacion, id_cotizacion)
     if not cot:
         raise NoEncontradoError(f"No existe la cotización {id_cotizacion}")
@@ -31,6 +32,7 @@ def actualizar_vencimiento(cot: Cotizacion) -> Cotizacion:
 
 
 def autorizada_inicial(orden: OrdenServicio) -> Cotizacion | None:
+    """Primera cotización autorizada de la orden: base para el umbral del 10 % (RN-04)."""
     return next((c for c in orden.cotizaciones if c.estado == EC.Autorizada), None)
 
 
@@ -40,6 +42,7 @@ def autorizada_vigente(orden: OrdenServicio) -> Cotizacion | None:
 
 
 def pendiente(orden: OrdenServicio) -> Cotizacion | None:
+    """Cotización pendiente y vigente de la orden, si la hay."""
     for c in orden.cotizaciones:
         actualizar_vencimiento(c)
     return next((c for c in orden.cotizaciones if c.estado == EC.Pendiente), None)
@@ -92,6 +95,7 @@ def enviar_enlace(db: Session, orden: OrdenServicio) -> None:
 
 
 def token_valido(db: Session, token: str) -> TokenAcceso:
+    """Valida el token del enlace del cliente (RN-01); si no es válido, responde que no existe."""
     acceso = db.get(TokenAcceso, seguridad.sha256(token))
     if not acceso or not acceso.es_valido():
         raise NoEncontradoError("El enlace no es válido o ya expiró")
@@ -114,6 +118,7 @@ def seleccionar_opcionales(cot: Cotizacion, seleccion: dict[int, bool]) -> Cotiz
 
 
 def _exigir_autorizable(cot: Cotizacion) -> None:
+    """Exige que la cotización esté pendiente y vigente (RN-11)."""
     actualizar_vencimiento(cot)
     if cot.estado == EC.Vencida:
         raise ReglaNegocioError("La cotización venció (5 días naturales); el taller debe emitir una nueva", "RN-11")
@@ -122,6 +127,7 @@ def _exigir_autorizable(cot: Cotizacion) -> None:
 
 
 def _expirar_codigos(cot: Cotizacion) -> None:
+    """Marca como expirados los códigos pendientes de la cotización."""
     for a in cot.autorizaciones:
         if a.estado == EstadoAutorizacion.Pendiente:
             a.estado = EstadoAutorizacion.Expirada
@@ -158,6 +164,7 @@ def huella(aut: Autorizacion) -> str:
 
 
 def verificar_huella(aut: Autorizacion) -> bool:
+    """Comprueba que la huella guardada coincide con lo que el cliente aceptó (RNF-04)."""
     return aut.huella_sha256 is not None and aut.huella_sha256 == huella(aut)
 
 

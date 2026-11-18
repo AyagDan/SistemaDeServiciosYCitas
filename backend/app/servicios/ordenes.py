@@ -27,6 +27,7 @@ TRANSICIONES: dict[EstadoOrden, set[EstadoOrden]] = {
 
 
 def obtener_orden(db: Session, folio: str) -> OrdenServicio:
+    """Busca una orden por su folio o avisa que no existe."""
     orden = db.get(OrdenServicio, folio)
     if not orden:
         raise NoEncontradoError(f"No existe la orden {folio}")
@@ -45,15 +46,18 @@ def cambiar_estado(db: Session, orden: OrdenServicio, nuevo: EstadoOrden, usuari
 
 
 def bahias_libres(db: Session) -> list[Bahia]:
+    """Bahías que están libres, ordenadas por número."""
     return list(db.scalars(select(Bahia).where(Bahia.estado == EstadoBahia.Libre).order_by(Bahia.numero)))
 
 
 def liberar_bahia(db: Session, orden: OrdenServicio) -> None:
+    """Libera la bahía que ocupaba la orden."""
     if orden.numero_bahia:
         db.get(Bahia, orden.numero_bahia).estado = EstadoBahia.Libre
 
 
 def _siguiente_folio(db: Session) -> str:
+    """Siguiente folio consecutivo del año, con el formato OS-AAAA-0001."""
     prefijo = f"OS-{reloj.hoy().year}-"
     n = db.scalar(select(func.count()).select_from(OrdenServicio).where(OrdenServicio.folio.like(prefijo + "%")))
     return f"{prefijo}{n + 1:04d}"
@@ -109,6 +113,7 @@ def abrir_orden(db: Session, recepcionista: Usuario, *, kilometraje: int, nivel_
 
 
 def actualizar_checklist(db: Session, orden: OrdenServicio, datos: dict) -> ChecklistInspeccion:
+    """Actualiza el checklist de la recepción mientras la orden está en recepción (HU-01)."""
     if orden.estado not in (E.Abierta, E.EnEsperaDeBahia):
         raise ReglaNegocioError("El checklist solo se modifica durante la recepción")
     checklist = orden.recepcion.checklist
@@ -118,6 +123,7 @@ def actualizar_checklist(db: Session, orden: OrdenServicio, datos: dict) -> Chec
 
 
 def agregar_fotografia(db: Session, orden: OrdenServicio, posicion: PosicionFoto, archivo: str) -> Fotografia:
+    """Agrega una fotografía a la recepción; solo una por posición (RN-12)."""
     if orden.estado not in (E.Abierta, E.EnEsperaDeBahia):
         raise ReglaNegocioError("Las fotografías de recepción se agregan antes del diagnóstico")
     recepcion = orden.recepcion
@@ -206,4 +212,5 @@ def reanudar_reparacion(db: Session, orden: OrdenServicio, jefe: Usuario, numero
 
 
 def cancelar(db: Session, orden: OrdenServicio, usuario: Usuario) -> None:
+    """Cancela la orden y libera su bahía."""
     cambiar_estado(db, orden, E.Cancelada, usuario)

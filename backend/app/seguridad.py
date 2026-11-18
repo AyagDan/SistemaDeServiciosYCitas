@@ -23,12 +23,14 @@ _ITERACIONES = 260_000
 
 
 def hash_secreto(secreto: str) -> str:
+    """Guarda un secreto con PBKDF2-SHA256 y una sal aleatoria; nunca en claro."""
     sal = secrets.token_hex(16)
     dk = hashlib.pbkdf2_hmac("sha256", secreto.encode(), sal.encode(), _ITERACIONES)
     return f"pbkdf2_sha256${_ITERACIONES}${sal}${dk.hex()}"
 
 
 def verificar_secreto(secreto: str, guardado: str | None) -> bool:
+    """Compara un secreto con su versión guardada en tiempo constante."""
     if not guardado:
         return False
     try:
@@ -40,6 +42,7 @@ def verificar_secreto(secreto: str, guardado: str | None) -> bool:
 
 
 def sha256(texto: str) -> str:
+    """Huella SHA-256 de un texto."""
     return hashlib.sha256(texto.encode()).hexdigest()
 
 
@@ -56,14 +59,17 @@ def nuevo_codigo_2fa() -> str:
 
 # --- Sesiones del personal --------------------------------------------------
 def _b64(datos: bytes) -> str:
+    """Codifica bytes en base64 seguro para URL, sin relleno."""
     return base64.urlsafe_b64encode(datos).rstrip(b"=").decode()
 
 
 def _firma(carga: str) -> str:
+    """Firma una carga con HMAC-SHA256 usando la SECRET_KEY."""
     return _b64(hmac.new(config.SECRET_KEY.encode(), carga.encode(), hashlib.sha256).digest())
 
 
 def crear_sesion(usuario: Usuario) -> str:
+    """Crea el token de sesión firmado de un integrante del personal, con vigencia limitada."""
     expira = reloj.ahora() + timedelta(hours=config.SESION_HORAS)
     carga = _b64(json.dumps({"sub": usuario.id_usuario, "rol": usuario.rol.value,
                              "exp": int(expira.timestamp())}).encode())
@@ -71,6 +77,7 @@ def crear_sesion(usuario: Usuario) -> str:
 
 
 def leer_sesion(token: str) -> dict | None:
+    """Valida la firma y la vigencia de un token de sesión; devuelve sus datos o None."""
     try:
         carga, firma = token.split(".")
     except ValueError:
@@ -88,6 +95,7 @@ _bearer = HTTPBearer(auto_error=False)
 
 def usuario_actual(cred: HTTPAuthorizationCredentials | None = Depends(_bearer),
                    db: Session = Depends(get_db)) -> Usuario:
+    """Obtiene al usuario activo de la sesión o responde 401."""
     datos = leer_sesion(cred.credentials) if cred else None
     usuario = db.get(Usuario, datos["sub"]) if datos else None
     if not usuario or not usuario.activo:
@@ -100,6 +108,7 @@ def requiere_rol(*roles: RolUsuario):
     """Control de acceso por rol (OWASP A01). El Gerente no hereda permisos
     operativos: cada endpoint declara explícitamente qué roles lo usan."""
     def dependencia(usuario: Usuario = Depends(usuario_actual)) -> Usuario:
+        """Permite el paso si el rol del usuario está entre los autorizados; si no, responde 403."""
         if usuario.rol not in roles:
             raise HTTPException(status.HTTP_403_FORBIDDEN, "Tu rol no tiene permiso para esta operación")
         return usuario
