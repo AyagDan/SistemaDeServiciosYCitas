@@ -111,6 +111,28 @@ curl http://localhost:8000/panel -H "Authorization: Bearer <token>"
 
 Cada endpoint indica en `/docs` qué rol puede usarlo. Todos los datos de prueba y demostración son ficticios.
 
+## Prototipos y diagramas
+
+El sistema todavía no tiene interfaz gráfica: el backend se usa desde la documentación interactiva `/docs`.
+Estos son los prototipos de baja fidelidad de las pantallas del flujo núcleo (Figuras 4.5 a 4.10 del documento).
+Las capturas de pantalla del sistema en funcionamiento: Pendiente, hasta que exista la interfaz.
+
+| Recepción del vehículo (W-01) | Tableta del jefe de mecánicos (W-02) |
+|---|---|
+| ![W-01](docs/documento/figuras/wireframe-w01.png) | ![W-02](docs/documento/figuras/wireframe-w02.png) |
+
+| Cotización (W-03) | Portal del cliente (W-04) |
+|---|---|
+| ![W-03](docs/documento/figuras/wireframe-w03.png) | ![W-04](docs/documento/figuras/wireframe-w04.png) |
+
+| Agenda de citas (W-05) | Órdenes, cobro y entrega (W-06) |
+|---|---|
+| ![W-05](docs/documento/figuras/wireframe-w05.png) | ![W-06](docs/documento/figuras/wireframe-w06.png) |
+
+Diagramas del documento, en `docs/documento/figuras/`: casos de uso (`casos-de-uso-1.png` a `-3.png`), máquina de
+estados de la orden (`maquina-estados-orden.png`), story map y proceso actual. Sus fuentes están en
+`docs/03-vision/`, `docs/04-requisitos/` y `docs/06-analisis/`.
+
 ## Pruebas
 
 ```bash
@@ -125,7 +147,7 @@ La evidencia de la última ejecución está en [`docs/pruebas/resultado-pruebas.
 | Corte | Versión | Secciones | Archivos |
 |---|---|---|---|
 | Review 0 | v0.1 | Portada, 1, 2.1–2.4, 3 | `docs/entregas/IS1-Fase1-EquipoB-v0.1.docx` (versión en Word, antes de migrar a LaTeX) |
-| Review 1 | v0.2 | + 4.1–4.5 (borrador), 4.6, 4.7 | Se genera desde `docs/documento/` en `docs/entregas/IS1-Fase1-EquipoB-v0.2.pdf` y `.docx` |
+| Review 1 (corregida) | v0.2.10 | + 4.1–4.7, 6.5 y 13 | `docs/entregas/IS1-Fase1-EquipoB-v0.2.10.pdf` |
 
 Cada corrección aumenta en uno el tercer dígito de la versión y tiene una etiqueta de Git con ese nombre.
 Versión vigente: **v0.2.10**.
