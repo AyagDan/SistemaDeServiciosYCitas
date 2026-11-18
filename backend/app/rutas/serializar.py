@@ -5,6 +5,7 @@ from app.servicios import cobro
 
 
 def resumen_orden(o: OrdenServicio) -> schemas.OrdenResumen:
+    """Convierte una orden en su versión resumida para listados."""
     v = o.vehiculo
     return schemas.OrdenResumen(
         folio=o.folio, estado=o.estado, placas=v.placas, vehiculo=f"{v.marca} {v.modelo} {v.anio}",
@@ -14,6 +15,7 @@ def resumen_orden(o: OrdenServicio) -> schemas.OrdenResumen:
 
 
 def detalle_orden(o: OrdenServicio) -> schemas.OrdenDetalle:
+    """Convierte una orden en su versión completa: recepción, diagnósticos, historial y saldo."""
     r = o.recepcion
     return schemas.OrdenDetalle(
         **resumen_orden(o).model_dump(),
@@ -28,4 +30,5 @@ def detalle_orden(o: OrdenServicio) -> schemas.OrdenDetalle:
 
 
 def cotizacion(c: Cotizacion) -> schemas.CotizacionSalida:
+    """Convierte una cotización en su respuesta, con total y fecha de vencimiento."""
     return schemas.CotizacionSalida.model_validate(c)

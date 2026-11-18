@@ -16,6 +16,7 @@ log = logging.getLogger("taller.notificaciones")
 
 @dataclass
 class Mensaje:
+    """Mensaje enviado al cliente: destino, asunto, cuerpo y fecha."""
     destino: str
     asunto: str
     cuerpo: str
@@ -26,9 +27,11 @@ BANDEJA: list[Mensaje] = []
 
 
 def enviar(destino: str, asunto: str, cuerpo: str) -> None:
+    """Registra el mensaje en la bandeja y en la bitácora (no envía correos reales en la Fase 1)."""
     BANDEJA.append(Mensaje(destino, asunto, cuerpo))
     log.info("Notificación a %s: %s", destino, asunto)
 
 
 def ultimo_mensaje(destino: str) -> Mensaje | None:
+    """Devuelve el mensaje más reciente enviado a un destino, o None."""
     return next((m for m in reversed(BANDEJA) if m.destino == destino), None)

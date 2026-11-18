@@ -19,10 +19,12 @@ from app.db import Base
 
 
 def _enum(cls, nombre):
+    """Tipo de enumeración de la base de datos, con el nombre dado y los valores de la clase."""
     return Enum(cls, name=nombre, values_callable=lambda e: [m.value for m in e])
 
 
 class RolUsuario(str, enum.Enum):
+    """Roles del personal del taller."""
     Gerente = "Gerente"
     Recepcionista = "Recepcionista"
     Mecanico = "Mecanico"
@@ -31,23 +33,27 @@ class RolUsuario(str, enum.Enum):
 
 
 class TipoVehiculo(str, enum.Enum):
+    """Tipos de vehículo que atiende el taller (RN-07)."""
     Automovil = "Automovil"
     Motocicleta = "Motocicleta"
     Camioneta = "Camioneta"
 
 
 class EstadoCita(str, enum.Enum):
+    """Estados de una cita."""
     Pendiente = "Pendiente"
     Confirmada = "Confirmada"
     Cancelada = "Cancelada"
 
 
 class EstadoBahia(str, enum.Enum):
+    """Estados de una bahía de trabajo."""
     Libre = "Libre"
     Ocupada = "Ocupada"
 
 
 class EstadoOrden(str, enum.Enum):
+    """Estados de la orden de servicio (6.5); las transiciones válidas están en ordenes.TRANSICIONES."""
     Abierta = "Abierta"
     EnEsperaDeBahia = "EnEsperaDeBahia"
     Diagnosticada = "Diagnosticada"
@@ -64,6 +70,7 @@ ESTADOS_ABIERTOS = [e for e in EstadoOrden if e not in (EstadoOrden.Cerrada, Est
 
 
 class NivelCombustible(str, enum.Enum):
+    """Niveles de combustible que se registran en la recepción."""
     Reserva = "Reserva"
     UnCuarto = "UnCuarto"
     Mitad = "Mitad"
@@ -72,6 +79,7 @@ class NivelCombustible(str, enum.Enum):
 
 
 class PosicionFoto(str, enum.Enum):
+    """Posiciones de las fotografías de la recepción (RN-12)."""
     Frente = "Frente"
     Trasera = "Trasera"
     Izquierda = "Izquierda"
@@ -83,11 +91,13 @@ POSICIONES_OBLIGATORIAS = {PosicionFoto.Frente, PosicionFoto.Trasera, PosicionFo
 
 
 class Canal(str, enum.Enum):
+    """Canales por los que se envía el enlace al cliente."""
     Correo = "Correo"
     SMS = "SMS"
 
 
 class EstadoCotizacion(str, enum.Enum):
+    """Estados de una cotización."""
     Pendiente = "Pendiente"
     Autorizada = "Autorizada"
     Rechazada = "Rechazada"
@@ -95,22 +105,26 @@ class EstadoCotizacion(str, enum.Enum):
 
 
 class TipoConcepto(str, enum.Enum):
+    """Tipos de concepto de una cotización."""
     ManoDeObra = "ManoDeObra"
     Refaccion = "Refaccion"
     Insumo = "Insumo"
 
 
 class MedioAutorizacion(str, enum.Enum):
+    """Medios por los que el cliente autoriza una cotización."""
     Remoto = "Remoto"
     Presencial = "Presencial"
 
 
 class TipoAutorizacion(str, enum.Enum):
+    """Tipos de autorización: la inicial o un incremento mayor al 10 % (RN-04)."""
     Inicial = "Inicial"
     IncrementoMayor10 = "IncrementoMayor10"
 
 
 class EstadoAutorizacion(str, enum.Enum):
+    """Estados de una autorización con código 2FA."""
     Pendiente = "Pendiente"
     Confirmada = "Confirmada"
     Rechazada = "Rechazada"
@@ -119,6 +133,7 @@ class EstadoAutorizacion(str, enum.Enum):
 
 # ---------------------------------------------------------------------------
 class Usuario(Base):
+    """Integrante del personal del taller, con su rol y su contraseña cifrada."""
     __tablename__ = "usuario"
     id_usuario: Mapped[int] = mapped_column(Integer, primary_key=True)
     nombre: Mapped[str] = mapped_column(String(120))
@@ -129,6 +144,7 @@ class Usuario(Base):
 
 
 class Cliente(Base):
+    """Cliente del taller, particular o flotilla; es dueño de sus vehículos."""
     __tablename__ = "cliente"
     id_cliente: Mapped[int] = mapped_column(Integer, primary_key=True)
     tipo_cliente: Mapped[str] = mapped_column(String(10))
@@ -140,12 +156,14 @@ class Cliente(Base):
 
     @property
     def nombre(self) -> str:
+        """Nombre completo del cliente, para mostrar en pantalla."""
         if self.particular:
             return self.particular.nombre
         return self.flotilla.razon_social if self.flotilla else ""
 
 
 class ClienteParticular(Base):
+    """Datos propios de un cliente particular."""
     __tablename__ = "cliente_particular"
     id_cliente: Mapped[int] = mapped_column(ForeignKey("cliente.id_cliente", ondelete="CASCADE"), primary_key=True)
     tipo_cliente: Mapped[str] = mapped_column(String(10), default="Particular")
@@ -153,6 +171,7 @@ class ClienteParticular(Base):
 
 
 class Flotilla(Base):
+    """Datos propios de una flotilla empresarial, incluido si tiene crédito (RN-10)."""
     __tablename__ = "flotilla"
     id_cliente: Mapped[int] = mapped_column(ForeignKey("cliente.id_cliente", ondelete="CASCADE"), primary_key=True)
     tipo_cliente: Mapped[str] = mapped_column(String(10), default="Flotilla")
@@ -161,6 +180,7 @@ class Flotilla(Base):
 
 
 class Vehiculo(Base):
+    """Vehículo de un cliente, identificado por sus placas."""
     __tablename__ = "vehiculo"
     id_vehiculo: Mapped[int] = mapped_column(Integer, primary_key=True)
     id_cliente: Mapped[int] = mapped_column(ForeignKey("cliente.id_cliente"))
@@ -174,12 +194,14 @@ class Vehiculo(Base):
 
 
 class Bahia(Base):
+    """Bahía de trabajo del taller (son 4, RN-05)."""
     __tablename__ = "bahia"
     numero: Mapped[int] = mapped_column(SmallInteger, primary_key=True, autoincrement=False)
     estado: Mapped[EstadoBahia] = mapped_column(_enum(EstadoBahia, "estado_bahia"), default=EstadoBahia.Libre)
 
 
 class Cita(Base):
+    """Cita solicitada por un cliente; una cita web empieza Pendiente (RN-08)."""
     __tablename__ = "cita"
     id_cita: Mapped[int] = mapped_column(Integer, primary_key=True)
     id_cliente: Mapped[int] = mapped_column(ForeignKey("cliente.id_cliente"))
@@ -193,6 +215,7 @@ class Cita(Base):
 
 
 class OrdenServicio(Base):
+    """Orden de servicio: reúne la recepción, el diagnóstico, las cotizaciones, los pagos y el historial de estados."""
     __tablename__ = "orden_servicio"
     folio: Mapped[str] = mapped_column(String(20), primary_key=True)
     fecha_apertura: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=reloj.ahora)
@@ -215,6 +238,7 @@ class OrdenServicio(Base):
 
 
 class AsignacionColaborador(Base):
+    """Mecánico que colabora en una orden sin ser el responsable (RN-09)."""
     __tablename__ = "asignacion_colaborador"
     folio: Mapped[str] = mapped_column(ForeignKey("orden_servicio.folio", ondelete="CASCADE"), primary_key=True)
     id_usuario: Mapped[int] = mapped_column(ForeignKey("usuario.id_usuario"), primary_key=True)
@@ -222,6 +246,7 @@ class AsignacionColaborador(Base):
 
 
 class HistorialEstado(Base):
+    """Registro de cada cambio de estado de una orden y de quién lo hizo."""
     __tablename__ = "historial_estado"
     id_historial: Mapped[int] = mapped_column(Integer, primary_key=True)
     folio: Mapped[str] = mapped_column(ForeignKey("orden_servicio.folio"))
@@ -232,6 +257,7 @@ class HistorialEstado(Base):
 
 
 class Diagnostico(Base):
+    """Diagnóstico técnico de una orden; cada uno se agrega al historial, no reemplaza al anterior."""
     __tablename__ = "diagnostico"
     id_diagnostico: Mapped[int] = mapped_column(Integer, primary_key=True)
     uuid_local: Mapped[object | None] = mapped_column(Uuid, unique=True)
@@ -242,6 +268,7 @@ class Diagnostico(Base):
 
 
 class RecepcionVehicular(Base):
+    """Recepción del vehículo: kilometraje, combustible, checklist y fotografías."""
     __tablename__ = "recepcion_vehicular"
     id_recepcion: Mapped[int] = mapped_column(Integer, primary_key=True)
     uuid_local: Mapped[object | None] = mapped_column(Uuid, unique=True)
@@ -262,6 +289,7 @@ class RecepcionVehicular(Base):
 
 
 class ChecklistInspeccion(Base):
+    """Checklist de carrocería e interiores de la recepción."""
     __tablename__ = "checklist_inspeccion"
     id_checklist: Mapped[int] = mapped_column(Integer, primary_key=True)
     uuid_local: Mapped[object | None] = mapped_column(Uuid, unique=True)
@@ -273,6 +301,7 @@ class ChecklistInspeccion(Base):
 
 
 class Fotografia(Base):
+    """Fotografía del estado del vehículo al recibirlo (RN-12)."""
     __tablename__ = "fotografia"
     id_foto: Mapped[int] = mapped_column(Integer, primary_key=True)
     uuid_local: Mapped[object | None] = mapped_column(Uuid, unique=True)
@@ -283,6 +312,7 @@ class Fotografia(Base):
 
 
 class TokenAcceso(Base):
+    """Enlace seguro del cliente; solo se guarda la huella del token, no el token (RN-01)."""
     __tablename__ = "token_acceso"
     token_hash: Mapped[str] = mapped_column(String(64), primary_key=True)
     folio: Mapped[str] = mapped_column(ForeignKey("orden_servicio.folio", ondelete="CASCADE"))
@@ -294,12 +324,14 @@ class TokenAcceso(Base):
     orden: Mapped[OrdenServicio] = relationship()
 
     def es_valido(self) -> bool:
+        """Indica si el enlace está activo y no ha expirado."""
         if not self.activo:
             return False
         return self.fecha_expiracion is None or reloj.utc(self.fecha_expiracion) > reloj.ahora()
 
 
 class Cotizacion(Base):
+    """Cotización de una orden; una re-cotización reemplaza a la anterior y aumenta la versión."""
     __tablename__ = "cotizacion"
     id_cotizacion: Mapped[int] = mapped_column(Integer, primary_key=True)
     folio: Mapped[str] = mapped_column(ForeignKey("orden_servicio.folio"))
@@ -316,6 +348,7 @@ class Cotizacion(Base):
 
     @property
     def fecha_vencimiento(self) -> date:
+        """Fecha en que vence la cotización (RN-11)."""
         return self.fecha_emision + timedelta(days=self.vigencia_dias)
 
     def esta_vigente(self) -> bool:
@@ -324,10 +357,12 @@ class Cotizacion(Base):
 
     @property
     def total(self) -> Decimal:
+        """Suma de los conceptos que el cliente seleccionó."""
         return sum((d.subtotal for d in self.detalles if d.seleccionado), Decimal("0.00"))
 
 
 class DetalleCotizacion(Base):
+    """Concepto de una cotización: mano de obra, refacción o insumo."""
     __tablename__ = "detalle_cotizacion"
     id_detalle: Mapped[int] = mapped_column(Integer, primary_key=True)
     id_cotizacion: Mapped[int] = mapped_column(ForeignKey("cotizacion.id_cotizacion", ondelete="CASCADE"))
@@ -340,10 +375,12 @@ class DetalleCotizacion(Base):
 
     @property
     def subtotal(self) -> Decimal:
+        """Importe del concepto: cantidad por precio unitario."""
         return Decimal(self.cantidad) * Decimal(self.precio_unitario)
 
 
 class Autorizacion(Base):
+    """Autorización del cliente con código 2FA; guarda la huella SHA-256 de lo que aceptó (RN-02, RNF-04)."""
     __tablename__ = "autorizacion"
     id_autorizacion: Mapped[int] = mapped_column(Integer, primary_key=True)
     id_cotizacion: Mapped[int] = mapped_column(ForeignKey("cotizacion.id_cotizacion"))
@@ -360,6 +397,7 @@ class Autorizacion(Base):
 
 
 class Pago(Base):
+    """Pago aplicado a una cotización autorizada."""
     __tablename__ = "pago"
     id_pago: Mapped[int] = mapped_column(Integer, primary_key=True)
     id_cotizacion: Mapped[int] = mapped_column(ForeignKey("cotizacion.id_cotizacion"))
@@ -369,6 +407,7 @@ class Pago(Base):
 
 
 class Garantia(Base):
+    """Garantía de mano de obra que se crea al cerrar la orden (RN-13)."""
     __tablename__ = "garantia"
     folio: Mapped[str] = mapped_column(ForeignKey("orden_servicio.folio", ondelete="CASCADE"), primary_key=True)
     fecha_inicio: Mapped[date] = mapped_column(Date)
@@ -377,7 +416,9 @@ class Garantia(Base):
 
     @property
     def fecha_fin(self) -> date:
+        """Fecha en que termina la garantía."""
         return self.fecha_inicio + timedelta(days=self.duracion_dias)
 
     def esta_vigente(self) -> bool:
+        """Indica si la garantía sigue vigente hoy."""
         return self.fecha_inicio <= reloj.hoy() <= self.fecha_fin
