@@ -27,7 +27,7 @@ Cada historia o tarea se trabaja en su propia rama `tipo/número-descripción` (
 | Review 1 | v0.2 | + 4.1–4.5 (borrador), 4.6, 4.7 | Se genera desde `docs/documento/` en `docs/entregas/IS1-Fase1-EquipoB-v0.2.pdf` y `.docx` |
 
 Cada corrección aumenta en uno el tercer dígito de la versión y tiene una etiqueta de Git con ese nombre.
-Versión vigente: **v0.2.8**.
+Versión vigente: **v0.2.9**.
 
 | Versión | Corrección de la Review 1 | Issue | PR |
 |---|---|---|---|
@@ -39,6 +39,7 @@ Versión vigente: **v0.2.8**.
 | v0.2.6 | B6 · Declaración de uso de IA (primera parte) | #30 | #63 |
 | v0.2.7 | B6 · Sesión interna de transferencia (segunda parte) | #30 | #66 |
 | v0.2.8 | B1 · Diagramas de casos de uso y wireframes | #67 | #69 |
+| v0.2.9 | B6 · Declaración de uso de IA (complemento) | #30 | #69 |
 
 ## Contenido del repositorio
 
