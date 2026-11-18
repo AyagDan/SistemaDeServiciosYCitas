@@ -24,3 +24,7 @@ docs/documento/*.pdf
 
 # Word: archivos temporales
 ~$*
+
+# Backend: caché de pruebas y base de datos local de desarrollo
+.pytest_cache/
+*.db

@@ -1,0 +1,27 @@
+@startuml casos-de-uso-3
+' Figura 4.4. Casos de uso: gerencia y almacén.
+left to right direction
+skinparam packageStyle rectangle
+skinparam shadowing false
+title Gerencia y almacén
+
+actor "Usuario del personal" as Personal
+actor Gerente
+actor "Encargado de Almacén" as Almacen
+actor "Jefe de Mecánicos" as Jefe
+Personal <|-- Gerente
+Personal <|-- Almacen
+
+rectangle "Sistema de Órdenes de Servicio y Citas" {
+  usecase "CU-12 Monitoreo global\ndel taller y KPIs" as CU12
+  usecase "CU-13 Autorización de entrega\na crédito (flotillas)" as CU13
+  usecase "CU-06 Requisición\nde refacciones" as CU06
+  usecase "CU-08 Atender solicitud de refacciones\ny registrar compra" as CU08
+}
+
+Gerente --> CU12
+Gerente --> CU13
+Jefe --> CU06
+Almacen --> CU08
+CU08 ..> CU06 : atiende
+@enduml
