@@ -13,8 +13,8 @@ cotización con autorización del cliente por código de verificación, refaccio
 | Universidad | Universidad del Istmo · Campus Ixtepec |
 | Carrera | Ingeniería en Desarrollo de Software y Sistemas Inteligentes |
 | Materia | Ingeniería de Software I (IDSSI-27) |
-| Semestre y grupo | Quinto semestre · grupo: Pendiente |
-| Profesor(a) | Pendiente: su nombre no figura en el repositorio |
+| Semestre y grupo | Quinto semestre · grupo 517 |
+| Profesor(a) | Florentino Ruiz Aquino |
 | Equipo | B (5 integrantes) |
 | Cliente | Servicio Automotriz Hermanos Ruiz, S.A. de C.V. |
 | Entrega | Review 1 corregida · versión **v0.2.10** · 18/11/2026 |
