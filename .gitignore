@@ -29,3 +29,8 @@ docs/documento/*.pdf
 # Backend: caché de pruebas y base de datos local de desarrollo
 .pytest_cache/
 *.db
+
+# Editores e IDE
+.vscode/
+.idea/
+*.swp
