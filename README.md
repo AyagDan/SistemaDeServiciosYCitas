@@ -13,8 +13,8 @@ cotización con autorización del cliente por código de verificación, refaccio
 | Universidad | Universidad del Istmo · Campus Ixtepec |
 | Carrera | Ingeniería en Desarrollo de Software y Sistemas Inteligentes |
 | Materia | Ingeniería de Software I (IDSSI-27) |
-| Semestre y grupo | Quinto semestre · grupo: Pendiente |
-| Profesor(a) | Pendiente: su nombre no figura en el repositorio |
+| Semestre y grupo | Quinto semestre · grupo 517 |
+| Profesor(a) | Florentino Ruiz Aquino |
 | Equipo | B (5 integrantes) |
 | Cliente | Servicio Automotriz Hermanos Ruiz, S.A. de C.V. |
 | Entrega | Review 1 corregida · versión **v0.2.10** · 18/11/2026 |
@@ -133,6 +133,16 @@ Diagramas del documento, en `docs/documento/figuras/`: casos de uso (`casos-de-u
 estados de la orden (`maquina-estados-orden.png`), story map y proceso actual. Sus fuentes están en
 `docs/03-vision/`, `docs/04-requisitos/` y `docs/06-analisis/`.
 
+Diagrama de clases del dominio, generado a partir de `backend/app/models.py` con
+`docs/06-analisis/clases/generar_clases.py`:
+
+- [`clases-1-operacion.png`](docs/06-analisis/clases/clases-1-operacion.png): clientes, citas, recepción y orden de servicio.
+- [`clases-2-cotizacion-cobro.png`](docs/06-analisis/clases/clases-2-cotizacion-cobro.png): cotización, autorización, cobro y garantía.
+
+Mapa de tecnologías y cómo se comunican:
+
+![Mapa de tecnologías](docs/07-arquitectura/tecnologias/diagrama-tecnologias.png)
+
 ## Pruebas
 
 ```bash
@@ -173,7 +183,8 @@ Versión vigente: **v0.2.10**.
 | `docs/entregas/` | Cada entrega en PDF y Word (`IS1-Fase1-EquipoB-v<versión>`) |
 | `docs/03-vision/` | Fuentes de las figuras de la sección 3 (proceso actual y mapa de poder/interés) |
 | `docs/04-requisitos/` | Fuentes del story map, los diagramas de casos de uso y los wireframes (4.5 y 4.10), y la propuesta de alcance |
-| `docs/06-analisis/` | Fuente PlantUML de la máquina de estados de la Orden (6.5) |
+| `docs/06-analisis/` | Máquina de estados de la Orden (6.5) y diagrama de clases del dominio, con sus fuentes |
+| `docs/07-arquitectura/` | Mapa de tecnologías, su generador y los íconos que usa |
 | `backend/` | Backend FastAPI y sus pruebas automatizadas (`backend/tests/`) |
 | `db/` | Esquema de PostgreSQL (`schema.sql`) |
 | `docs/pruebas/` | Evidencia de la ejecución de las pruebas automatizadas |

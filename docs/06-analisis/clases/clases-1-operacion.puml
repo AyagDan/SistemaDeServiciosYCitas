@@ -1,0 +1,211 @@
+@startuml clases-1-operacion
+' Generado por docs/06-analisis/clases/generar_clases.py a partir de backend/app/models.py.
+title Diagrama de clases del dominio · Clientes, citas, recepción y orden de servicio
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam linetype polyline
+skinparam nodesep 60
+skinparam ranksep 70
+hide empty members
+
+class Usuario {
+  - id_usuario : int {PK}
+  - nombre : String
+  - correo : String
+  - contrasena_hash : String
+  - rol : RolUsuario
+  - activo : Boolean
+}
+class Cliente {
+  - id_cliente : int {PK}
+  - tipo_cliente : String
+  - telefono : String
+  - correo : String
+  --
+  + nombre() : String
+}
+class ClienteParticular {
+  - id_cliente : int {PK, FK}
+  - tipo_cliente : String
+  - nombre : String
+}
+class Flotilla {
+  - id_cliente : int {PK, FK}
+  - tipo_cliente : String
+  - razon_social : String
+  - credito_habilitado : Boolean
+}
+class Vehiculo {
+  - id_vehiculo : int {PK}
+  - id_cliente : int {FK}
+  - placas : String
+  - marca : String
+  - modelo : String
+  - anio : int
+  - vin : String
+  - tipo : TipoVehiculo
+}
+class Bahia {
+  - numero : int {PK}
+  - estado : EstadoBahia
+}
+class Cita {
+  - id_cita : int {PK}
+  - id_cliente : int {FK}
+  - id_vehiculo : int {FK}
+  - fecha : Date
+  - hora : Time
+  - estado : EstadoCita
+  - numero_bahia : int {FK}
+  - id_usuario_confirma : int {FK}
+}
+class OrdenServicio {
+  - folio : String {PK}
+  - fecha_apertura : DateTime
+  - estado : EstadoOrden
+  - fecha_entrega : DateTime
+  - entrega_a_credito : Boolean
+  - id_vehiculo : int {FK}
+  - id_usuario_abre : int {FK}
+  - id_usuario_responsable : int {FK}
+  - numero_bahia : int {FK}
+  - id_usuario_autoriza_credito : int {FK}
+}
+class AsignacionColaborador {
+  - folio : String {PK, FK}
+  - id_usuario : int {PK, FK}
+  - fecha_asignacion : DateTime
+}
+class HistorialEstado {
+  - id_historial : int {PK}
+  - folio : String {FK}
+  - estado_anterior : EstadoOrden
+  - estado_nuevo : EstadoOrden
+  - fecha_hora : DateTime
+  - id_usuario : int {FK}
+}
+class Diagnostico {
+  - id_diagnostico : int {PK}
+  - uuid_local : UUID
+  - folio : String {FK}
+  - id_usuario : int {FK}
+  - fecha_hora : DateTime
+  - descripcion : String
+}
+class RecepcionVehicular {
+  - id_recepcion : int {PK}
+  - uuid_local : UUID
+  - folio : String {FK}
+  - id_cita : int {FK}
+  - fecha_hora : DateTime
+  - kilometraje : int
+  - nivel_combustible : NivelCombustible
+  --
+  + esta_completa() : Boolean
+}
+class ChecklistInspeccion {
+  - id_checklist : int {PK}
+  - uuid_local : UUID
+  - id_recepcion : int {FK}
+  - carroceria : String
+  - interiores : String
+  - observaciones : String
+  - completo : Boolean
+}
+class Fotografia {
+  - id_foto : int {PK}
+  - uuid_local : UUID
+  - id_recepcion : int {FK}
+  - archivo : String
+  - posicion : PosicionFoto
+  - fecha_hora : DateTime
+}
+class TokenAcceso {
+  - token_hash : String {PK}
+  - folio : String {FK}
+  - id_cliente : int {FK}
+  - canal : Canal
+  - fecha_emision : DateTime
+  - fecha_expiracion : DateTime
+  - activo : Boolean
+  --
+  + es_valido() : Boolean
+}
+
+enum RolUsuario {
+  Gerente
+  Recepcionista
+  Mecanico
+  JefeMecanicos
+  EncargadoAlmacen
+}
+enum TipoVehiculo {
+  Automovil
+  Motocicleta
+  Camioneta
+}
+enum EstadoCita {
+  Pendiente
+  Confirmada
+  Cancelada
+}
+enum EstadoBahia {
+  Libre
+  Ocupada
+}
+enum EstadoOrden {
+  Abierta
+  EnEsperaDeBahia
+  Diagnosticada
+  Autorizada
+  EnReparacion
+  EsperandoRefaccion
+  EsperandoAutorizacionAdicional
+  ListaParaEntrega
+  Cerrada
+  Cancelada
+}
+enum NivelCombustible {
+  Reserva
+  UnCuarto
+  Mitad
+  TresCuartos
+  Lleno
+}
+enum PosicionFoto {
+  Frente
+  Trasera
+  Izquierda
+  Derecha
+  Otra
+}
+enum Canal {
+  Correo
+  SMS
+}
+
+Vehiculo "1" -- "0..*" Cita : vehiculo
+Cliente "1" *-- "0..1" ClienteParticular : particular
+Cliente "1" *-- "0..1" Flotilla : flotilla
+Cliente "1" -- "0..*" Vehiculo : vehiculos
+Vehiculo "1" -- "0..*" OrdenServicio : vehiculo
+Usuario "0..1" -- "0..*" OrdenServicio : responsable
+OrdenServicio "1" -- "0..1" RecepcionVehicular : recepcion
+OrdenServicio "1" -- "0..*" Diagnostico : diagnosticos
+OrdenServicio "1" -- "0..*" HistorialEstado : historial
+OrdenServicio "1" *-- "0..*" AsignacionColaborador : colaboradores
+RecepcionVehicular "1" *-- "0..1" ChecklistInspeccion : checklist
+RecepcionVehicular "1" *-- "0..*" Fotografia : fotografias
+OrdenServicio "1" -- "0..*" TokenAcceso : orden
+Usuario "1" -- "0..*" AsignacionColaborador : id_usuario
+Cliente "1" -- "0..*" Cita : id_cliente
+Bahia "0..1" -- "0..*" Cita : numero_bahia
+Usuario "0..1" -- "0..*" Cita : id_usuario_confirma
+Usuario "1" -- "0..*" Diagnostico : id_usuario
+Usuario "0..1" -- "0..*" HistorialEstado : id_usuario
+Usuario "1" -- "0..*" OrdenServicio : id_usuario_abre
+Bahia "0..1" -- "0..*" OrdenServicio : numero_bahia
+Usuario "0..1" -- "0..*" OrdenServicio : id_usuario_autoriza_credito
+Cita "0..1" -- "0..*" RecepcionVehicular : id_cita
+Cliente "1" -- "0..*" TokenAcceso : id_cliente
+@enduml
