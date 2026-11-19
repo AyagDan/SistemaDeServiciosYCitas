@@ -1,0 +1,40 @@
+\section{6. Modelos de análisis}\label{modelos-de-analisis}
+
+\subsection{6.5 Diagramas de estados}\label{diagramas-de-estados}
+
+Las transiciones de la orden están programadas en una sola tabla (\texttt{TRANSICIONES} en
+\texttt{backend/app/servicios/ordenes.py}); cualquier transición que no aparezca aquí es rechazada por
+el sistema y toda transición válida queda en HistorialEstado. Las historias de usuario (4.5), este modelo
+y el código usan los mismos nombres de estado.
+
+\figura{figuras/maquina-estados-orden.png}{width=\linewidth}{6.7}{Máquina de estados de la Orden de
+servicio: los 10 estados con sus transiciones, cada una con evento, [condición] y / rol. Elaboración
+propia}{docs/06-analisis/estados/orden-servicio.puml}
+
+{\footnotesize
+\begin{longtable}{@{}L{0.14\linewidth}L{0.17\linewidth}L{0.26\linewidth}L{0.21\linewidth}L{0.12\linewidth}@{}}
+\toprule
+\textbf{Estado origen} & \textbf{Evento} & \textbf{Condición} & \textbf{Estado destino} & \textbf{Rol autorizado} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+(inicio) & Registrar recepción & El vehículo no tiene otra orden abierta; si no hay bahía, hay lugar en el estacionamiento (RN-05) & Abierta & Recepcionista \\
+Abierta & Recepción sin bahía libre & Las 4 bahías están ocupadas & EnEsperaDeBahia & Recepcionista \\
+EnEsperaDeBahia & Asignar bahía & Bahía libre; responsable es mecánico activo (RN-09) & Abierta & Jefe de Mecánicos \\
+Abierta & Registrar diagnóstico & Checklist completo y 4 fotografías (RN-12); bahía y responsable asignados & Diagnosticada & Jefe de Mecánicos \\
+Diagnosticada & Confirmar código 2FA & Cotización vigente (RN-11); código correcto, de un solo uso y con menos de 5 minutos (RN-02) & Autorizada & Cliente (remoto) o Recepcionista (presencial) \\
+Diagnosticada & Rechazar cotización & Cotización vigente & Cancelada & Cliente \\
+Autorizada & Iniciar reparación & Bahía asignada y sin re-cotización pendiente (RN-04) & EnReparacion & Jefe de Mecánicos \\
+EnReparacion & Esperar refacción & Hay lugar en el estacionamiento (RN-05); la bahía se libera (RN-06) & EsperandoRefaccion & Jefe de Mecánicos \\
+EsperandoRefaccion & Reanudar reparación & Llegó la refacción y hay una bahía libre & EnReparacion & Jefe de Mecánicos \\
+EnReparacion & Re-cotizar & Nuevo total mayor que el autorizado $\times$ 1.10 (RN-04) & EsperandoAutorizacionAdicional & Recepcionista o Jefe de Mecánicos \\
+EsperandoAutorizacionAdicional & Confirmar código 2FA o rechazar el incremento & Cotización vigente; si se rechaza, se continúa solo con lo autorizado & EnReparacion & Cliente o Recepcionista \\
+EnReparacion & Terminar trabajo & No hay re-cotización pendiente mayor al 10\,\% (RN-04) & ListaParaEntrega & Jefe de Mecánicos \\
+ListaParaEntrega & Registrar entrega & Saldo pendiente igual a 0, o entrega a crédito autorizada (RN-10) & Cerrada & Recepcionista \\
+Abierta, EnEsperaDeBahia, Diagnosticada & Cancelar & --- & Cancelada & Gerente \\
+\end{longtable}
+}
+
+Pruebas que cubren la máquina de estados: \texttt{backend/tests/test\_estados.py} (7 pruebas) y las
+pruebas de cotización y cobro que recorren el flujo completo; las 42 pruebas pasan.

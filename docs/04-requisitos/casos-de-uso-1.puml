@@ -1,0 +1,40 @@
+@startuml casos-de-uso-1
+' Figura 4.2. Casos de uso: recepción, taller y cotización.
+left to right direction
+skinparam packageStyle rectangle
+skinparam shadowing false
+title Recepción, taller y cotización
+
+actor "Usuario del personal" as Personal
+actor Recepcionista
+actor "Jefe de Mecánicos" as Jefe
+actor "Servicio de correo" as Correo <<sistema>>
+Personal <|-- Recepcionista
+Personal <|-- Jefe
+
+rectangle "Sistema de Órdenes de Servicio y Citas" {
+  usecase "CU-01 Confirmación de cita web" as CU01
+  usecase "CU-02 Recepción del vehículo\ny apertura de orden" as CU02
+  usecase "CU-03 Firma de contrato\npresencial (2FA)" as CU03
+  usecase "CU-04 Cobro y entrega\ndel vehículo" as CU04
+  usecase "CU-05 Diagnóstico, cotización técnica\ny asignación de trabajo" as CU05
+  usecase "CU-07 Finalización de trabajo\ny sellado de historial" as CU07
+  usecase "Autenticarse" as AUT
+}
+
+Recepcionista --> CU01
+Recepcionista --> CU02
+Recepcionista --> CU03
+Recepcionista --> CU04
+Jefe --> CU05
+Jefe --> CU07
+CU01 ..> AUT : <<include>>
+CU02 ..> AUT : <<include>>
+CU03 ..> AUT : <<include>>
+CU04 ..> AUT : <<include>>
+CU05 ..> AUT : <<include>>
+CU07 ..> AUT : <<include>>
+CU01 --> Correo
+CU03 --> Correo
+CU07 --> Correo
+@enduml

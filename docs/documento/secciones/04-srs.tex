@@ -332,6 +332,19 @@ Gerencia & Should & HU-29 \\
 \end{longtable}
 }
 
+\subsubsection{Diagramas de casos de uso}\label{diagramas-de-casos-de-uso}
+
+\figura{figuras/casos-de-uso-1.png}{width=\linewidth}{4.2}{Diagrama de casos de uso: recepción, taller y
+cotización. Actores Recepcionista y Jefe de Mecánicos, casos CU-01 a CU-05 y CU-07, «include» de
+Autenticarse y Servicio de correo como actor secundario. Elaboración propia}{docs/04-requisitos/casos-de-uso-1.puml}
+
+\figura{figuras/casos-de-uso-2.png}{width=0.85\linewidth}{4.3}{Diagrama de casos de uso: portal del
+cliente. Casos CU-09 a CU-11, con «extend» Rechazar cotización y Seleccionar opcionales. Elaboración
+propia}{docs/04-requisitos/casos-de-uso-2.puml}
+
+\figura{figuras/casos-de-uso-3.png}{width=\linewidth}{4.4}{Diagrama de casos de uso: gerencia y almacén.
+Casos CU-06, CU-08, CU-12 y CU-13. Elaboración propia}{docs/04-requisitos/casos-de-uso-3.puml}
+
 \subsection{4.5 Historias de usuario (Product
 Backlog)}\label{historias-de-usuario-product-backlog}
 
@@ -398,7 +411,7 @@ responsable, para iniciar formalmente los trabajos en el taller. & Must
 & 5 & v0.1.0 & Pendiente \\
 HU-09 / \#39 & Como jefe de mecánicos, quiero registrar el
 diagnóstico técnico y las observaciones iniciales en la tableta, para
-cambiar el estado de la orden a "En Diagnóstico". & Must & 3 & v0.1.0 &
+cambiar el estado de la orden a "Diagnosticada". & Must & 3 & v0.1.0 &
 Pendiente \\
 HU-10 / \#40 & Como jefe de mecánicos, quiero registrar las
 refacciones e insumos que los mecánicos detecten durante la revisión,
@@ -519,11 +532,11 @@ derecho). \\
 Criterio de aceptación 2 & Dado que se capturan las evidencias, cuando
 se finaliza el formulario de inspección, entonces el sistema genera una
 firma visual o sello digital con fecha y hora exacta de recepción,
-bloqueando el avance al estado "En Diagnóstico" si falta completar algún
+bloqueando el avance al estado "Diagnosticada" si falta completar algún
 punto del checklist obligatorio. \\
 Reglas de negocio & RN-12 (Evidencia fotográfica de recepción), RN-07
 (Clasificación de vehículos autorizados). \\
-Wireframe & W-01 (4.10, Review 2) \\
+Wireframe & W-01 (Figura 4.5) \\
 Casos de prueba & CPA-01 a CPA-04 \\
 \end{longtable}
 }
@@ -564,7 +577,7 @@ notificando al mecánico responsable. \\
 Reglas de negocio & RN-01 (Expiración y vigencia de enlaces), RN-02
 (Doble verificación en autorizaciones), RN-11 (Vigencia de
 cotizaciones). \\
-Wireframe & W-04 (4.10, Review 2) \\
+Wireframe & W-04 (Figura 4.8) \\
 Casos de prueba & CPA-10, CPA-30 \\
 \end{longtable}
 }
@@ -596,7 +609,7 @@ Criterio de aceptación 2 & Dado que se envía la solicitud, cuando se
 registra con éxito, entonces queda en estado "Pendiente" a la espera de
 la confirmación manual de la recepcionista. \\
 Reglas de negocio & RN-08 (Confirmación manual de citas web). \\
-Wireframe & W-05 (4.10, Review 2) \\
+Wireframe & W-05 (Figura 4.9) \\
 Casos de prueba & CPA-31, CPA-34 \\
 \end{longtable}
 }
@@ -630,7 +643,7 @@ cambia a "Confirmada" y se habilita la asignación de la bahía
 correspondiente. \\
 Reglas de negocio & RN-08 (Confirmación manual de citas web), RN-05
 (Capacidad física del taller). \\
-Wireframe & W-05 (4.10, Review 2) \\
+Wireframe & W-05 (Figura 4.9) \\
 Casos de prueba & CPA-32 \\
 \end{longtable}
 }
@@ -695,7 +708,7 @@ Criterio de aceptación 2 & Dado que los datos están precargados, cuando
 se procede con el ingreso, entonces el sistema vincula la cita
 directamente con la nueva orden de servicio abierta. \\
 Reglas de negocio & RN-08 (Confirmación manual de citas web). \\
-Wireframe & W-01 (4.10, Review 2) \\
+Wireframe & W-01 (Figura 4.5) \\
 Casos de prueba & CPA-33 \\
 \end{longtable}
 }
@@ -729,7 +742,7 @@ cuando el usuario acepta la notificación, entonces el sistema permite
 guardar el registro temporal asignando la unidad al estacionamiento de
 espera. \\
 Reglas de negocio & RN-05 (Capacidad física del taller). \\
-Wireframe & W-01 (4.10, Review 2) \\
+Wireframe & W-01 (Figura 4.5) \\
 Casos de prueba & CPA-05, CPA-06 \\
 \end{longtable}
 }
@@ -763,7 +776,7 @@ se intenta una asignación, entonces el sistema emite una alerta
 impidiendo el cruce de unidades en la misma bahía. \\
 Reglas de negocio & RN-05 (Capacidad física del taller), RN-09
 (Asignación y colaboración de mecánicos). \\
-Wireframe & W-02 (4.10, Review 2) \\
+Wireframe & W-02 (Figura 4.6) \\
 Casos de prueba & CPA-07, CPA-08 \\
 \end{longtable}
 }
@@ -787,18 +800,18 @@ Casos de prueba & CPA-07, CPA-08 \\
 ID e issue & HU-09 \\
 Historia & Como jefe de mecánicos, quiero registrar el diagnóstico
 técnico y las observaciones iniciales en la tableta, para cambiar el
-estado de la orden a "En Diagnóstico". \\
+estado de la orden a "Diagnosticada". \\
 Criterio de aceptación 1 & Dado que el jefe de mecánicos se encuentra
 autenticado en la tableta, cuando selecciona una orden con vehículo en
 bahía, entonces visualiza un formulario táctil optimizado con campos
 amplios para el dictamen técnico. \\
 Criterio de aceptación 2 & Dado que se ingresan las observaciones de la
 revisión, cuando se presiona "Guardar Diagnóstico", entonces el sistema
-actualiza automáticamente el estado de la orden a "En Diagnóstico" y
+actualiza automáticamente el estado de la orden a "Diagnosticada" y
 habilita la creación de cotizaciones. \\
 Reglas de negocio & RN-12 (Evidencia fotográfica de recepción).
 Usabilidad en tableta: RNF-02 y RNF-03. \\
-Wireframe & W-02 (4.10, Review 2) \\
+Wireframe & W-02 (Figura 4.6) \\
 Casos de prueba & CPA-02, CPA-03 \\
 \end{longtable}
 }
@@ -866,7 +879,7 @@ reparación, cuando cambia de fase, entonces el tablero refresca la
 información en tiempo real para optimizar la supervisión del taller. \\
 Reglas de negocio & RN-05 (Capacidad física del taller). Usabilidad en
 tableta: RNF-02. \\
-Wireframe & W-02 (4.10, Review 2) \\
+Wireframe & W-02 (Figura 4.6) \\
 Casos de prueba & Se definen en 5.2 (Review 2) \\
 \end{longtable}
 }
@@ -901,7 +914,7 @@ expiración exactamente a los 5 días naturales posteriores a su
 emisión. \\
 Reglas de negocio & RN-11 (Vigencia de cotizaciones), RN-03 (Selección
 granular de rubros). \\
-Wireframe & W-03 (4.10, Review 2) \\
+Wireframe & W-03 (Figura 4.7) \\
 Casos de prueba & CPA-10 \\
 \end{longtable}
 }
@@ -934,7 +947,7 @@ Criterio de aceptación 2 & Dado que se ajustan los opcionales, cuando el
 cliente procede a la firma, entonces el sistema guarda únicamente los
 conceptos seleccionados como parte oficial de la orden. \\
 Reglas de negocio & RN-03 (Selección granular de rubros). \\
-Wireframe & W-04 (4.10, Review 2) \\
+Wireframe & W-04 (Figura 4.8) \\
 Casos de prueba & CPA-12 \\
 \end{longtable}
 }
@@ -970,7 +983,7 @@ entonces el sistema valida el token, registra la dirección IP y la marca
 de tiempo, cambiando la orden a "Autorizada". \\
 Reglas de negocio & RN-02 (Doble verificación en autorizaciones). No
 repudio: RNF-04. \\
-Wireframe & W-04 (4.10, Review 2) \\
+Wireframe & W-04 (Figura 4.8) \\
 Casos de prueba & CPA-11, CPA-13 a CPA-16 \\
 \end{longtable}
 }
@@ -1004,7 +1017,7 @@ recepción para coordinar la entrega física del auto sin costo de
 reparación. \\
 Reglas de negocio & RN-02 (Doble verificación en autorizaciones). Flujo
 de rechazo: CU-11 (A1). \\
-Wireframe & W-04 (4.10, Review 2) \\
+Wireframe & W-04 (Figura 4.8) \\
 Casos de prueba & CPA-17 \\
 \end{longtable}
 }
@@ -1038,7 +1051,7 @@ del sobrecosto, cuando aprueba mediante el código digital, entonces se
 actualiza el monto total e historial de la orden. \\
 Reglas de negocio & RN-04 (Re-cotización obligatoria por sobrecostos),
 RN-02 (Doble verificación en autorizaciones). \\
-Wireframe & W-03 (4.10, Review 2) \\
+Wireframe & W-03 (Figura 4.7) \\
 Casos de prueba & CPA-18, CPA-19 \\
 \end{longtable}
 }
@@ -1169,7 +1182,7 @@ Criterio de aceptación 2 & Dado que la recepción recibe la alerta,
 cuando se verifica el estado, entonces se habilita el aviso automatizado
 al cliente de que su vehículo está listo. \\
 Reglas de negocio & Sin regla de negocio específica; ver CU-07. \\
-Wireframe & W-06 (4.10, Review 2) \\
+Wireframe & W-06 (Figura 4.10) \\
 Casos de prueba & Se definen en 5.2 (Review 2) \\
 \end{longtable}
 }
@@ -1195,7 +1208,7 @@ Historia & Como gerente del taller, quiero que el sistema impida
 registrar la entrega de un vehículo cuya orden tenga saldo pendiente,
 para evitar pérdidas financieras al taller. \\
 Criterio de aceptación 1 & Dado que un vehículo se encuentra en estado
-"Lista para Entrega", cuando la recepcionista intenta registrar la
+"ListaParaEntrega", cuando la recepcionista intenta registrar la
 salida y el balance de pago es mayor a cero, entonces el sistema bloquea
 la acción de liberación. \\
 Criterio de aceptación 2 & Dado que se activa el bloqueo por saldo
@@ -1204,7 +1217,7 @@ crédito autorizado, entonces permite omitir la restricción
 exclusivamente bajo permisos del rol Gerente. \\
 Reglas de negocio & RN-10 (Restricción de entrega y excepción a
 flotillas). \\
-Wireframe & W-06 (4.10, Review 2) \\
+Wireframe & W-06 (Figura 4.10) \\
 Casos de prueba & CPA-21 \\
 \end{longtable}
 }
@@ -1239,7 +1252,7 @@ aprobación, cuando valida el convenio comercial, entonces el sistema
 permite liberar la unidad y factura el adeudo a crédito empresarial. \\
 Reglas de negocio & RN-10 (Restricción de entrega y excepción a
 flotillas). \\
-Wireframe & W-06 (4.10, Review 2) \\
+Wireframe & W-06 (Figura 4.10) \\
 Casos de prueba & CPA-24, CPA-25 \\
 \end{longtable}
 }
@@ -1274,7 +1287,7 @@ comprobante digital. \\
 Reglas de negocio & RN-10 (Restricción de entrega y excepción a
 flotillas), RN-13 (Garantía de mano de obra), RN-01 (Expiración y
 vigencia de enlaces). \\
-Wireframe & W-06 (4.10, Review 2) \\
+Wireframe & W-06 (Figura 4.10) \\
 Casos de prueba & CPA-22, CPA-23 \\
 \end{longtable}
 }
@@ -1450,7 +1463,7 @@ los elementos táctiles responden de manera fluida y adaptada a
 dispositivos móviles. \\
 Reglas de negocio & RN-01 (Expiración y vigencia de enlaces).
 Portabilidad: RNF-01. \\
-Wireframe & W-04 (4.10, Review 2) \\
+Wireframe & W-04 (Figura 4.8) \\
 Casos de prueba & Se definen en 5.2 (Review 2) \\
 \end{longtable}
 }
@@ -1854,3 +1867,25 @@ campo \texttt{folio\_provisional}; diseñar e imprimir los formatos de la
 Bitácora; validar con el cliente el umbral de 4 horas y el plazo de 24
 horas.}
 
+\subsection{4.10 Prototipos de baja fidelidad}\label{prototipos-de-baja-fidelidad}
+
+Un wireframe por pantalla del flujo núcleo, con las historias y los casos de uso que representa. Son de
+baja fidelidad: muestran qué contiene cada pantalla y cómo se distribuye, no su diseño visual.
+
+\figura{figuras/wireframe-w01.png}{width=0.9\linewidth}{4.5}{Wireframe W-01: recepción del vehículo
+(HU-01, HU-06, HU-07; CU-02). Elaboración propia}{docs/04-requisitos/wireframes.py}
+
+\figura{figuras/wireframe-w02.png}{width=0.9\linewidth}{4.6}{Wireframe W-02: tableta del jefe de
+mecánicos (HU-08, HU-09, HU-11; CU-05). Elaboración propia}{docs/04-requisitos/wireframes.py}
+
+\figura{figuras/wireframe-w03.png}{width=0.9\linewidth}{4.7}{Wireframe W-03: generación de cotización
+(HU-12, HU-16; CU-05). Elaboración propia}{docs/04-requisitos/wireframes.py}
+
+\figura{figuras/wireframe-w04.png}{height=0.6\textheight}{4.8}{Wireframe W-04: portal del cliente en
+celular (HU-02, HU-13 a HU-15, HU-28; CU-10, CU-11). Elaboración propia}{docs/04-requisitos/wireframes.py}
+
+\figura{figuras/wireframe-w05.png}{width=0.9\linewidth}{4.9}{Wireframe W-05: agenda de citas (HU-03,
+HU-04; CU-01, CU-09). Elaboración propia}{docs/04-requisitos/wireframes.py}
+
+\figura{figuras/wireframe-w06.png}{width=0.9\linewidth}{4.10}{Wireframe W-06: órdenes abiertas, cobro y
+entrega (HU-20 a HU-23; CU-04, CU-13). Elaboración propia}{docs/04-requisitos/wireframes.py}

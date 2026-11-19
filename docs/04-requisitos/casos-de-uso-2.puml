@@ -1,0 +1,25 @@
+@startuml casos-de-uso-2
+' Figura 4.3. Casos de uso: portal del cliente.
+left to right direction
+skinparam packageStyle rectangle
+skinparam shadowing false
+title Portal del cliente
+
+actor Cliente
+actor "Servicio de correo" as Correo <<sistema>>
+
+rectangle "Portal del cliente (enlace seguro)" {
+  usecase "CU-09 Solicitud de cita\ndesde la web" as CU09
+  usecase "CU-10 Consulta del estado\ndel vehículo en vivo" as CU10
+  usecase "CU-11 Aprobación remota\nde cotización (2FA)" as CU11
+  usecase "Rechazar cotización" as REC
+  usecase "Seleccionar opcionales" as OPC
+}
+
+Cliente --> CU09
+Cliente --> CU10
+Cliente --> CU11
+REC ..> CU11 : <<extend>>
+OPC ..> CU11 : <<extend>>
+CU11 --> Correo
+@enduml

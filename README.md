@@ -27,7 +27,7 @@ Cada historia o tarea se trabaja en su propia rama `tipo/número-descripción` (
 | Review 1 | v0.2 | + 4.1–4.5 (borrador), 4.6, 4.7 | Se genera desde `docs/documento/` en `docs/entregas/IS1-Fase1-EquipoB-v0.2.pdf` y `.docx` |
 
 Cada corrección aumenta en uno el tercer dígito de la versión y tiene una etiqueta de Git con ese nombre.
-Versión vigente: **v0.2.7**.
+Versión vigente: **v0.2.10**.
 
 | Versión | Corrección de la Review 1 | Issue | PR |
 |---|---|---|---|
@@ -38,6 +38,9 @@ Versión vigente: **v0.2.7**.
 | v0.2.5 | B2 · Propuesta de alcance del Release v0.1.0 (primera parte) | #29 | #62 |
 | v0.2.6 | B6 · Declaración de uso de IA (primera parte) | #30 | #63 |
 | v0.2.7 | B6 · Sesión interna de transferencia (segunda parte) | #30 | #76 |
+| v0.2.8 | B1 · Diagramas de casos de uso y wireframes | #67 | #77 |
+| v0.2.9 | B6 · Declaración de uso de IA (complemento) | #30 | #77 |
+| v0.2.10 | B7 · Máquina de estados de la Orden | #68 | #77 |
 
 ## Contenido del repositorio
 
@@ -46,7 +49,10 @@ Versión vigente: **v0.2.7**.
 | `docs/documento/` | Documento de Ingeniería en LaTeX, un archivo por sección en `secciones/` |
 | `docs/entregas/` | Cada entrega en PDF y Word (`IS1-Fase1-EquipoB-v<versión>`) |
 | `docs/03-vision/` | Fuentes de las figuras de la sección 3 (proceso actual y mapa de poder/interés) |
-| `docs/04-requisitos/` | Fuente del story map de la sección 4.5 |
+| `docs/04-requisitos/` | Fuentes del story map, los diagramas de casos de uso y los wireframes (4.5 y 4.10), y la propuesta de alcance |
+| `docs/06-analisis/` | Fuente PlantUML de la máquina de estados de la Orden (6.5) |
+| `backend/` | Backend FastAPI y sus pruebas automatizadas (`backend/tests/`) |
+| `db/` | Esquema de PostgreSQL (`schema.sql`) |
 | `informacion/` | Material de referencia del curso: machote del documento, observaciones de la Review 1 y su plan de atención, reglas de negocio y de datos, propuesta de solución (resumen en `contexto.md` y original en Word) e indicaciones de clase |
 | `docs/minutas/` | Minutas de las Sprint Reviews |
 | `CONTRIBUTING.md` | Acuerdos de trabajo del equipo |

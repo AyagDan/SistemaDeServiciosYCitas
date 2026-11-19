@@ -239,13 +239,13 @@ responsable: Developers & Abierto \\
 \end{longtable}
 }
 
+
 \subsection{2.6 Declaración de uso de inteligencia
 artificial}\label{declaracion-de-uso-de-ia}
 
-El equipo usó un asistente de inteligencia artificial para pasar el
-documento a LaTeX, atender las observaciones de la Review 1 y organizar el
-repositorio. La tabla indica en qué se usó, cómo se verificó el resultado
-y quién responde por él.
+El equipo usó un asistente de inteligencia artificial antes de la v0.1 y después, para atender las
+observaciones de la Review 1. La tabla indica en qué se usó, cómo se verificó el resultado y quién
+responde por él.
 
 {\small
 \begin{longtable}[]{@{}
@@ -260,51 +260,58 @@ y quién responde por él.
 \endhead
 \bottomrule
 \endlastfoot
-Claude Code (Anthropic) & Documento en LaTeX (\ruta{docs/documento/}):
-migración desde el Word v0.1, plantilla, preámbulo y
-\ruta{generar-docx.py} & Pasar a LaTeX el contenido que el equipo ya
-había redactado en Word, con un archivo por sección & El documento
-compila con pdflatex sin errores & Abdías Daniel Chávez Cruz \\
-Claude Code (Anthropic) & Correcciones B11 y B5: 3.4, Figura 3.1,
-portada, control de versiones, CONTRIBUTING.md, README, 2.1 y Anexo F &
-Redactar los cambios que pide cada observación & Compilación sin errores
-y comprobación de que no quedan los stakeholders retirados ni las ramas
-por rol & Abdías Daniel Chávez Cruz \\
-Claude Code (Anthropic) & Corrección B3: Anexo A (guion y minuta de la
-entrevista) y fuentes de las reglas de 4.7 & Redactar el guion y la
-minuta, y ligar cada regla con su hallazgo & Cada regla de entrevista de
-4.7 cita un hallazgo de la minuta. La minuta está pendiente de validar
-por el Product Owner contra sus notas de la entrevista & Abdías Daniel
+Claude Code (Anthropic) & Versión v0.1: revisión de consistencia del documento; borradores de 1.3,
+2.1--2.4, 3.1--3.3, 3.6, 4.1 y 4.2; correcciones de trazabilidad en 4.4--4.9; esquema de base de datos
+(\ruta{db/schema.sql}) & Detectar inconsistencias y proponer redacción a partir del anteproyecto, la
+entrevista del 19/10/2026 y el diagrama de clases v4 & Revisión del Scrum Master / Tech Lead contra las
+fuentes & Abdías Daniel Chávez Cruz \\
+Claude Code (Anthropic) & Versión v0.1: backend FastAPI, 35 pruebas automatizadas, integración continua,
+secciones 5, 6, 7, 9 y 10.1, fuentes PlantUML de estados y actividades & Generar código, pruebas y
+borradores a partir del SRS, las reglas de negocio, el diagrama de clases v4 y el esquema de base de
+datos & Las 35 pruebas pasan en local y en la integración continua; el documento compila & Abdías Daniel
 Chávez Cruz \\
-Claude Code (Anthropic) & Corrección B4: issues de las 30 historias,
-números en 4.5, 2.3, minuta de la Review 1 y 12.2 & Registrar los issues
-a partir de 4.5, resumir la retroalimentación del profesor y contar
-commits, PR y revisiones & Datos comprobados contra GitHub y contra
+Claude Code (Anthropic) & Migración del documento a LaTeX (\ruta{docs/documento/}) y organización del
+repositorio: carpeta \ruta{informacion/} y archivos Word en \ruta{docs/entregas/} & Pasar a LaTeX el
+contenido existente, con un archivo por sección & El documento compila con pdflatex sin errores & Abdías
+Daniel Chávez Cruz \\
+Claude Code (Anthropic) & Correcciones B11 y B5: 3.4, Figura 3.1, portada, control de versiones,
+CONTRIBUTING.md, README, 2.1 y Anexo F & Redactar los cambios que pide cada observación & Compilación
+sin errores y comprobación de que no quedan los stakeholders retirados ni las ramas por rol & Abdías
+Daniel Chávez Cruz \\
+Claude Code (Anthropic) & Corrección B3: Anexo A (guion y minuta de la entrevista) y fuentes de las
+reglas de 4.7 & Redactar el guion y la minuta, y ligar cada regla con su hallazgo & Cada regla de
+entrevista de 4.7 cita un hallazgo de la minuta. La minuta está pendiente de validar por el Product
+Owner contra sus notas de la entrevista & Abdías Daniel Chávez Cruz \\
+Claude Code (Anthropic) & Corrección B4: issues de las 30 historias, números en 4.5, 2.3, minuta de la
+Review 1 y 12.2 & Registrar los issues a partir de 4.5, resumir la retroalimentación del profesor y
+contar commits, PR y revisiones & Datos comprobados contra GitHub y contra
 \ruta{informacion/correcionesContexto.md} & Abdías Daniel Chávez Cruz \\
-Claude Code (Anthropic) & Propuesta de alcance del Release v0.1.0
-(observación B2) & Redactar la propuesta a partir de 4.5 y del
-anteproyecto & Sumas de historias y puntos comprobadas contra 4.5.
-Pendiente de revisión por el Product Owner y de negociación con el
-cliente & Abdías Daniel Chávez Cruz \\
-Claude Code (Anthropic) & Versiones v0.2.1 a v0.2.3, etiquetas de Git,
-issues, ramas, Pull Requests, carpeta \ruta{informacion/} y esta
-declaración & Aplicar los acuerdos de CONTRIBUTING.md en el repositorio &
-Estado del repositorio comprobado en GitHub después de cada cambio &
-Abdías Daniel Chávez Cruz \\
-\pendiente{} & Contenido original de las secciones 1 a 4, redactado en
-Word en octubre de 2026 & \pendiente{} & \pendiente{} & Cada autor declara
-su parte \\
+Claude Code (Anthropic) & Propuesta de alcance del Release v0.1.0 (observación B2) & Redactar la
+propuesta a partir de 4.5 y del anteproyecto & Sumas de historias y puntos comprobadas contra 4.5.
+Pendiente de revisión por el Product Owner y de negociación con el cliente & Abdías Daniel Chávez
+Cruz \\
+Claude Code (Anthropic) & Corrección B6: esta declaración y el guion de la sesión interna de
+transferencia (\ruta{docs/minutas/2026-11-18-sesion-transferencia.md}) & Redactar la declaración a
+partir de la original de la v0.1 y preparar los temas y preguntas de la sesión & Filas comprobadas
+contra la declaración original y el historial del repositorio & Abdías Daniel Chávez Cruz \\
+Claude Code (Anthropic) & Versiones v0.2.1 en adelante: portada, control de versiones, Anexo F,
+README, etiquetas de Git, issues, ramas y Pull Requests & Aplicar los acuerdos de CONTRIBUTING.md en el
+repositorio & Estado del repositorio comprobado en GitHub después de cada cambio & Abdías Daniel Chávez
+Cruz \\
+Claude Code (Anthropic) & Corrección B1: diagramas de casos de uso (Figuras 4.2 a 4.4) y wireframes W-01 a W-06 (Figuras 4.5 a 4.10) con sus fuentes & Dibujar los diagramas y los wireframes a partir de la sección 4.9 y de la descripción de cada pantalla & Contenido comparado contra los casos de uso y la tabla de wireframes de 4.5; pendiente la validación del QA Lead & Abdías Daniel Chávez Cruz \\
+Claude Code (Anthropic) & Corrección B7: estados EnReparacion, EsperandoRefaccion y EsperandoAutorizacionAdicional en el modelo 6.5, la tabla TRANSICIONES del código y sus pruebas & Programar las transiciones y escribir 7 pruebas nuevas & Las 42 pruebas pasan (35 originales y 7 nuevas) & Abdías Daniel Chávez Cruz \\
+\pendiente{} & Secciones redactadas antes de la v0.1 que no aparecen en las filas anteriores y Propuesta
+de Solución Tecnológica & Cada autor declara la herramienta que usó o que no usó IA & \pendiente{} &
+Cada integrante \\
 \end{longtable}
 }
 
-\textbf{Datos personales.} No se ingresaron datos de clientes en la
-herramienta: el proyecto solo usa datos ficticios. El asistente trabajó
-sobre el contenido del repositorio, que incluye los nombres y las
+\textbf{Datos personales.} No se ingresaron datos de clientes en la herramienta: el proyecto solo usa
+datos ficticios. El asistente trabajó sobre el contenido del repositorio, que incluye los nombres y las
 matrículas de los integrantes (sección 1.1).
 
-\textbf{Concentración del trabajo.} Todo el uso del asistente estuvo a
-cargo de un solo integrante. Para repartir ese conocimiento, el Tech Lead
-explica al equipo la estructura del repositorio, el flujo de trabajo, las
-correcciones integradas, las reglas de negocio y las pruebas en una sesión
-interna (observación B6). Su guion y su minuta están en
+\textbf{Concentración del trabajo.} Todo el uso del asistente estuvo a cargo de un solo integrante. Para
+repartir ese conocimiento, el Tech Lead explica al equipo la estructura del repositorio, el flujo de
+trabajo, las correcciones integradas, las reglas de negocio y las pruebas en una sesión interna
+(observación B6). Su guion y su minuta están en
 \ruta{docs/minutas/2026-11-18-sesion-transferencia.md}.
