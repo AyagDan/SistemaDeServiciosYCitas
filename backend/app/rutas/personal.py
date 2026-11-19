@@ -20,6 +20,7 @@ router = APIRouter()
 # --- Autenticación (RF-01) ---------------------------------------------------
 @router.post("/auth/login", response_model=schemas.Sesion, tags=["Autenticación"])
 def login(datos: schemas.Login, db: Session = Depends(get_db)):
+    """Inicia sesión con correo y contraseña y devuelve el token de sesión del personal."""
     usuario = db.scalar(select(Usuario).where(Usuario.correo == datos.correo.strip().lower()))
     if not usuario or not usuario.activo or not seguridad.verificar_secreto(datos.contrasena, usuario.contrasena_hash):
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, "Correo o contraseña incorrectos")
@@ -28,6 +29,7 @@ def login(datos: schemas.Login, db: Session = Depends(get_db)):
 
 @router.get("/auth/yo", response_model=schemas.UsuarioSalida, tags=["Autenticación"])
 def yo(usuario: Usuario = Depends(seguridad.usuario_actual)):
+    """Devuelve el usuario de la sesión actual."""
     return usuario
 
 
@@ -35,6 +37,7 @@ def yo(usuario: Usuario = Depends(seguridad.usuario_actual)):
 @router.post("/usuarios", response_model=schemas.UsuarioSalida, status_code=201, tags=["Usuarios"])
 def crear_usuario(datos: schemas.UsuarioNuevo, db: Session = Depends(get_db),
                   _: Usuario = Depends(requiere_rol(R.Gerente))):
+    """Da de alta a un integrante del personal con su rol (HU-27). Solo el Gerente."""
     correo = datos.correo.strip().lower()
     if db.scalar(select(Usuario).where(Usuario.correo == correo)):
         raise HTTPException(409, "Ya existe un usuario con ese correo")
@@ -50,6 +53,7 @@ def crear_usuario(datos: schemas.UsuarioNuevo, db: Session = Depends(get_db),
 @router.get("/usuarios", response_model=list[schemas.UsuarioSalida], tags=["Usuarios"])
 def listar_usuarios(rol: RolUsuario | None = None, db: Session = Depends(get_db),
                     _: Usuario = Depends(requiere_rol(R.Gerente, R.JefeMecanicos))):
+    """Lista al personal, opcionalmente filtrado por rol (HU-27). Solo el Gerente."""
     consulta = select(Usuario).order_by(Usuario.nombre)
     if rol:
         consulta = consulta.where(Usuario.rol == rol)
@@ -58,6 +62,7 @@ def listar_usuarios(rol: RolUsuario | None = None, db: Session = Depends(get_db)
 
 # --- Clientes y vehículos (RF-03.1, HU-05) ------------------------------------
 def _cliente_salida(c: Cliente) -> schemas.ClienteSalida:
+    """Arma la respuesta de un cliente con los datos de su tipo (particular o flotilla)."""
     return schemas.ClienteSalida(id_cliente=c.id_cliente, tipo_cliente=c.tipo_cliente, nombre=c.nombre,
                                  telefono=c.telefono, correo=c.correo,
                                  vehiculos=[schemas.VehiculoSalida.model_validate(v) for v in c.vehiculos])
@@ -66,6 +71,7 @@ def _cliente_salida(c: Cliente) -> schemas.ClienteSalida:
 @router.post("/clientes", response_model=schemas.ClienteSalida, status_code=201, tags=["Clientes"])
 def crear_cliente(datos: schemas.ClienteNuevo, db: Session = Depends(get_db),
                   _: Usuario = Depends(requiere_rol(R.Recepcionista, R.Gerente))):
+    """Registra a un cliente particular o a una flotilla."""
     cliente = Cliente(tipo_cliente=datos.tipo_cliente, telefono=datos.telefono, correo=datos.correo.strip())
     # {disjoint, complete}: el cliente se crea junto con su subclase.
     if datos.tipo_cliente == "Particular":
@@ -94,6 +100,7 @@ def buscar_clientes(q: str, db: Session = Depends(get_db),
 @router.post("/clientes/{id_cliente}/vehiculos", response_model=schemas.VehiculoSalida, status_code=201, tags=["Clientes"])
 def agregar_vehiculo(id_cliente: int, datos: schemas.VehiculoNuevo, db: Session = Depends(get_db),
                      _: Usuario = Depends(requiere_rol(R.Recepcionista, R.Gerente))):
+    """Agrega un vehículo a un cliente; el sistema solo atiende vehículos ligeros (RN-07)."""
     if not db.get(Cliente, id_cliente):
         raise HTTPException(404, "No existe el cliente")
     if db.scalar(select(Vehiculo).where(Vehiculo.placas == datos.placas.upper())):
@@ -137,6 +144,7 @@ def agenda(fecha: date | None = None, estado: EstadoCita | None = None, db: Sess
 @router.post("/citas/{id_cita}/confirmar", response_model=schemas.CitaSalida, tags=["Citas"])
 def confirmar_cita(id_cita: int, datos: schemas.ConfirmarCita, db: Session = Depends(get_db),
                    usuario: Usuario = Depends(requiere_rol(R.Recepcionista))):
+    """Confirma una cita pendiente asignándole una bahía (HU-04, RN-08)."""
     cita = citas.confirmar(db, id_cita, usuario, datos.numero_bahia)
     db.commit()
     return cita
@@ -145,6 +153,7 @@ def confirmar_cita(id_cita: int, datos: schemas.ConfirmarCita, db: Session = Dep
 @router.post("/citas/{id_cita}/cancelar", response_model=schemas.CitaSalida, tags=["Citas"])
 def cancelar_cita(id_cita: int, db: Session = Depends(get_db),
                   _: Usuario = Depends(requiere_rol(R.Recepcionista))):
+    """Cancela una cita."""
     cita = citas.cancelar(db, id_cita)
     db.commit()
     return cita

@@ -3,10 +3,12 @@ from datetime import date, datetime, timezone
 
 
 def ahora() -> datetime:
+    """Fecha y hora actuales en UTC."""
     return datetime.now(timezone.utc)
 
 
 def hoy() -> date:
+    """Fecha de hoy en UTC."""
     return ahora().date()
 
 
