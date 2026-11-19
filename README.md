@@ -6,6 +6,26 @@ Cliente: Servicio Automotriz Hermanos Ruiz, S.A. de C.V. El sistema digitalizar�
 taller: citas, recepción del vehículo con checklist y fotografías, diagnóstico y asignación de bahía,
 cotización con autorización del cliente por código de verificación, refacciones, cobro y entrega.
 
+## Problema que resuelve
+
+Hoy las citas se apuntan en un cuaderno, las órdenes se llenan en papel y la comunicación con el cliente es por
+teléfono o WhatsApp. Eso provoca disputas por cobros que el cliente dice no haber autorizado, reclamos por daños
+sin evidencia del estado en que llegó el vehículo, muchas llamadas para preguntar por el avance y poca
+visibilidad de qué vehículo ocupa cada una de las 4 bahías del taller.
+
+## Objetivos
+
+**Objetivo general:** digitalizar el ciclo de atención del taller (cita, recepción, diagnóstico, cotización y
+autorización, cobro y entrega) para que cada paso quede registrado y consultable.
+
+**Objetivos específicos** (con el indicador de la sección 3.2 del documento):
+
+1. Eliminar las disputas por cobros no autorizados: el 100 % de las órdenes cerradas con la autorización digital
+   registrada (fecha, hora, IP y monto).
+2. Reducir las llamadas de seguimiento a recepción: al menos 50 % menos que la medición inicial.
+3. Contar con evidencia del estado del vehículo al recibirlo: el 100 % de las recepciones con el checklist
+   completo y las 4 fotografías obligatorias.
+
 ## Equipo
 
 | Integrante | Rol |
