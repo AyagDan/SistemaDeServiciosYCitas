@@ -30,6 +30,9 @@ Módulos de apoyo:
 | `errores.py` | Excepciones de negocio. |
 | `semilla.py` | Crea las 4 bahías y, con `--demo`, usuarios y clientes ficticios. |
 
+Diagramas: el mapa de tecnologías está en `docs/07-arquitectura/tecnologias/diagrama-tecnologias.png` y el
+diagrama de clases del dominio en `docs/06-analisis/clases/` (se genera a partir de `models.py`).
+
 ## 2. Estructura del código
 
 ```
