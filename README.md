@@ -48,7 +48,10 @@ Versión vigente: **v0.2.9**.
 | `docs/documento/` | Documento de Ingeniería en LaTeX, un archivo por sección en `secciones/` |
 | `docs/entregas/` | Cada entrega en PDF y Word (`IS1-Fase1-EquipoB-v<versión>`) |
 | `docs/03-vision/` | Fuentes de las figuras de la sección 3 (proceso actual y mapa de poder/interés) |
-| `docs/04-requisitos/` | Fuente del story map de la sección 4.5 |
+| `docs/04-requisitos/` | Fuentes del story map, los diagramas de casos de uso y los wireframes (4.5 y 4.10), y la propuesta de alcance |
+| `docs/06-analisis/` | Fuente PlantUML de la máquina de estados de la Orden (6.5) |
+| `backend/` | Backend FastAPI y sus pruebas automatizadas (`backend/tests/`) |
+| `db/` | Esquema de PostgreSQL (`schema.sql`) |
 | `informacion/` | Material de referencia del curso: machote del documento, observaciones de la Review 1 y su plan de atención, reglas de negocio y de datos, propuesta de solución (resumen en `contexto.md` y original en Word) e indicaciones de clase |
 | `docs/minutas/` | Minutas de las Sprint Reviews |
 | `CONTRIBUTING.md` | Acuerdos de trabajo del equipo |
