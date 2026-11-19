@@ -25,6 +25,7 @@ TIPOS_IMAGEN = {"image/jpeg": ".jpg", "image/png": ".png", "image/webp": ".webp"
 @router.post("/ordenes", response_model=schemas.OrdenAbierta, status_code=201, tags=["Órdenes"])
 def abrir_orden(datos: schemas.Recepcion, db: Session = Depends(get_db),
                 usuario: Usuario = Depends(requiere_rol(R.Recepcionista))):
+    """Registra la recepción del vehículo y abre la orden (HU-01, HU-07, RN-05)."""
     orden, sin_bahias = ordenes.abrir_orden(
         db, usuario, kilometraje=datos.kilometraje, nivel_combustible=datos.nivel_combustible,
         id_vehiculo=datos.id_vehiculo, id_cita=datos.id_cita, checklist=datos.checklist.model_dump())
@@ -44,12 +45,14 @@ def listar_ordenes(abiertas: bool = True, db: Session = Depends(get_db),
 
 @router.get("/ordenes/{folio}", response_model=schemas.OrdenDetalle, tags=["Órdenes"])
 def ver_orden(folio: str, db: Session = Depends(get_db), _: Usuario = Depends(requiere_rol(*OPERACION))):
+    """Consulta una orden con todo su detalle."""
     return detalle_orden(ordenes.obtener_orden(db, folio))
 
 
 @router.put("/ordenes/{folio}/checklist", response_model=schemas.Checklist, tags=["Órdenes"])
 def actualizar_checklist(folio: str, datos: schemas.Checklist, db: Session = Depends(get_db),
                          _: Usuario = Depends(requiere_rol(R.Recepcionista))):
+    """Actualiza el checklist de la recepción (HU-01)."""
     checklist = ordenes.actualizar_checklist(db, ordenes.obtener_orden(db, folio), datos.model_dump())
     db.commit()
     return schemas.Checklist.model_validate(checklist, from_attributes=True)
@@ -59,6 +62,7 @@ def actualizar_checklist(folio: str, datos: schemas.Checklist, db: Session = Dep
 async def subir_fotografia(folio: str, posicion: PosicionFoto = Form(...), archivo: UploadFile = File(...),
                            db: Session = Depends(get_db),
                            _: Usuario = Depends(requiere_rol(R.Recepcionista, R.JefeMecanicos))):
+    """Guarda una fotografía de la recepción: una por posición y de tamaño limitado (RN-12)."""
     extension = TIPOS_IMAGEN.get(archivo.content_type or "")
     if not extension:
         raise HTTPException(415, "Solo se aceptan imágenes JPEG, PNG o WebP")
@@ -78,6 +82,7 @@ async def subir_fotografia(folio: str, posicion: PosicionFoto = Form(...), archi
 @router.post("/ordenes/{folio}/asignacion", response_model=schemas.OrdenDetalle, tags=["Órdenes"])
 def asignar(folio: str, datos: schemas.Asignacion, db: Session = Depends(get_db),
             usuario: Usuario = Depends(requiere_rol(R.JefeMecanicos))):
+    """Asigna una bahía y un mecánico responsable a la orden (HU-08, RN-05, RN-09)."""
     orden = ordenes.obtener_orden(db, folio)
     ordenes.asignar(db, orden, usuario, numero_bahia=datos.numero_bahia, id_responsable=datos.id_responsable,
                     colaboradores=datos.colaboradores)
@@ -88,6 +93,7 @@ def asignar(folio: str, datos: schemas.Asignacion, db: Session = Depends(get_db)
 @router.post("/ordenes/{folio}/diagnosticos", response_model=schemas.DiagnosticoSalida, status_code=201, tags=["Órdenes"])
 def diagnosticar(folio: str, datos: schemas.DiagnosticoNuevo, db: Session = Depends(get_db),
                  usuario: Usuario = Depends(requiere_rol(R.JefeMecanicos))):
+    """Registra el diagnóstico técnico y pasa la orden a Diagnosticada (HU-09)."""
     diagnostico = ordenes.registrar_diagnostico(db, ordenes.obtener_orden(db, folio), usuario, datos.descripcion)
     db.commit()
     return diagnostico
@@ -96,6 +102,7 @@ def diagnosticar(folio: str, datos: schemas.DiagnosticoNuevo, db: Session = Depe
 @router.post("/ordenes/{folio}/reparacion", response_model=schemas.OrdenDetalle, tags=["Órdenes"])
 def iniciar_reparacion(folio: str, db: Session = Depends(get_db),
         usuario: Usuario = Depends(requiere_rol(R.JefeMecanicos))):
+    """Inicia la reparación de una orden autorizada: pasa a EnReparacion (6.5)."""
     orden = ordenes.obtener_orden(db, folio)
     ordenes.iniciar_reparacion(db, orden, usuario)
     db.commit()
@@ -105,6 +112,7 @@ def iniciar_reparacion(folio: str, db: Session = Depends(get_db),
 @router.post("/ordenes/{folio}/espera-refaccion", response_model=schemas.OrdenDetalle, tags=["Órdenes"])
 def esperar_refaccion(folio: str, db: Session = Depends(get_db),
         usuario: Usuario = Depends(requiere_rol(R.JefeMecanicos))):
+    """Pone la orden en espera de refacción y libera su bahía (RN-06)."""
     orden = ordenes.obtener_orden(db, folio)
     ordenes.esperar_refaccion(db, orden, usuario)
     db.commit()
@@ -114,6 +122,7 @@ def esperar_refaccion(folio: str, db: Session = Depends(get_db),
 @router.post("/ordenes/{folio}/reanudacion", response_model=schemas.OrdenDetalle, tags=["Órdenes"])
 def reanudar_reparacion(folio: str, datos: schemas.Reanudacion, db: Session = Depends(get_db),
         usuario: Usuario = Depends(requiere_rol(R.JefeMecanicos))):
+    """Reanuda la reparación en una bahía libre al llegar la refacción (RN-06)."""
     orden = ordenes.obtener_orden(db, folio)
     ordenes.reanudar_reparacion(db, orden, usuario, datos.numero_bahia)
     db.commit()
@@ -122,6 +131,7 @@ def reanudar_reparacion(folio: str, datos: schemas.Reanudacion, db: Session = De
 
 @router.post("/ordenes/{folio}/terminar", response_model=schemas.OrdenDetalle, tags=["Órdenes"])
 def terminar(folio: str, db: Session = Depends(get_db), usuario: Usuario = Depends(requiere_rol(R.JefeMecanicos))):
+    """Termina el trabajo y avisa a recepción; pasa a ListaParaEntrega (HU-20, RN-04)."""
     orden = ordenes.obtener_orden(db, folio)
     cobro.terminar_trabajo(db, orden, usuario)
     db.commit()
@@ -130,6 +140,7 @@ def terminar(folio: str, db: Session = Depends(get_db), usuario: Usuario = Depen
 
 @router.post("/ordenes/{folio}/cancelar", response_model=schemas.OrdenDetalle, tags=["Órdenes"])
 def cancelar(folio: str, db: Session = Depends(get_db), usuario: Usuario = Depends(requiere_rol(R.Gerente))):
+    """Cancela una orden. Solo el Gerente."""
     orden = ordenes.obtener_orden(db, folio)
     ordenes.cancelar(db, orden, usuario)
     db.commit()
@@ -140,6 +151,7 @@ def cancelar(folio: str, db: Session = Depends(get_db), usuario: Usuario = Depen
 @router.post("/ordenes/{folio}/cotizaciones", response_model=schemas.CotizacionSalida, status_code=201, tags=["Cotizaciones"])
 def cotizar(folio: str, datos: schemas.CotizacionNueva, db: Session = Depends(get_db),
             usuario: Usuario = Depends(requiere_rol(R.Recepcionista, R.JefeMecanicos))):
+    """Genera una cotización o una re-cotización por trabajos adicionales (HU-12, HU-16, RN-04)."""
     cot = cotizaciones.crear_cotizacion(db, ordenes.obtener_orden(db, folio), usuario,
                                         [d.model_dump() for d in datos.detalles])
     db.commit()
@@ -148,6 +160,7 @@ def cotizar(folio: str, datos: schemas.CotizacionNueva, db: Session = Depends(ge
 
 @router.get("/ordenes/{folio}/cotizaciones", response_model=list[schemas.CotizacionSalida], tags=["Cotizaciones"])
 def listar_cotizaciones(folio: str, db: Session = Depends(get_db), _: Usuario = Depends(requiere_rol(*OPERACION))):
+    """Lista las cotizaciones de una orden."""
     orden = ordenes.obtener_orden(db, folio)
     return [cotizacion(cotizaciones.actualizar_vencimiento(c)) for c in orden.cotizaciones]
 
@@ -155,6 +168,7 @@ def listar_cotizaciones(folio: str, db: Session = Depends(get_db), _: Usuario = 
 @router.put("/cotizaciones/{id_cotizacion}/seleccion", response_model=schemas.CotizacionSalida, tags=["Cotizaciones"])
 def seleccionar_presencial(id_cotizacion: int, datos: schemas.Seleccion, db: Session = Depends(get_db),
                            _: Usuario = Depends(requiere_rol(R.Recepcionista))):
+    """Elige los conceptos opcionales de una cotización en la recepción (HU-13, RN-03)."""
     cot = cotizaciones.seleccionar_opcionales(cotizaciones.obtener_cotizacion(db, id_cotizacion), datos.seleccion)
     db.commit()
     return cotizacion(cot)
@@ -173,6 +187,7 @@ def codigo_presencial(id_cotizacion: int, request: Request, db: Session = Depend
 @router.post("/cotizaciones/{id_cotizacion}/autorizacion", response_model=schemas.AutorizacionSalida, tags=["Cotizaciones"])
 def autorizar_presencial(id_cotizacion: int, datos: schemas.CodigoPresencial, request: Request,
                          db: Session = Depends(get_db), usuario: Usuario = Depends(requiere_rol(R.Recepcionista))):
+    """Confirma el código y autoriza la cotización de forma presencial (HU-14, CU-03)."""
     cot = cotizaciones.obtener_cotizacion(db, id_cotizacion)
     aut = cotizaciones.confirmar_codigo(db, cot, datos.codigo, usuario=usuario,
                                         ip=request.client.host if request.client else None)
@@ -182,18 +197,21 @@ def autorizar_presencial(id_cotizacion: int, datos: schemas.CodigoPresencial, re
 
 # --- Cobro y entrega (CU-04, CU-13) -----------------------------------------
 def _saldo(o: OrdenServicio) -> schemas.Saldo:
+    """Calcula el total autorizado, lo pagado y el saldo pendiente de una orden."""
     return schemas.Saldo(folio=o.folio, total_autorizado=cobro.total_autorizado(o), total_pagado=cobro.total_pagado(o),
                          saldo_pendiente=cobro.saldo_pendiente(o), entrega_a_credito=o.entrega_a_credito)
 
 
 @router.get("/ordenes/{folio}/saldo", response_model=schemas.Saldo, tags=["Cobro"])
 def saldo(folio: str, db: Session = Depends(get_db), _: Usuario = Depends(requiere_rol(R.Recepcionista, R.Gerente))):
+    """Consulta el saldo pendiente de una orden."""
     return _saldo(ordenes.obtener_orden(db, folio))
 
 
 @router.post("/ordenes/{folio}/pagos", response_model=schemas.Saldo, status_code=201, tags=["Cobro"])
 def pagar(folio: str, datos: schemas.PagoNuevo, db: Session = Depends(get_db),
           _: Usuario = Depends(requiere_rol(R.Recepcionista))):
+    """Registra un pago que no puede exceder el saldo pendiente (HU-23)."""
     orden = ordenes.obtener_orden(db, folio)
     cobro.registrar_pago(db, orden, datos.monto, datos.metodo)
     db.commit()
@@ -202,6 +220,7 @@ def pagar(folio: str, datos: schemas.PagoNuevo, db: Session = Depends(get_db),
 
 @router.post("/ordenes/{folio}/credito", response_model=schemas.Saldo, tags=["Cobro"])
 def credito(folio: str, db: Session = Depends(get_db), usuario: Usuario = Depends(requiere_rol(R.Gerente))):
+    """Autoriza la entrega a crédito de una flotilla. Solo el Gerente (HU-22, RN-10)."""
     orden = ordenes.obtener_orden(db, folio)
     cobro.autorizar_credito(db, orden, usuario)
     db.commit()
@@ -210,6 +229,7 @@ def credito(folio: str, db: Session = Depends(get_db), usuario: Usuario = Depend
 
 @router.post("/ordenes/{folio}/entrega", response_model=schemas.OrdenDetalle, tags=["Cobro"])
 def entregar(folio: str, db: Session = Depends(get_db), usuario: Usuario = Depends(requiere_rol(R.Recepcionista))):
+    """Entrega el vehículo y cierra la orden; exige saldo cero o crédito autorizado (HU-21, RN-10)."""
     orden = ordenes.obtener_orden(db, folio)
     cobro.entregar(db, orden, usuario)
     db.commit()
@@ -218,6 +238,7 @@ def entregar(folio: str, db: Session = Depends(get_db), usuario: Usuario = Depen
 
 # --- Bahías y panel (HU-07, RF-11) -------------------------------------------
 def _bahias(db: Session) -> list[schemas.BahiaSalida]:
+    """Arma el estado de las 4 bahías con la orden que ocupa cada una."""
     activas = {o.numero_bahia: o for o in db.scalars(select(OrdenServicio).where(
         OrdenServicio.estado.in_(ESTADOS_ABIERTOS), OrdenServicio.numero_bahia.is_not(None)))}
     return [schemas.BahiaSalida(numero=b.numero, estado=b.estado.value,
@@ -228,11 +249,13 @@ def _bahias(db: Session) -> list[schemas.BahiaSalida]:
 
 @router.get("/bahias", response_model=list[schemas.BahiaSalida], tags=["Panel"])
 def bahias(db: Session = Depends(get_db), _: Usuario = Depends(requiere_rol(*OPERACION))):
+    """Estado de las bahías para la recepcionista y el jefe de mecánicos (HU-11)."""
     return _bahias(db)
 
 
 @router.get("/panel", response_model=schemas.Panel, tags=["Panel"])
 def panel(db: Session = Depends(get_db), _: Usuario = Depends(requiere_rol(R.Gerente))):
+    """Panel del Gerente: bahías, órdenes por estado, vehículos en estacionamiento e ingresos."""
     abiertas = db.scalars(select(OrdenServicio).where(OrdenServicio.estado.in_(ESTADOS_ABIERTOS))).all()
     ingresos = sum((Decimal(p.monto) for p in db.scalars(select(Pago))), Decimal("0.00"))
     return schemas.Panel(bahias=_bahias(db), ordenes_por_estado=dict(Counter(o.estado.value for o in abiertas)),

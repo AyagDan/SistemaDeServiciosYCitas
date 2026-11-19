@@ -17,6 +17,7 @@ router = APIRouter(prefix="/portal/{token}", tags=["Portal del cliente"])
 
 
 def acceso(token: str, db: Session = Depends(get_db)) -> TokenAcceso:
+    """Valida el token del enlace seguro del cliente (RN-01)."""
     return cotizaciones.token_valido(db, token)
 
 
@@ -26,6 +27,7 @@ def _ultima(orden):
 
 
 def _cotizacion_actual(acc: TokenAcceso):
+    """Devuelve la cotización más reciente de la orden del enlace o avisa que aún no existe."""
     cot = _ultima(acc.orden)
     if not cot:
         raise NoEncontradoError("Tu vehículo todavía no tiene cotización")
@@ -33,11 +35,13 @@ def _cotizacion_actual(acc: TokenAcceso):
 
 
 def _ip(request: Request) -> str:
+    """Dirección IP desde la que el cliente hace la petición, para dejarla en la autorización."""
     return request.client.host if request.client else "0.0.0.0"
 
 
 @router.get("", response_model=schemas.PortalEstado)
 def estado(acc: TokenAcceso = Depends(acceso)):
+    """Estado del vehículo y cotización vigente que ve el cliente (HU-02, HU-28)."""
     o = acc.orden
     cot = _ultima(o)
     return schemas.PortalEstado(
@@ -48,6 +52,7 @@ def estado(acc: TokenAcceso = Depends(acceso)):
 
 @router.put("/seleccion", response_model=schemas.CotizacionSalida)
 def seleccionar(datos: schemas.Seleccion, acc: TokenAcceso = Depends(acceso), db: Session = Depends(get_db)):
+    """El cliente elige los conceptos opcionales de su cotización (HU-13, RN-03)."""
     cot = cotizaciones.seleccionar_opcionales(_cotizacion_actual(acc), datos.seleccion)
     db.commit()
     return cotizacion(cot)
@@ -55,6 +60,7 @@ def seleccionar(datos: schemas.Seleccion, acc: TokenAcceso = Depends(acceso), db
 
 @router.post("/codigo", status_code=202)
 def pedir_codigo(request: Request, acc: TokenAcceso = Depends(acceso), db: Session = Depends(get_db)):
+    """Envía al correo del cliente el código de 6 dígitos para autorizar (RN-02)."""
     cotizaciones.solicitar_codigo(db, _cotizacion_actual(acc), MedioAutorizacion.Remoto,
                                   token_hash=acc.token_hash, ip=_ip(request))
     db.commit()
@@ -64,6 +70,7 @@ def pedir_codigo(request: Request, acc: TokenAcceso = Depends(acceso), db: Sessi
 @router.post("/autorizacion", response_model=schemas.AutorizacionSalida)
 def autorizar(datos: schemas.CodigoPresencial, request: Request, acc: TokenAcceso = Depends(acceso),
               db: Session = Depends(get_db)):
+    """Confirma el código y autoriza la cotización desde el enlace del cliente (HU-14)."""
     aut = cotizaciones.confirmar_codigo(db, _cotizacion_actual(acc), datos.codigo, ip=_ip(request),
                                         token_hash=acc.token_hash)
     db.commit()
@@ -72,6 +79,7 @@ def autorizar(datos: schemas.CodigoPresencial, request: Request, acc: TokenAcces
 
 @router.post("/rechazo", response_model=schemas.CotizacionSalida)
 def rechazar(acc: TokenAcceso = Depends(acceso), db: Session = Depends(get_db)):
+    """El cliente rechaza la cotización (HU-15)."""
     cot = _cotizacion_actual(acc)
     cotizaciones.rechazar(db, cot)
     db.commit()

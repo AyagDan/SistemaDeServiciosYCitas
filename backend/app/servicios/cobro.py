@@ -11,15 +11,18 @@ from app.servicios import cotizaciones, ordenes
 
 
 def total_autorizado(orden: OrdenServicio) -> Decimal:
+    """Total de la cotización autorizada vigente, o cero si no hay."""
     cot = cotizaciones.autorizada_vigente(orden)
     return cot.total if cot else Decimal("0.00")
 
 
 def total_pagado(orden: OrdenServicio) -> Decimal:
+    """Suma de los pagos registrados en todas las cotizaciones de la orden."""
     return sum((Decimal(p.monto) for c in orden.cotizaciones for p in c.pagos), Decimal("0.00"))
 
 
 def saldo_pendiente(orden: OrdenServicio) -> Decimal:
+    """Total autorizado menos lo pagado."""
     return total_autorizado(orden) - total_pagado(orden)
 
 

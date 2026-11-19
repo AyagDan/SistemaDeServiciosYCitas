@@ -18,6 +18,7 @@ from app.models import Bahia, Cliente, ClienteParticular, EstadoBahia, Flotilla,
 
 
 def preparar_base() -> None:
+    """Crea las tablas (solo en SQLite) y las 4 bahías si todavía no existen."""
     if engine.url.get_backend_name() == "sqlite":
         Base.metadata.create_all(engine)  # en PostgreSQL se usa db/schema.sql
     with SessionLocal() as db:
@@ -28,6 +29,7 @@ def preparar_base() -> None:
 
 
 def cargar_demo() -> None:
+    """Carga un usuario por rol y clientes con datos FICTICIOS para la demostración."""
     preparar_base()
     contrasena = os.getenv("SEED_PASSWORD") or secrets.token_urlsafe(12)
     with SessionLocal() as db:

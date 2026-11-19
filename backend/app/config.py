@@ -7,6 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 def _cargar_env() -> None:
+    """Carga las variables de backend/.env sin pisar las que ya estén definidas en el entorno."""
     archivo = BASE_DIR / ".env"
     if not archivo.exists():
         return
