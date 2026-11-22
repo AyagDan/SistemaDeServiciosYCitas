@@ -160,7 +160,7 @@ La evidencia de la última ejecución está en [`docs/pruebas/resultado-pruebas.
 | Review 1 (corregida) | v0.2.10 | + 4.1–4.7, 6.5 y 13 | `docs/entregas/IS1-Fase1-EquipoB-v0.2.10.pdf` |
 
 Cada corrección aumenta en uno el tercer dígito de la versión y tiene una etiqueta de Git con ese nombre.
-Versión vigente: **v0.2.18**.
+Versión vigente: **v0.2.19**.
 
 | Versión | Corrección de la Review 1 | Issue | PR |
 |---|---|---|---|
@@ -182,6 +182,7 @@ Versión vigente: **v0.2.18**.
 | v0.2.16 | B4 · Fechas de sprints, retrospectivas, minutas internas y aportes (seguimiento) | #87 | #88 |
 | v0.2.17 | B1 · Validación de la QA Lead (seguimiento) | #87 | #88 |
 | v0.2.18 | B6 · Declaración de IA de cada integrante y minuta de la sesión interna (tercera parte) | #30 | #88 |
+| v0.2.19 | B10 · Campos del modelo y formatos de la Bitácora de Contingencia (implementación) | #81 | #88 |
 
 ## Contenido del repositorio
 
