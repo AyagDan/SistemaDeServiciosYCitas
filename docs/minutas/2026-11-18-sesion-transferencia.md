@@ -7,9 +7,10 @@
 | Expone | Tech Lead (Abdías Daniel Chávez Cruz) |
 | Fecha límite | Miércoles 18 de noviembre de 2026 |
 | Fecha | Miércoles 18 de noviembre de 2026 |
-| Hora y modalidad | Pendiente |
+| Hora | 10:00 a 12:00 |
+| Modalidad | Presencial, en la universidad |
 | Temas expuestos | Estructura del backend, reglas de negocio implementadas y pruebas (1.1, 1.4 y 1.5) |
-| Asistentes | Pendiente |
+| Asistentes | Ángel Yael Avendaño Guzmán, Abdías Daniel Chávez Cruz, Dulce María Estudillo Rosado, Isis Alhelí González Maldonado, Isis Yamilet Meléndez Hernández |
 
 En la Review cualquier integrante puede ser preguntado sobre cualquier parte del documento o del
 repositorio. Por eso cada tema termina con preguntas de comprobación que responde alguien distinto de quien
@@ -85,8 +86,9 @@ Preguntas de comprobación:
 
 - La Definición de Terminado (2.2) exige pruebas automatizadas y la integración continua en verde para cada
   historia.
-- Hoy el repositorio no tiene código ni pruebas automatizadas: el plan de pruebas (sección 5) y la
-  implementación corresponden a cortes posteriores.
+- El backend FastAPI (`backend/app/`) separa rutas, servicios y modelos; sus 42 pruebas automatizadas
+  (`backend/tests/`) se ejecutan con `python -m pytest` y cubren acceso, recepción, cotización, estados de
+  la orden, cobro, citas y panel.
 - Se explica cómo se verificó cada cambio hecho con IA: compilación del documento sin errores y comprobación
   de los datos contra GitHub y contra `informacion/`.
 
@@ -109,8 +111,8 @@ Pendiente: se registra al realizar la sesión.
 
 ## 3. Acuerdos
 
-Pendiente: se registran al realizar la sesión. Como mínimo:
-
-- Cada autor declara en 2.6 si usó IA en el contenido original de las secciones 1 a 4 y cómo verificó el
-  resultado, para eliminar la fila «Pendiente».
-- Responsable y fecha de cada duda que quede sin resolver.
+| # | Acuerdo | Responsable | Fecha |
+|---|---|---|---|
+| 1 | Cada autor declara en 2.6 si usó IA en el contenido original de las secciones 1 a 4 y cómo verificó el resultado, para eliminar la fila «Pendiente». | Cada integrante | 25/11/2026 |
+| 2 | Registrar en la tabla de la sección 2 quién respondió cada pregunta de comprobación y las dudas que surgieron. | Cada integrante | 25/11/2026 |
+| 3 | Las Developers y la QA Lead hacen los commits de contenido de su área; el Scrum Master se queda con issues, coordinación y versiones. | Scrum Master | 18/11/2026 |
