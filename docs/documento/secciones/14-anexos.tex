@@ -134,22 +134,30 @@ se cita como fuente en las reglas de negocio de la sección 4.7.
 \endhead
 \bottomrule
 \endlastfoot
-E-01 & Toda autorización de cotización, remota o presencial, debe tener
-una doble verificación con un código de 6 dígitos. & RN-02 \\
+E-01 & Toda autorización de cotización, remota o presencial, debe
+verificarse dos veces: después de «Aceptar», el cliente confirma de nuevo
+su decisión («sí, acepto»), para que después no diga que no lo verificó.
+El equipo implementa esa segunda verificación con un código de 6
+dígitos. & RN-02 \\
 E-02 & El cliente puede aprobar o rechazar por separado los conceptos
-opcionales de una cotización; solo se ejecuta lo autorizado. & RN-03 \\
+de una cotización (por ejemplo, cambiar solo los brazos y dejar las
+rótulas para después); solo se ejecuta lo autorizado y el cliente firma
+lo que autoriza y lo que no. & RN-03 \\
 E-03 & El enlace de seguimiento del cliente funciona mientras el vehículo
-está en el taller y vence al entregarlo y saldarlo. & RN-01 \\
+está en el taller y vence al entregarlo y saldarlo. Si después el
+cliente pide su historial, se genera un enlace nuevo. & RN-01 \\
 E-04 & El taller tiene 4 bahías (un vehículo por bahía) y un
 estacionamiento de espera para 5 vehículos. & RN-05 \\
 E-05 & Si una refacción tarda varios días, el vehículo pasa al
-estacionamiento para liberar la bahía. & RN-06 \\
-E-06 & Solo se atienden vehículos ligeros: automóviles, motocicletas y
-camionetas de hasta 3 toneladas. & RN-07 \\
+estacionamiento, en espera, para liberar la bahía. & RN-06 \\
+E-06 & Solo se atienden vehículos automotrices ligeros: automóviles,
+motocicletas y camionetas de hasta 3 toneladas. Tractocamiones, tráilers y
+tortons son pesados, y las bicicletas no se atienden. & RN-07 \\
 E-07 & Las citas pedidas en línea no apartan lugar hasta que la
 recepcionista las confirma. & RN-08 \\
 E-08 & Varios mecánicos pueden colaborar en una orden, pero siempre hay
-un responsable. & RN-09 \\
+un responsable; la orden solo se reasigna a otro mecánico si el
+responsable deja el trabajo. & RN-09 \\
 E-09 & No se entrega un vehículo con saldo pendiente; solo el gerente
 puede autorizar la entrega a crédito a flotillas empresariales
 registradas. & RN-10 \\
@@ -157,8 +165,39 @@ E-10 & Hay cortes de luz e internet; el personal necesita seguir
 capturando sin conexión. & RNF-08, RNF-09 \\
 E-11 & El jefe de mecánicos trabajará con 1 o 2 tabletas en un ambiente
 con ruido, polvo y manos sucias. & 4.3.1, RNF-02, RNF-03 \\
+E-12 & La cotización se explica y se autoriza en persona en la sucursal,
+por WhatsApp o por correo electrónico. & RF-06 \\
+E-13 & Integrar la API de WhatsApp tiene costo (Meta solo da gratis una
+parte); la de Telegram es gratuita. Si se usa una API con costo, debe
+contemplarse en el presupuesto. & 4.3.2 \\
+E-14 & El correo electrónico es el canal mínimo indispensable, pero
+también se pide el teléfono: si el cliente no responde el correo, se le
+avisa por WhatsApp o SMS. & RF-02.3, 4.3.2 \\
+E-15 & La recepcionista toma las fotografías con su celular; si el
+proyecto lo requiere, la empresa puede otorgar un dispositivo móvil. El
+equipo debe proponer qué se necesita además de lo que ya hay. & RF-04 \\
+E-16 & Proceso actual, todo manual: la recepción registra a mano los
+datos del vehículo, que pasa al estacionamiento; desde ahí solo los
+mecánicos lo mueven a la bahía. El mecánico diagnostica y pasa los datos
+a la recepcionista, que calcula la cotización y llama al cliente si no
+está esperando. Al terminar, el mecánico avisa y la recepcionista llama
+al cliente para que salde y recoja su vehículo. & 3.5 \\
+E-17 & El almacén tiene insumos y refacciones de uso general: aceites,
+filtros de gasolina y de aceite, y brazos estabilizadores, entre
+otros. & RF-08.1, RF-08.2 \\
+E-18 & La recepcionista no necesita conocimientos técnicos de
+mecánica. & 4.3.1 \\
+E-19 & En las flotillas empresariales, la autorización la valida el
+gerente. & \pendiente{} \\
+E-20 & El cliente no tiene más reglas que agregar y acepta cambiar el
+flujo de trabajo del taller siempre que lo haga más efectivo. & 3.6
+(Operativa) \\
 \end{longtable}
 }
+
+Los hallazgos E-01 a E-09 y E-12 a E-20 se contrastaron con la
+transcripción de la entrevista. E-10 y E-11 no aparecen en el fragmento
+transcrito: \pendiente{confirmar su fuente}.
 
 \textbf{Pendientes para la siguiente sesión con el cliente.} Confirmar el
 mínimo de 4 fotografías al recibir el vehículo (RN-12) y la fuente de la
