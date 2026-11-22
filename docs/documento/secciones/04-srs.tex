@@ -1855,9 +1855,9 @@ niveles es una de las decisiones candidatas a modelarse en DMN (7.9).
 gana la opción «No verificable», que obliga a capturar el método de
 estimación (OBD-II, computadora de viaje, medición en litros o declaración
 del cliente), el valor obtenido y una fotografía del tablero.
-\pendiente{agregar los campos \texttt{metodo\_combustible} y
-\texttt{litros\_medidos} a RecepcionVehicular (6.2) y su caso de prueba en
-la sección 5.}
+Los campos \texttt{metodo\_combustible} y \texttt{litros\_medidos} de
+RecepcionVehicular ya están en el backend, con sus validaciones y los casos de
+prueba CPA-36 a CPA-38 (PR \#92).
 
 \paragraph{B. Cortes prolongados de luz o de internet (RN-15).}
 
@@ -1918,10 +1918,10 @@ papel». El Gerente revisa que no falte ningún folio provisional del
 consecutivo y firma la Bitácora como conciliada. Las hojas físicas se
 resguardan con el mismo cuidado que los datos personales del sistema (4.8).
 
-\pendiente{agregar al modelo el medio de autorización «Firma en papel» y el
-campo \texttt{folio\_provisional}; diseñar e imprimir los formatos de la
-Bitácora; confirmar con el cliente el umbral de 4 horas y el plazo de 24
-horas.}
+El modelo ya tiene el medio de autorización «Firma en papel» y el campo
+\texttt{folio\_provisional} (CPA-39), y los formatos de la Bitácora están listos para
+imprimir en \ruta{docs/04-requisitos/bitacora/} (PR \#92). \pendiente{confirmar con el cliente
+el umbral de 4 horas y el plazo de 24 horas.}
 
 \subsection{4.10 Prototipos de baja fidelidad}\label{prototipos-de-baja-fidelidad}
 
