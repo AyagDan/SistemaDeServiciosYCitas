@@ -23,6 +23,10 @@ registro en papel, que después se captura manualmente en el sistema. Se organiz
    `C-AAAAMMDD-NN` y la firma autógrafa del cliente como única autorización válida. Al restablecerse el
    servicio, todo se captura en el sistema en las 24 horas siguientes.
 
+Se consideró también registrar en Excel durante la contingencia, pero se descartó: en el nivel 3 la batería de los
+equipos se agotó o se reserva para lo indispensable, y mientras hay batería la PWA sigue funcionando sin conexión (niveles 1 y 2). Por eso el
+registro de respaldo es en papel.
+
 ### 1.2 Nivel de gasolina al entrar a servicio (D-2)
 
 Si el medidor de combustible del tablero no funciona, la recepcionista usa el primer método disponible y
