@@ -179,8 +179,12 @@ dependencias}\label{restricciones-supuestos-y-dependencias}
 \item
   Presupuesto y Licenciamiento: El desarrollo debe realizarse
   estrictamente con herramientas, lenguajes y frameworks de código
-  abierto (\emph{Open Source} como Python y FastAPI), garantizando cero
-  costos de licencias o rentas de software.
+  abierto (\emph{Open Source} como Python y FastAPI) y planes
+  educativos, garantizando cero costos de licencias o rentas de
+  software. Se comprueba con el inventario de dependencias (por ejemplo,
+  con pip-licenses) y el registro de los planes educativos usados: 100
+  \% de las dependencias con licencia de código abierto o plan educativo
+  vigente. (Antes figuraba como RNF-07 en 4.6.)
 \item
   Infraestructura Física: El taller cuenta únicamente con 4 bahías de
   trabajo físicas (capacidad estricta de 1 vehículo por bahía) y un
@@ -1600,23 +1604,21 @@ RNF-05 & Seguridad (confidencialidad y cumplimiento legal) & El manejo
 de datos personales deberá apegarse a la Ley Federal de Protección de
 Datos Personales en Posesión de los Particulares y usar solo datos
 ficticios en las pruebas. & 100 \% de las conexiones con HTTPS (TLS 1.2
-o superior); datos personales sensibles cifrados en reposo; aviso de
-privacidad visible en el 100 \% de los formularios que capturan datos; 0
-registros reales en el ambiente de pruebas. & Análisis con testssl.sh o
-SSL Labs, lista de verificación de la ley revisada por el equipo y
-revisión de los datos de prueba antes de cada entrega. \\
+o superior); 0 campos que capturen datos personales sensibles (solo
+datos de identificación y contacto y datos del vehículo, como establece
+3.6); contraseñas, códigos 2FA y tokens del cliente guardados solo como
+hash, nunca en claro; aviso de privacidad visible en el 100 \% de los
+formularios que capturan datos; 0 registros reales en el ambiente de
+pruebas. & Análisis con testssl.sh o SSL Labs, revisión del modelo de
+datos contra la lista de datos de 3.6, consulta directa a la base de
+datos para confirmar que no hay secretos en claro, lista de
+verificación de la ley revisada por el equipo y revisión de los datos de
+prueba antes de cada entrega. \\
 RNF-06 & Eficiencia de desempeño & El registro de recepción se deberá
 guardar de forma local con rapidez, aun sin conexión. & Guardar un
 registro con 5 fotografías en máximo 2 s (percentil 95) en la tableta o
 laptop del taller. & 20 repeticiones cronometradas con la herramienta de
 rendimiento del navegador, calculando el percentil 95. \\
-RNF-07 & Mantenibilidad (modificabilidad) & El desarrollo deberá usar
-únicamente herramientas de código abierto, frameworks de uso libre (como
-FastAPI y Python) y planes educativos. & 100 \% de las dependencias con
-licencia de código abierto o plan educativo vigente; costo de
-licenciamiento de \$0 en esta fase. & Inventario de dependencias con
-herramientas de revisión de licencias (por ejemplo, pip-licenses) y
-registro de los planes educativos usados. \\
 RNF-08 & Fiabilidad (tolerancia a fallos) & El personal interno deberá
 poder operar sin internet o sin energía eléctrica, con equipos en
 batería, bajo una arquitectura local con sincronización diferida. & Las
@@ -1642,8 +1644,55 @@ cada 30 s o menos hasta completar; 0 autorizaciones duplicadas o
 perdidas. & Cortar el servidor durante la consulta y durante el envío
 del código, cronometrar el mensaje y revisar la base de datos tras
 restablecer el servicio. \\
+RNF-11 & Adecuación funcional (completitud y corrección) & El sistema
+deberá aplicar sin excepciones las reglas de negocio del flujo núcleo:
+transiciones de estado de la orden, vigencia de cotizaciones (RN-11),
+umbral de sobrecosto (RN-04), evidencia de recepción (RN-12) y bloqueo
+de entrega con saldo (RN-10). & 100 \% de los RF Must con al menos un
+caso de prueba aprobado; 100 \% de las transiciones de estado no
+permitidas rechazadas; totales de cotización exactos al centavo; 0
+órdenes que pasan a diagnóstico con menos de 4 fotografías. & Pruebas
+automatizadas con pytest (máquina de estados, cotización, recepción y
+cobro) en cada PR y matriz de trazabilidad RF--caso de prueba revisada
+por la QA Lead. \\
+RNF-12 & Compatibilidad (interoperabilidad y coexistencia) & El backend
+deberá exponer sus servicios mediante una API REST con JSON documentada
+en OpenAPI, para que la PWA del taller, el portal del cliente y los
+servicios de correo y SMS (4.3.2) intercambien datos sin conversiones
+manuales, y deberá coexistir con el software que ya usan las
+computadoras del taller. & 100 \% de los endpoints descritos en el
+esquema OpenAPI (/docs); 100 \% de las respuestas con JSON válido según
+su esquema; 0 instalaciones ni cambios de configuración en las
+computadoras del taller fuera del navegador. & Revisión del esquema
+OpenAPI generado por FastAPI contra la lista de endpoints, pruebas de la
+API con httpx en pytest y prueba en una computadora del taller con sus
+programas abiertos. \\
+RNF-13 & Protección (restricción operativa y falla segura) & El sistema
+deberá impedir operaciones que pongan en riesgo a las personas o a los
+vehículos en el taller y, ante una falla, deberá quedar en un estado
+seguro: no sobrepasar la capacidad física (RN-05) ni avanzar una orden
+sin la autorización vigente (RN-04). & 0 asignaciones aceptadas con más
+de 1 vehículo por bahía, más de 4 bahías ocupadas o más de 5 vehículos
+en espera; ante un error o una falla de conexión, 100 \% de las órdenes
+conservan su último estado confirmado y 0 avanzan sin autorización. &
+Casos de prueba que intentan sobrepasar la capacidad y avanzar sin
+autorización, y prueba de corte del servidor a mitad de una operación,
+revisando el estado de la orden en la base de datos. \\
+RNF-14 & Mantenibilidad (modularidad y capacidad de prueba) & El
+backend deberá organizarse en módulos separados (rutas, servicios y
+modelos) con pruebas automatizadas que se ejecuten con un solo comando,
+para modificar una regla sin afectar el resto. & 100 \% de las pruebas
+automatizadas aprobadas antes de integrar cada PR; las pruebas se
+ejecutan con un solo comando (python -m pytest); cada regla de negocio
+del flujo núcleo vive en un solo módulo de servicios. & Ejecución de
+python -m pytest en un clon limpio antes de cada merge y revisión de la
+estructura de backend/app en el PR. \\
 \end{longtable}
 }
+
+RNF-07 (uso de herramientas de código abierto y planes educativos) es una
+restricción del proyecto y se trasladó a 4.3.2; su identificador no se
+reutiliza.
 
 \subsection{4.7 Reglas de negocio y requisitos de
 dominio}\label{reglas-de-negocio-y-requisitos-de-dominio}
