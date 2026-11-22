@@ -1,0 +1,185 @@
+% Bitácora de Contingencia (sección 4.7.1 B, RN-15).
+% Formatos para imprimir y numerar de antemano; se guardan en recepción.
+% Compilar desde esta carpeta:  pdflatex bitacora-contingencia.tex
+\documentclass[11pt]{article}
+\usepackage[spanish,es-noshorthands]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[letterpaper,margin=1.6cm]{geometry}
+\usepackage{array,tabularx,amssymb}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small Servicio Automotriz Hermanos Ruiz · Bitácora de Contingencia}
+\rhead{\small Hoja \thepage\ de \pageref{LastPage}}
+\lfoot{\footnotesize Usar solo con la contingencia declarada por el Gerente (RN-15). Capturar en el sistema en las 24 horas siguientes al restablecimiento.}
+\renewcommand{\headrulewidth}{0.4pt}
+\setlength{\parindent}{0pt}
+\renewcommand{\arraystretch}{1.9}
+
+\newcommand{\campo}[1]{\rule{#1}{0.4pt}}
+\newcommand{\casilla}{$\square$}
+\newcommand{\encabezado}[1]{%
+  {\Large\bfseries #1}\par\medskip
+  \begin{tabularx}{\linewidth}{|l|X|l|X|}
+    \hline
+    \textbf{Folio provisional} & C-\campo{2.4cm}-\campo{0.8cm} & \textbf{Fecha y hora} & \\ \hline
+    \textbf{Folio definitivo (al capturar)} & OS-\campo{3cm} & \textbf{Atendió} & \\ \hline
+  \end{tabularx}\par\medskip
+  {\footnotesize Folio provisional: C-AAAAMMDD-NN (consecutivo del día, escrito a mano).}\par\bigskip}
+
+\begin{document}
+
+% ---------------------------------------------------------------------------
+\encabezado{1. Hoja de recepción}
+
+\textbf{Cliente y vehículo}\par
+\begin{tabularx}{\linewidth}{|l|X|l|X|}
+  \hline
+  Nombre o razón social & & Teléfono & \\ \hline
+  Correo electrónico & & Tipo & \casilla\ Particular \quad \casilla\ Flotilla \\ \hline
+  Placas & & Marca y modelo & \\ \hline
+  Año & & VIN (opcional) & \\ \hline
+  Kilometraje & & & \\ \hline
+\end{tabularx}\par\bigskip
+
+\textbf{Nivel de combustible}\par
+\casilla\ Reserva \quad \casilla\ 1/4 \quad \casilla\ 1/2 \quad \casilla\ 3/4 \quad \casilla\ Lleno \quad
+\casilla\ \textbf{No verificable} (indicador inoperante, RN-14)\par\smallskip
+Si es «No verificable», método usado: \casilla\ Escáner OBD-II \quad \casilla\ Computadora de viaje \quad
+\casilla\ Medición en litros \quad \casilla\ Declaración del cliente\par\smallskip
+Valor obtenido: \campo{4cm} \quad Litros medidos (solo medición en litros): \campo{3cm}\par
+\casilla\ Se fotografió el tablero encendido.\par\bigskip
+
+\textbf{Checklist de carrocería e interiores}\par
+\begin{tabularx}{\linewidth}{|l|X|}
+  \hline
+  Carrocería & \\ \hline
+  Interiores & \\ \hline
+  Observaciones & \\ \hline
+\end{tabularx}\par\bigskip
+
+\textbf{Fotografías obligatorias (RN-12)}, tomadas con el celular del taller y nombradas con el folio provisional:\par
+\casilla\ Frente \quad \casilla\ Trasera \quad \casilla\ Costado izquierdo \quad \casilla\ Costado derecho\par\vfill
+
+\begin{tabularx}{\linewidth}{X X}
+  \campo{7cm} & \campo{7cm} \\
+  Firma del cliente (acepta lo registrado) & Firma de la recepcionista \\
+\end{tabularx}
+
+\newpage
+% ---------------------------------------------------------------------------
+\encabezado{2. Hoja de diagnóstico y cotización}
+
+\textbf{Diagnóstico}\par
+\begin{tabularx}{\linewidth}{|l|X|}
+  \hline
+  Bahía & \\ \hline
+  Mecánico responsable & \\ \hline
+  Diagnóstico & \\ \hline
+  & \\ \hline
+\end{tabularx}\par\bigskip
+
+\textbf{Cotización} (vigencia de 5 días naturales, RN-11)\par
+\begin{tabularx}{\linewidth}{|c|X|l|c|r|r|c|}
+  \hline
+  \textbf{\#} & \textbf{Concepto} & \textbf{Tipo} & \textbf{Cant.} & \textbf{Precio unit.} & \textbf{Importe} & \textbf{Opcional} \\ \hline
+  1 & & & & & & \casilla \\ \hline
+  2 & & & & & & \casilla \\ \hline
+  3 & & & & & & \casilla \\ \hline
+  4 & & & & & & \casilla \\ \hline
+  5 & & & & & & \casilla \\ \hline
+  6 & & & & & & \casilla \\ \hline
+  7 & & & & & & \casilla \\ \hline
+  8 & & & & & & \casilla \\ \hline
+  \multicolumn{5}{|r|}{\textbf{Total}} & & \\ \hline
+\end{tabularx}\par
+{\footnotesize Tipo: MO = mano de obra, R = refacción, I = insumo.}\par\vfill
+
+\begin{tabularx}{\linewidth}{X X}
+  \campo{7cm} & \campo{7cm} \\
+  Jefe de Mecánicos & Recepcionista \\
+\end{tabularx}
+
+\newpage
+% ---------------------------------------------------------------------------
+\encabezado{3. Hoja de autorización}
+
+Sin conexión no se puede enviar el código 2FA por correo (RN-02). En contingencia la \textbf{única
+autorización válida es la firma autógrafa del cliente en presencia del personal}, con fecha y hora. No se
+aceptan autorizaciones por teléfono.\par\bigskip
+
+\begin{tabularx}{\linewidth}{|l|X|}
+  \hline
+  Tipo & \casilla\ Inicial \quad \casilla\ Incremento mayor al 10 \% (RN-04) \\ \hline
+  Conceptos autorizados (\# de la hoja 2) & \\ \hline
+  Conceptos rechazados (\# de la hoja 2) & \\ \hline
+  Monto autorizado & \$ \\ \hline
+  Fecha y hora de la firma & \\ \hline
+\end{tabularx}\par\bigskip
+
+Declaro que revisé la cotización y autorizo únicamente los conceptos indicados arriba (RN-03).\par\vfill
+
+\begin{tabularx}{\linewidth}{X X}
+  \campo{7cm} & \campo{7cm} \\
+  Nombre y firma autógrafa del cliente & Nombre y firma de quien atiende \\
+\end{tabularx}
+
+\newpage
+% ---------------------------------------------------------------------------
+\encabezado{4. Recibo provisional}
+
+Solo efectivo: la terminal bancaria tampoco funciona. Sigue vigente RN-10: no se entrega un vehículo con
+saldo pendiente.\par\bigskip
+
+\begin{tabularx}{\linewidth}{|l|X|}
+  \hline
+  Número de recibo provisional & \\ \hline
+  Recibimos de & \\ \hline
+  Cantidad (con número) & \$ \\ \hline
+  Cantidad (con letra) & \\ \hline
+  Concepto & \\ \hline
+  Saldo pendiente después del pago & \$ \\ \hline
+\end{tabularx}\par\vfill
+
+\begin{tabularx}{\linewidth}{X X}
+  \campo{7cm} & \campo{7cm} \\
+  Recibió (recepcionista) & Entregó (cliente) \\
+\end{tabularx}
+
+\newpage
+% ---------------------------------------------------------------------------
+{\Large\bfseries 5. Registro de movimientos}\par\medskip
+Cambios de estado y de bahía de todas las órdenes durante la contingencia.\par\medskip
+\begin{tabularx}{\linewidth}{|l|l|l|l|X|l|}
+  \hline
+  \textbf{Hora} & \textbf{Folio prov.} & \textbf{Estado anterior} & \textbf{Estado nuevo} & \textbf{Bahía / observación} & \textbf{Nombre} \\ \hline
+  & & & & & \\ \hline
+  & & & & & \\ \hline
+  & & & & & \\ \hline
+  & & & & & \\ \hline
+  & & & & & \\ \hline
+  & & & & & \\ \hline
+  & & & & & \\ \hline
+  & & & & & \\ \hline
+  & & & & & \\ \hline
+  & & & & & \\ \hline
+  & & & & & \\ \hline
+  & & & & & \\ \hline
+\end{tabularx}\par\bigskip
+
+\textbf{Control de la contingencia (Gerente)}\par
+\begin{tabularx}{\linewidth}{|l|X|l|X|}
+  \hline
+  Inicio (fecha y hora) & & Fin (fecha y hora) & \\ \hline
+  Folios provisionales usados & del \campo{1.5cm} al \campo{1.5cm} & Capturados en el sistema & \casilla\ Todos \\ \hline
+\end{tabularx}\par\vfill
+
+\begin{tabularx}{\linewidth}{X X}
+  \campo{7cm} & \campo{7cm} \\
+  Firma del Gerente: declara la contingencia & Firma del Gerente: bitácora conciliada \\
+\end{tabularx}
+
+\end{document}
