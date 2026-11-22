@@ -20,6 +20,7 @@ def detalle_orden(o: OrdenServicio) -> schemas.OrdenDetalle:
     return schemas.OrdenDetalle(
         **resumen_orden(o).model_dump(),
         kilometraje=r.kilometraje, nivel_combustible=r.nivel_combustible,
+        metodo_combustible=r.metodo_combustible, litros_medidos=r.litros_medidos,
         checklist=schemas.Checklist.model_validate(r.checklist, from_attributes=True),
         fotografias=[schemas.FotoSalida.model_validate(f) for f in r.fotografias],
         recepcion_completa=r.esta_completa(),

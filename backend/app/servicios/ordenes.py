@@ -1,4 +1,6 @@
 """Recepción, asignación de bahía, diagnóstico y ciclo de estados de la orden."""
+from decimal import Decimal
+
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
@@ -6,7 +8,7 @@ from app import config, reloj
 from app.errores import NoEncontradoError, ReglaNegocioError
 from app.models import (ESTADOS_ABIERTOS, AsignacionColaborador, Bahia, ChecklistInspeccion, Cita,
                         Diagnostico, EstadoBahia, EstadoCita, EstadoOrden, Fotografia,
-                        HistorialEstado, NivelCombustible, OrdenServicio, PosicionFoto,
+                        HistorialEstado, MetodoCombustible, NivelCombustible, OrdenServicio, PosicionFoto,
                         RecepcionVehicular, RolUsuario, Usuario, Vehiculo)
 
 E = EstadoOrden
@@ -63,9 +65,21 @@ def _siguiente_folio(db: Session) -> str:
     return f"{prefijo}{n + 1:04d}"
 
 
+def validar_combustible(nivel: NivelCombustible, metodo: MetodoCombustible | None,
+                        litros: Decimal | None) -> None:
+    """RN-14: el nivel «No verificable» exige el método de estimación; la medición en litros exige los litros."""
+    if nivel == NivelCombustible.NoVerificable and metodo is None:
+        raise ReglaNegocioError("Si el nivel no es verificable, indica el método de estimación", "RN-14")
+    if nivel != NivelCombustible.NoVerificable and metodo is not None:
+        raise ReglaNegocioError("El método de estimación solo se registra con el nivel «No verificable»", "RN-14")
+    if (metodo == MetodoCombustible.MedicionLitros) != (litros is not None):
+        raise ReglaNegocioError("Los litros medidos se registran solo y siempre con la medición en litros", "RN-14")
+
+
 def abrir_orden(db: Session, recepcionista: Usuario, *, kilometraje: int, nivel_combustible: NivelCombustible,
                 id_vehiculo: int | None = None, id_cita: int | None = None,
-                checklist: dict | None = None) -> tuple[OrdenServicio, bool]:
+                checklist: dict | None = None, metodo_combustible: MetodoCombustible | None = None,
+                litros_medidos: Decimal | None = None) -> tuple[OrdenServicio, bool]:
     """CU-02 / HU-01: registra la recepción y abre la orden en estado Abierta.
 
     Devuelve (orden, sin_bahias). Si las 4 bahías están ocupadas, la orden
@@ -85,6 +99,7 @@ def abrir_orden(db: Session, recepcionista: Usuario, *, kilometraje: int, nivel_
         raise NoEncontradoError("Indica un vehículo registrado o una cita confirmada")
     if kilometraje < 0:
         raise ReglaNegocioError("El kilometraje no puede ser negativo")
+    validar_combustible(nivel_combustible, metodo_combustible, litros_medidos)
     if db.scalar(select(OrdenServicio).where(OrdenServicio.id_vehiculo == id_vehiculo,
                                              OrdenServicio.estado.in_(ESTADOS_ABIERTOS))):
         raise ReglaNegocioError("El vehículo ya tiene una orden abierta")
@@ -103,7 +118,8 @@ def abrir_orden(db: Session, recepcionista: Usuario, *, kilometraje: int, nivel_
     db.add(HistorialEstado(folio=orden.folio, estado_anterior=None, estado_nuevo=E.Abierta,
                            fecha_hora=ahora, id_usuario=recepcionista.id_usuario))
     recepcion = RecepcionVehicular(folio=orden.folio, id_cita=id_cita, fecha_hora=ahora,
-                                   kilometraje=kilometraje, nivel_combustible=nivel_combustible)
+                                   kilometraje=kilometraje, nivel_combustible=nivel_combustible,
+                                   metodo_combustible=metodo_combustible, litros_medidos=litros_medidos)
     recepcion.checklist = ChecklistInspeccion(**(checklist or {}))
     db.add(recepcion)
     db.flush()

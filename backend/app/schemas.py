@@ -4,7 +4,8 @@ from decimal import Decimal
 
 from pydantic import BaseModel, ConfigDict, Field
 
-from app.models import (EstadoCita, EstadoCotizacion, EstadoOrden, MedioAutorizacion, NivelCombustible,
+from app.models import (EstadoCita, EstadoCotizacion, EstadoOrden, MedioAutorizacion, MetodoCombustible,
+                        NivelCombustible,
                         PosicionFoto, RolUsuario, TipoConcepto, TipoVehiculo)
 
 
@@ -120,6 +121,8 @@ class Recepcion(BaseModel):
     id_cita: int | None = None
     kilometraje: int = Field(ge=0)
     nivel_combustible: NivelCombustible
+    metodo_combustible: MetodoCombustible | None = None
+    litros_medidos: Decimal | None = Field(default=None, gt=0, max_digits=5, decimal_places=1)
     checklist: Checklist = Checklist()
 
 
@@ -172,6 +175,8 @@ class OrdenResumen(BaseModel):
 class OrdenDetalle(OrdenResumen):
     kilometraje: int
     nivel_combustible: NivelCombustible
+    metodo_combustible: MetodoCombustible | None
+    litros_medidos: Decimal | None
     checklist: Checklist
     fotografias: list[FotoSalida]
     recepcion_completa: bool

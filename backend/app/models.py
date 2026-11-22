@@ -76,6 +76,15 @@ class NivelCombustible(str, enum.Enum):
     Mitad = "Mitad"
     TresCuartos = "TresCuartos"
     Lleno = "Lleno"
+    NoVerificable = "NoVerificable"   # RN-14: el indicador del tablero no funciona
+
+
+class MetodoCombustible(str, enum.Enum):
+    """Método con que se estima el combustible cuando el nivel es «No verificable» (RN-14, 4.7.1 A)."""
+    OBDII = "OBDII"
+    ComputadoraViaje = "ComputadoraViaje"
+    MedicionLitros = "MedicionLitros"
+    DeclaracionCliente = "DeclaracionCliente"
 
 
 class PosicionFoto(str, enum.Enum):
@@ -115,6 +124,7 @@ class MedioAutorizacion(str, enum.Enum):
     """Medios por los que el cliente autoriza una cotización."""
     Remoto = "Remoto"
     Presencial = "Presencial"
+    FirmaEnPapel = "FirmaEnPapel"   # RN-15: contingencia en papel, sin código 2FA
 
 
 class TipoAutorizacion(str, enum.Enum):
@@ -227,6 +237,8 @@ class OrdenServicio(Base):
     id_usuario_responsable: Mapped[int | None] = mapped_column(ForeignKey("usuario.id_usuario"))
     numero_bahia: Mapped[int | None] = mapped_column(ForeignKey("bahia.numero"))
     id_usuario_autoriza_credito: Mapped[int | None] = mapped_column(ForeignKey("usuario.id_usuario"))
+    # RN-15: folio de la Bitácora de Contingencia (C-AAAAMMDD-NN) de una orden capturada después del corte.
+    folio_provisional: Mapped[str | None] = mapped_column(String(14), unique=True)
 
     vehiculo: Mapped[Vehiculo] = relationship()
     responsable: Mapped[Usuario | None] = relationship(foreign_keys=[id_usuario_responsable])
@@ -277,6 +289,9 @@ class RecepcionVehicular(Base):
     fecha_hora: Mapped[datetime] = mapped_column(DateTime(timezone=True))
     kilometraje: Mapped[int] = mapped_column(Integer)
     nivel_combustible: Mapped[NivelCombustible] = mapped_column(_enum(NivelCombustible, "nivel_combustible"))
+    # RN-14: solo cuando el nivel es «No verificable».
+    metodo_combustible: Mapped[MetodoCombustible | None] = mapped_column(_enum(MetodoCombustible, "metodo_combustible"))
+    litros_medidos: Mapped[Decimal | None] = mapped_column(Numeric(5, 1))
 
     orden: Mapped[OrdenServicio] = relationship(back_populates="recepcion")
     checklist: Mapped["ChecklistInspeccion | None"] = relationship(uselist=False, cascade="all, delete-orphan")
@@ -389,7 +404,8 @@ class Autorizacion(Base):
     medio: Mapped[MedioAutorizacion] = mapped_column(_enum(MedioAutorizacion, "medio_autorizacion"))
     tipo: Mapped[TipoAutorizacion] = mapped_column(_enum(TipoAutorizacion, "tipo_autorizacion"), default=TipoAutorizacion.Inicial)
     monto_aceptado: Mapped[Decimal] = mapped_column(Numeric(10, 2))
-    codigo_verificacion_hash: Mapped[str] = mapped_column(String(255))
+    # Nulo solo en las autorizaciones con firma en papel (RN-15), que no llevan código 2FA.
+    codigo_verificacion_hash: Mapped[str | None] = mapped_column(String(255))
     estado: Mapped[EstadoAutorizacion] = mapped_column(_enum(EstadoAutorizacion, "estado_autorizacion"), default=EstadoAutorizacion.Pendiente)
     token_hash: Mapped[str | None] = mapped_column(ForeignKey("token_acceso.token_hash"))
     huella_sha256: Mapped[str | None] = mapped_column(String(64))
