@@ -160,7 +160,7 @@ La evidencia de la última ejecución está en [`docs/pruebas/resultado-pruebas.
 | Review 1 (corregida) | v0.2.10 | + 4.1–4.7, 6.5 y 13 | `docs/entregas/IS1-Fase1-EquipoB-v0.2.10.pdf` |
 
 Cada corrección aumenta en uno el tercer dígito de la versión y tiene una etiqueta de Git con ese nombre.
-Versión vigente: **v0.2.13**.
+Versión vigente: **v0.2.15**.
 
 | Versión | Corrección de la Review 1 | Issue | PR |
 |---|---|---|---|
@@ -177,6 +177,8 @@ Versión vigente: **v0.2.13**.
 | v0.2.11 | B2 · Guion de la sesión con el cliente (segunda parte) | #29 | #82 |
 | v0.2.12 | B10 · Procedimientos de contingencia en la sesión con el cliente | #81 | #82 |
 | v0.2.13 | B8 · Reclasificación y complemento de los RNF | #83 | #84 |
+| v0.2.14 | B10 · Aceptación del cliente de los procedimientos de contingencia | #81 | #86 |
+| v0.2.15 | B3 · Minuta de la entrevista con la transcripción y registro de reuniones | #85 | #86 |
 
 ## Contenido del repositorio
 
