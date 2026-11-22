@@ -3,8 +3,9 @@
 | Dato | Valor |
 |---|---|
 | Fecha | Sábado 24 de octubre de 2026 |
-| Hora y modalidad | Pendiente |
-| Asistentes | Pendiente |
+| Hora | 16:00 a 18:00 |
+| Modalidad | Llamada en el grupo de WhatsApp del equipo |
+| Asistentes | Ángel Yael Avendaño Guzmán, Abdías Daniel Chávez Cruz, Dulce María Estudillo Rosado, Isis Alhelí González Maldonado, Isis Yamilet Meléndez Hernández |
 | Elaboró | Developer SRS (Isis Alhelí González Maldonado) |
 | Objetivo | Definir la solución a las dudas D-1 y D-2 del cliente ([minuta del 23/10/2026](2026-10-23-sesion-cliente-propuestas.md)) |
 
@@ -42,5 +43,5 @@ cliente lo acepta con su firma. Al entregar, el nivel se mide con el mismo méto
 
 | # | Acuerdo | Responsable | Fecha |
 |---|---|---|---|
-| 1 | Registrar las soluciones como RN-14, RN-15 y los procedimientos de contingencia de 4.7.1. | Developer SRS | Pendiente |
+| 1 | Registrar las soluciones como RN-14, RN-15 y los procedimientos de contingencia de 4.7.1. | Developer SRS | 27/10/2026 |
 | 2 | Presentar las soluciones al cliente. | Product Owner | 09/11/2026 ([minuta](2026-11-09-sesion-cliente-soluciones.md)) |
