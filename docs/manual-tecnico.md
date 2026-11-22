@@ -43,7 +43,7 @@ backend/
 │   │                     cotizaciones, cobro, panel), portal.py (enlace seguro del cliente)
 │   ├── servicios/        ordenes.py, cotizaciones.py, cobro.py, citas.py
 │   └── models.py, schemas.py, seguridad.py, config.py, db.py, ...
-├── tests/                42 pruebas automatizadas
+├── tests/                46 pruebas automatizadas
 ├── requirements.txt      dependencias con sus versiones
 └── .env.example          plantilla de configuración
 ```

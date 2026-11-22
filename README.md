@@ -154,7 +154,7 @@ Mapa de tecnologías y cómo se comunican:
 
 ```bash
 cd backend
-python -m pytest              # 42 pruebas
+python -m pytest              # 46 pruebas
 ```
 
 La evidencia de la última ejecución está en [`docs/pruebas/resultado-pruebas.txt`](docs/pruebas/resultado-pruebas.txt).

@@ -1,59 +1,63 @@
 Evidencia de la ejecución de las pruebas automatizadas del backend
-Fecha: 18/11/2026 · Commit base: ef3f658
+Fecha: 22/11/2026 · Commit base: 48eaca7
 Comando (desde backend/): python -m pytest -v
 Entorno: entorno virtual nuevo con las versiones de backend/requirements.txt (Python 3.13)
 Datos: solo ficticios (backend/tests/conftest.py)
 ----------------------------------------------------------------------
 
 ============================= test session starts =============================
-platform win32 -- Python 3.13.15, pytest-9.2.0, pluggy-1.7.0
-rootdir: <repo>/backend
+platform win32 -- Python 3.13.15, pytest-9.2.0, pluggy-1.7.0 -- <venv>/Scripts/python.exe
+rootdir: <repo>\backend
 configfile: pytest.ini
 testpaths: tests
 plugins: anyio-4.16.0
-collecting ... collected 42 items
+collecting ... collected 46 items
 
 tests/test_acceso.py::test_cpa26_sin_sesion_no_hay_acceso PASSED         [  2%]
 tests/test_acceso.py::test_cpa27_credenciales_incorrectas PASSED         [  4%]
-tests/test_acceso.py::test_cpa28_cada_rol_solo_hace_lo_suyo PASSED       [  7%]
-tests/test_acceso.py::test_cpa29_gerente_da_de_alta_personal PASSED      [  9%]
-tests/test_acceso.py::test_cpa30_enlace_del_cliente_solo_abre_su_orden PASSED [ 11%]
-tests/test_citas_panel.py::test_cpa31_cita_web_queda_pendiente_y_exige_aviso PASSED [ 14%]
-tests/test_citas_panel.py::test_cpa32_confirmacion_manual_sin_choques_de_bahia PASSED [ 16%]
-tests/test_citas_panel.py::test_cpa33_solo_cita_confirmada_se_convierte_en_recepcion PASSED [ 19%]
-tests/test_citas_panel.py::test_cpa34_placas_ajenas_no_se_agendan_con_otros_datos PASSED [ 21%]
-tests/test_citas_panel.py::test_cpa35_lista_de_ordenes_abiertas_y_panel PASSED [ 23%]
-tests/test_cobro.py::test_cpa21_no_se_entrega_con_saldo_pendiente PASSED [ 26%]
-tests/test_cobro.py::test_cpa22_pago_total_cierra_orden_da_garantia_y_expira_enlace PASSED [ 28%]
-tests/test_cobro.py::test_cpa23_pago_no_excede_el_saldo PASSED           [ 30%]
-tests/test_cobro.py::test_cpa24_credito_solo_flotillas_y_solo_gerente PASSED [ 33%]
-tests/test_cobro.py::test_cpa25_flotilla_con_credito_se_entrega_con_saldo PASSED [ 35%]
-tests/test_cotizacion.py::test_cpa10_cotizacion_desglosada_con_vigencia_y_enlace PASSED [ 38%]
-tests/test_cotizacion.py::test_cpa11_vigencia_limite_cinco_dias_si_seis_no PASSED [ 40%]
-tests/test_cotizacion.py::test_cpa12_cliente_elige_opcionales_pero_no_obligatorios PASSED [ 42%]
-tests/test_cotizacion.py::test_cpa13_autorizacion_remota_registra_evidencia PASSED [ 45%]
-tests/test_cotizacion.py::test_cpa14_codigo_expira_a_los_cinco_minutos PASSED [ 47%]
-tests/test_cotizacion.py::test_cpa15_codigo_incorrecto_y_de_un_solo_uso PASSED [ 50%]
-tests/test_cotizacion.py::test_cpa16_autorizacion_presencial_en_mostrador PASSED [ 52%]
-tests/test_cotizacion.py::test_cpa17_rechazo_del_cliente_cancela_la_orden PASSED [ 54%]
-tests/test_cotizacion.py::test_cpa18_incremento_mayor_al_10_requiere_nueva_autorizacion PASSED [ 57%]
-tests/test_cotizacion.py::test_cpa19_incremento_de_hasta_10_no_detiene_el_trabajo PASSED [ 59%]
-tests/test_cotizacion.py::test_cpa20_alterar_una_autorizacion_se_detecta PASSED [ 61%]
-tests/test_estados.py::test_tabla_de_transiciones_cubre_todos_los_estados PASSED [ 64%]
-tests/test_estados.py::test_no_se_termina_sin_iniciar_la_reparacion PASSED [ 66%]
-tests/test_estados.py::test_rn06_espera_de_refaccion_libera_la_bahia_y_reanuda PASSED [ 69%]
-tests/test_estados.py::test_rn06_no_se_reanuda_en_bahia_ocupada PASSED   [ 71%]
-tests/test_estados.py::test_rn04_recotizacion_mayor_al_10_detiene_y_al_autorizar_reanuda PASSED [ 73%]
-tests/test_estados.py::test_rn04_rechazar_el_incremento_continua_con_lo_autorizado PASSED [ 76%]
-tests/test_estados.py::test_historial_registra_cada_transicion PASSED    [ 78%]
-tests/test_recepcion.py::test_cpa01_recepcion_abre_orden_abierta PASSED  [ 80%]
-tests/test_recepcion.py::test_cpa02_diagnostico_bloqueado_sin_cuatro_fotos PASSED [ 83%]
-tests/test_recepcion.py::test_cpa03_checklist_incompleto_bloquea_diagnostico PASSED [ 85%]
-tests/test_recepcion.py::test_cpa04_una_foto_por_posicion_y_solo_imagenes PASSED [ 88%]
-tests/test_recepcion.py::test_cpa05_sin_bahias_la_orden_queda_en_espera_con_alerta PASSED [ 90%]
-tests/test_recepcion.py::test_cpa06_estacionamiento_lleno_rechaza_recepcion PASSED [ 92%]
+tests/test_acceso.py::test_cpa28_cada_rol_solo_hace_lo_suyo PASSED       [  6%]
+tests/test_acceso.py::test_cpa29_gerente_da_de_alta_personal PASSED      [  8%]
+tests/test_acceso.py::test_cpa30_enlace_del_cliente_solo_abre_su_orden PASSED [ 10%]
+tests/test_citas_panel.py::test_cpa31_cita_web_queda_pendiente_y_exige_aviso PASSED [ 13%]
+tests/test_citas_panel.py::test_cpa32_confirmacion_manual_sin_choques_de_bahia PASSED [ 15%]
+tests/test_citas_panel.py::test_cpa33_solo_cita_confirmada_se_convierte_en_recepcion PASSED [ 17%]
+tests/test_citas_panel.py::test_cpa34_placas_ajenas_no_se_agendan_con_otros_datos PASSED [ 19%]
+tests/test_citas_panel.py::test_cpa35_lista_de_ordenes_abiertas_y_panel PASSED [ 21%]
+tests/test_cobro.py::test_cpa21_no_se_entrega_con_saldo_pendiente PASSED [ 23%]
+tests/test_cobro.py::test_cpa22_pago_total_cierra_orden_da_garantia_y_expira_enlace PASSED [ 26%]
+tests/test_cobro.py::test_cpa23_pago_no_excede_el_saldo PASSED           [ 28%]
+tests/test_cobro.py::test_cpa24_credito_solo_flotillas_y_solo_gerente PASSED [ 30%]
+tests/test_cobro.py::test_cpa25_flotilla_con_credito_se_entrega_con_saldo PASSED [ 32%]
+tests/test_contingencia.py::test_cpa36_no_verificable_con_metodo_se_registra PASSED [ 34%]
+tests/test_contingencia.py::test_cpa37_no_verificable_sin_metodo_se_rechaza PASSED [ 36%]
+tests/test_contingencia.py::test_cpa38_medicion_en_litros_exige_los_litros PASSED [ 39%]
+tests/test_contingencia.py::test_cpa39_firma_en_papel_y_folio_provisional PASSED [ 41%]
+tests/test_cotizacion.py::test_cpa10_cotizacion_desglosada_con_vigencia_y_enlace PASSED [ 43%]
+tests/test_cotizacion.py::test_cpa11_vigencia_limite_cinco_dias_si_seis_no PASSED [ 45%]
+tests/test_cotizacion.py::test_cpa12_cliente_elige_opcionales_pero_no_obligatorios PASSED [ 47%]
+tests/test_cotizacion.py::test_cpa13_autorizacion_remota_registra_evidencia PASSED [ 50%]
+tests/test_cotizacion.py::test_cpa14_codigo_expira_a_los_cinco_minutos PASSED [ 52%]
+tests/test_cotizacion.py::test_cpa15_codigo_incorrecto_y_de_un_solo_uso PASSED [ 54%]
+tests/test_cotizacion.py::test_cpa16_autorizacion_presencial_en_mostrador PASSED [ 56%]
+tests/test_cotizacion.py::test_cpa17_rechazo_del_cliente_cancela_la_orden PASSED [ 58%]
+tests/test_cotizacion.py::test_cpa18_incremento_mayor_al_10_requiere_nueva_autorizacion PASSED [ 60%]
+tests/test_cotizacion.py::test_cpa19_incremento_de_hasta_10_no_detiene_el_trabajo PASSED [ 63%]
+tests/test_cotizacion.py::test_cpa20_alterar_una_autorizacion_se_detecta PASSED [ 65%]
+tests/test_estados.py::test_tabla_de_transiciones_cubre_todos_los_estados PASSED [ 67%]
+tests/test_estados.py::test_no_se_termina_sin_iniciar_la_reparacion PASSED [ 69%]
+tests/test_estados.py::test_rn06_espera_de_refaccion_libera_la_bahia_y_reanuda PASSED [ 71%]
+tests/test_estados.py::test_rn06_no_se_reanuda_en_bahia_ocupada PASSED   [ 73%]
+tests/test_estados.py::test_rn04_recotizacion_mayor_al_10_detiene_y_al_autorizar_reanuda PASSED [ 76%]
+tests/test_estados.py::test_rn04_rechazar_el_incremento_continua_con_lo_autorizado PASSED [ 78%]
+tests/test_estados.py::test_historial_registra_cada_transicion PASSED    [ 80%]
+tests/test_recepcion.py::test_cpa01_recepcion_abre_orden_abierta PASSED  [ 82%]
+tests/test_recepcion.py::test_cpa02_diagnostico_bloqueado_sin_cuatro_fotos PASSED [ 84%]
+tests/test_recepcion.py::test_cpa03_checklist_incompleto_bloquea_diagnostico PASSED [ 86%]
+tests/test_recepcion.py::test_cpa04_una_foto_por_posicion_y_solo_imagenes PASSED [ 89%]
+tests/test_recepcion.py::test_cpa05_sin_bahias_la_orden_queda_en_espera_con_alerta PASSED [ 91%]
+tests/test_recepcion.py::test_cpa06_estacionamiento_lleno_rechaza_recepcion PASSED [ 93%]
 tests/test_recepcion.py::test_cpa07_bahia_ocupada_no_se_asigna_y_se_libera_al_cerrar PASSED [ 95%]
 tests/test_recepcion.py::test_cpa08_responsable_debe_ser_mecanico PASSED [ 97%]
 tests/test_recepcion.py::test_cpa09_un_vehiculo_no_tiene_dos_ordenes_abiertas PASSED [100%]
 
-============================= 42 passed in 33.15s =============================
+======================== 46 passed in 60.71s (0:01:00) ========================
