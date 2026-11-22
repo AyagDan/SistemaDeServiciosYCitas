@@ -70,6 +70,7 @@ class OrdenServicio {
   - id_usuario_responsable : int {FK}
   - numero_bahia : int {FK}
   - id_usuario_autoriza_credito : int {FK}
+  - folio_provisional : String
 }
 class AsignacionColaborador {
   - folio : String {PK, FK}
@@ -100,6 +101,8 @@ class RecepcionVehicular {
   - fecha_hora : DateTime
   - kilometraje : int
   - nivel_combustible : NivelCombustible
+  - metodo_combustible : MetodoCombustible
+  - litros_medidos : Decimal
   --
   + esta_completa() : Boolean
 }
@@ -171,6 +174,13 @@ enum NivelCombustible {
   Mitad
   TresCuartos
   Lleno
+  NoVerificable
+}
+enum MetodoCombustible {
+  OBDII
+  ComputadoraViaje
+  MedicionLitros
+  DeclaracionCliente
 }
 enum PosicionFoto {
   Frente

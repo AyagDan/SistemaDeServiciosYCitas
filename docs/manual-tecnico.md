@@ -63,6 +63,9 @@ en la sección 6.5 del documento y su fuente en `docs/06-analisis/estados/orden-
 `checklist_inspeccion`, `fotografia`, `token_acceso`, `cotizacion`, `detalle_cotizacion`, `autorizacion`, `pago`,
 `garantia`, `proveedor`, `refaccion`, `solicitud_refaccion`, `compra`, `detalle_compra` y `entrega_refaccion`.
 
+El diagrama entidad-relación de las 20 tablas que usa el backend está en `docs/06-analisis/er/` y se genera a partir
+de `models.py` con `python docs/06-analisis/er/generar_er.py`. Las 6 tablas de refacciones y compras son de la Fase 2.
+
 Las reglas de integridad viven también en la base de datos: tipos enumerados para los estados, restricciones
 `CHECK` (por ejemplo, una cita confirmada exige bahía y usuario que la confirma, y un crédito exige quién lo
 autorizó) y un índice que impide que dos órdenes activas ocupen la misma bahía.

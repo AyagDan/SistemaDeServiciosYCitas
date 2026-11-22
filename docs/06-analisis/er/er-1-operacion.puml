@@ -1,0 +1,188 @@
+@startuml er-1-operacion
+' Generado por docs/06-analisis/er/generar_er.py a partir de backend/app/models.py.
+title Diagrama entidad-relación · Clientes, citas, recepción y orden de servicio
+!pragma layout smetana
+skinparam shadowing false
+skinparam linetype ortho
+hide circle
+
+entity usuario {
+  * id_usuario : integer <<PK>>
+  --
+  * nombre : varchar(120)
+  * correo : varchar(160) <<UQ>>
+  contrasena_hash : varchar(255)
+  * rol : rol_usuario
+  * activo : boolean
+}
+
+entity cliente {
+  * id_cliente : integer <<PK>>
+  --
+  * tipo_cliente : varchar(10)
+  * telefono : varchar(20)
+  * correo : varchar(160)
+}
+
+entity cliente_particular {
+  * id_cliente : integer <<PK>> <<FK>>
+  --
+  * tipo_cliente : varchar(10)
+  * nombre : varchar(120)
+}
+
+entity flotilla {
+  * id_cliente : integer <<PK>> <<FK>>
+  --
+  * tipo_cliente : varchar(10)
+  * razon_social : varchar(160)
+  * credito_habilitado : boolean
+}
+
+entity vehiculo {
+  * id_vehiculo : integer <<PK>>
+  --
+  * id_cliente : integer <<FK>>
+  * placas : varchar(15) <<UQ>>
+  * marca : varchar(60)
+  * modelo : varchar(60)
+  * anio : smallint
+  vin : varchar(17) <<UQ>>
+  * tipo : tipo_vehiculo
+}
+
+entity bahia {
+  * numero : smallint <<PK>>
+  --
+  * estado : estado_bahia
+}
+
+entity cita {
+  * id_cita : integer <<PK>>
+  --
+  * id_cliente : integer <<FK>>
+  * id_vehiculo : integer <<FK>>
+  * fecha : date
+  * hora : time
+  * estado : estado_cita
+  numero_bahia : smallint <<FK>>
+  id_usuario_confirma : integer <<FK>>
+}
+
+entity orden_servicio {
+  * folio : varchar(20) <<PK>>
+  --
+  * fecha_apertura : datetime
+  * estado : estado_orden
+  fecha_entrega : datetime
+  * entrega_a_credito : boolean
+  * id_vehiculo : integer <<FK>>
+  * id_usuario_abre : integer <<FK>>
+  id_usuario_responsable : integer <<FK>>
+  numero_bahia : smallint <<FK>>
+  id_usuario_autoriza_credito : integer <<FK>>
+  folio_provisional : varchar(14) <<UQ>>
+}
+
+entity asignacion_colaborador {
+  * folio : varchar(20) <<PK>> <<FK>>
+  * id_usuario : integer <<PK>> <<FK>>
+  --
+  * fecha_asignacion : datetime
+}
+
+entity historial_estado {
+  * id_historial : integer <<PK>>
+  --
+  * folio : varchar(20) <<FK>>
+  estado_anterior : estado_orden
+  * estado_nuevo : estado_orden
+  * fecha_hora : datetime
+  id_usuario : integer <<FK>>
+}
+
+entity diagnostico {
+  * id_diagnostico : integer <<PK>>
+  --
+  uuid_local : char(32) <<UQ>>
+  * folio : varchar(20) <<FK>>
+  * id_usuario : integer <<FK>>
+  * fecha_hora : datetime
+  * descripcion : text
+}
+
+entity recepcion_vehicular {
+  * id_recepcion : integer <<PK>>
+  --
+  uuid_local : char(32) <<UQ>>
+  * folio : varchar(20) <<FK>> <<UQ>>
+  id_cita : integer <<FK>> <<UQ>>
+  * fecha_hora : datetime
+  * kilometraje : integer
+  * nivel_combustible : nivel_combustible
+  metodo_combustible : metodo_combustible
+  litros_medidos : numeric(5, 1)
+}
+
+entity checklist_inspeccion {
+  * id_checklist : integer <<PK>>
+  --
+  uuid_local : char(32) <<UQ>>
+  * id_recepcion : integer <<FK>> <<UQ>>
+  carroceria : text
+  interiores : text
+  observaciones : text
+  * completo : boolean
+}
+
+entity fotografia {
+  * id_foto : integer <<PK>>
+  --
+  uuid_local : char(32) <<UQ>>
+  * id_recepcion : integer <<FK>>
+  * archivo : varchar(255)
+  * posicion : posicion_foto
+  * fecha_hora : datetime
+}
+
+entity token_acceso {
+  * token_hash : varchar(64) <<PK>>
+  --
+  * folio : varchar(20) <<FK>>
+  * id_cliente : integer <<FK>>
+  * canal : canal
+  * fecha_emision : datetime
+  fecha_expiracion : datetime
+  * activo : boolean
+}
+
+orden_servicio ||--o{ asignacion_colaborador : folio
+usuario ||--o{ asignacion_colaborador : id_usuario
+recepcion_vehicular ||--o| checklist_inspeccion : id_recepcion
+cliente ||--o{ cita : id_cliente
+usuario |o--o{ cita : id_usuario_confirma
+vehiculo ||--o{ cita : id_vehiculo
+bahia |o--o{ cita : numero_bahia
+cliente ||--o| cliente_particular : id_cliente
+orden_servicio ||--o{ diagnostico : folio
+usuario ||--o{ diagnostico : id_usuario
+cliente ||--o| flotilla : id_cliente
+recepcion_vehicular ||--o{ fotografia : id_recepcion
+orden_servicio ||--o{ historial_estado : folio
+usuario |o--o{ historial_estado : id_usuario
+usuario ||--o{ orden_servicio : id_usuario_abre
+usuario |o--o{ orden_servicio : id_usuario_autoriza_credito
+usuario |o--o{ orden_servicio : id_usuario_responsable
+vehiculo ||--o{ orden_servicio : id_vehiculo
+bahia |o--o{ orden_servicio : numero_bahia
+orden_servicio ||--o| recepcion_vehicular : folio
+cita |o--o| recepcion_vehicular : id_cita
+orden_servicio ||--o{ token_acceso : folio
+cliente ||--o{ token_acceso : id_cliente
+cliente ||--o{ vehiculo : id_cliente
+
+legend right
+  * columna obligatoria (NOT NULL)
+  PK llave primaria · FK llave foránea · UQ única
+endlegend
+@enduml
