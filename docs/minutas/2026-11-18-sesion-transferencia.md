@@ -6,7 +6,9 @@
 | Objetivo | Que todo el equipo pueda explicar el trabajo hecho con ayuda de IA, que concentró un solo integrante |
 | Expone | Tech Lead (Abdías Daniel Chávez Cruz) |
 | Fecha límite | Miércoles 18 de noviembre de 2026 |
-| Fecha, hora y modalidad | Pendiente: se registra al realizar la sesión |
+| Fecha | Miércoles 18 de noviembre de 2026 |
+| Hora y modalidad | Pendiente |
+| Temas expuestos | Estructura del backend, reglas de negocio implementadas y pruebas (1.1, 1.4 y 1.5) |
 | Asistentes | Pendiente: se registran al realizar la sesión |
 
 En la Review cualquier integrante puede ser preguntado sobre cualquier parte del documento o del

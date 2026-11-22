@@ -192,7 +192,7 @@ Versión vigente: **v0.2.13**.
 | `db/` | Esquema de PostgreSQL (`schema.sql`) |
 | `docs/pruebas/` | Evidencia de la ejecución de las pruebas automatizadas |
 | `informacion/` | Material de referencia del curso: machote del documento, observaciones de la Review 1 y su plan de atención, reglas de negocio y de datos, propuesta de solución (resumen en `contexto.md` y original en Word) e indicaciones de clase |
-| `docs/minutas/` | Minutas de las Sprint Reviews |
+| `docs/minutas/` | Minutas de las reuniones con el cliente, del equipo y de las Sprint Reviews, con su cronología (`README.md`) |
 | `CONTRIBUTING.md` | Acuerdos de trabajo del equipo |
 
 Las historias de usuario (HU-01 a HU-30) están registradas como issues del repositorio (#31 a #60),
