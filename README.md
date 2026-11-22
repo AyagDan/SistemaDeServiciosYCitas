@@ -110,6 +110,17 @@ curl http://localhost:8000/panel -H "Authorization: Bearer <token>"
 ```
 
 Cada endpoint indica en `/docs` qué rol puede usarlo. Todos los datos de prueba y demostración son ficticios.
+El paso a paso por rol está en el [manual de usuario](docs/manual-usuario.md).
+
+## Capturas de pantalla
+
+El sistema todavía no tiene interfaz gráfica: las pantallas están diseñadas en los wireframes (sección siguiente).
+Mientras tanto se usa desde la documentación interactiva de la API. Capturas tomadas con los datos ficticios de la
+demostración (`assets/capturas/`):
+
+| Documentación interactiva (`/docs`) | Inicio de sesión | Abrir una orden |
+|---|---|---|
+| ![/docs](assets/capturas/docs-general.png) | ![Login](assets/capturas/docs-login.png) | ![Abrir orden](assets/capturas/docs-orden.png) |
 
 ## Prototipos y diagramas
 
@@ -187,6 +198,9 @@ Versión vigente: **v0.2.12**.
 | `docs/04-requisitos/` | Fuentes del story map, los diagramas de casos de uso y los wireframes (4.5 y 4.10), y la propuesta de alcance |
 | `docs/06-analisis/` | Máquina de estados de la Orden (6.5) y diagrama de clases del dominio, con sus fuentes |
 | `docs/07-arquitectura/` | Mapa de tecnologías, su generador y los íconos que usa |
+| `docs/manual-usuario.md` | Manual de usuario: uso del sistema por rol desde `/docs`, con capturas |
+| `docs/presentacion/` | Diapositivas de la exposición del proyecto (.pptx) |
+| `assets/capturas/` | Capturas de pantalla del sistema |
 | `backend/` | Backend FastAPI y sus pruebas automatizadas (`backend/tests/`) |
 | `db/` | Esquema de PostgreSQL (`schema.sql`) |
 | `docs/pruebas/` | Evidencia de la ejecución de las pruebas automatizadas |
