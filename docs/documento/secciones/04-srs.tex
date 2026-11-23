@@ -1104,11 +1104,13 @@ directorio de proveedores locales con teléfonos y correos electrónicos,
 para solicitar refacciones especiales rápidamente. \\
 Criterio de aceptación 1 & Dado que el almacenista ingresa al módulo de
 refacciones, cuando abre el directorio de proveedores, entonces
-visualiza la lista con datos de contacto actualizados (teléfonos y
-correos). \\
+visualiza a todos los proveedores registrados, cada uno con su nombre,
+teléfono y correo electrónico. \\
 Criterio de aceptación 2 & Dado que se requiere dar de alta un nuevo
 proveedor, cuando el almacenista completa el formulario de registro,
-entonces el sistema lo almacena para futuras solicitudes de piezas. \\
+entonces el proveedor aparece en el directorio y puede elegirse al
+registrar una solicitud de piezas; si falta el nombre o el teléfono, el
+sistema no lo guarda y señala el campo faltante. \\
 Reglas de negocio & RN-06 (Reubicación por espera de refacciones). \\
 Wireframe & Se define en 4.10 (Review 2) \\
 Casos de prueba & Se definen en 5.2 (Review 2) \\
@@ -1140,8 +1142,9 @@ proveedor, cuando el almacenista registra el ticket, costo unitario y
 fecha estimada de entrega, entonces el sistema lo vincula a la orden de
 servicio. \\
 Criterio de aceptación 2 & Dado que se ingresa la compra, cuando se
-consolida el registro, entonces el sistema actualiza el historial de
-adquisiciones de la refacción para auditoría interna. \\
+consolida el registro, entonces el historial de adquisiciones de la
+refacción muestra la compra con su proveedor, costo unitario, fecha y
+número de ticket. \\
 Reglas de negocio & Sin regla de negocio específica; ver RF-08.2 y
 RF-08.3. \\
 Wireframe & Se define en 4.10 (Review 2) \\
@@ -1205,8 +1208,9 @@ Criterio de aceptación 1 & Dado que el mecánico marca la orden como
 terminada en bahía, cuando se actualiza el estatus, entonces el sistema
 envía una alerta interna a la recepcionista. \\
 Criterio de aceptación 2 & Dado que la recepción recibe la alerta,
-cuando se verifica el estado, entonces se habilita el aviso automatizado
-al cliente de que su vehículo está listo. \\
+cuando confirma el estado, entonces la orden pasa a
+"ListaParaEntrega" y el sistema envía al correo registrado del cliente
+el aviso de que su vehículo está listo. \\
 Reglas de negocio & Sin regla de negocio específica; ver CU-07. \\
 Wireframe & W-06 (Figura 4.10) \\
 Casos de prueba & Se definen en 5.2 (Review 2) \\
@@ -1238,9 +1242,10 @@ Criterio de aceptación 1 & Dado que un vehículo se encuentra en estado
 salida y el balance de pago es mayor a cero, entonces el sistema bloquea
 la acción de liberación. \\
 Criterio de aceptación 2 & Dado que se activa el bloqueo por saldo
-pendiente, cuando el sistema detecta que cuenta con un convenio de
-crédito autorizado, entonces permite omitir la restricción
-exclusivamente bajo permisos del rol Gerente. \\
+pendiente, cuando el vehículo pertenece a una flotilla empresarial
+registrada (RN-10), entonces solo un usuario con rol Gerente puede
+autorizar la entrega; con cualquier otro rol, o si el vehículo no es de
+flotilla, la entrega sigue bloqueada. \\
 Reglas de negocio & RN-10 (Restricción de entrega y excepción a
 flotillas). \\
 Wireframe & W-06 (Figura 4.10) \\
@@ -1375,12 +1380,15 @@ internet usando la batería del equipo, para que la operación no se
 detenga ante fallas eléctricas. \\
 Criterio de aceptación 1 & Dado que ocurre un corte de energía o caída
 de internet en el taller, cuando el personal opera mediante las baterías
-de laptops o tabletas, entonces el sistema local permite continuar
-capturando registros, checklists y fotografías. \\
+de laptops o tabletas, entonces las 7 operaciones de RNF-08 (registro
+de entrada, checklist, fotografías, diagnósticos, asignación de bahías,
+consulta de proveedores y autorizaciones gerenciales) funcionan durante
+al menos 4 h sin conexión. \\
 Criterio de aceptación 2 & Dado que se trabaja de forma local (offline),
-cuando se guardan los datos, entonces el almacenamiento temporal
-mediante Service Workers e IndexedDB asegura que no exista pérdida de
-información. \\
+cuando se guardan los datos, entonces el registro queda guardado en el
+equipo (IndexedDB) en máximo 2 s con 5 fotografías (percentil 95,
+RNF-06) y, al terminar la prueba, hay 0 registros perdidos
+(RNF-08). \\
 Reglas de negocio & Sin regla de negocio específica; ver RNF-06 y
 RNF-08. \\
 Wireframe & Se define en 4.10 (Review 2) \\
@@ -1415,8 +1423,10 @@ forma automática la sincronización de los datos almacenados
 localmente. \\
 Criterio de aceptación 2 & Dado que finaliza el proceso de
 sincronización, cuando se actualiza la base de datos central en la nube,
-entonces la información multimedia y de auditoría se consolida sin
-duplicidades. \\
+entonces el 100 \% de los registros, fotografías y registros de
+auditoría están en la base central, con 0 duplicados y 0 pérdidas; 200
+registros con 50 fotografías se sincronizan en máximo 5 min
+(RNF-09). \\
 Reglas de negocio & Sin regla de negocio específica; ver RNF-09. \\
 Wireframe & Se define en 4.10 (Review 2) \\
 Casos de prueba & Se definen en 5.2 (Review 2) \\
@@ -1481,12 +1491,15 @@ teléfono celular de forma responsiva y sin instalar aplicaciones
 adicionales, para consultar mi estatus con facilidad. \\
 Criterio de aceptación 1 & Dado que el cliente abre el enlace recibido
 por SMS o correo en un navegador móvil (iOS/Android), cuando carga la
-página, entonces el diseño se adapta responsivamente a la pantalla sin
-requerir descargas de tiendas de aplicaciones. \\
+página, entonces la página funciona sin errores bloqueantes en las 2
+últimas versiones de Safari (iOS) y Chrome (Android), sin desplazamiento
+horizontal en anchos de 360 a 430 px, sin instalar aplicaciones y con 0
+permisos solicitados (RNF-01). \\
 Criterio de aceptación 2 & Dado que el cliente navega por el portal web,
 cuando consulta el progreso de su vehículo o galería de fotos, entonces
-los elementos táctiles responden de manera fluida y adaptada a
-dispositivos móviles. \\
+cada botón y cada fotografía abre su pantalla o su imagen al tocarlo,
+sin desplazamiento horizontal en anchos de 360 a 430 px y sin errores
+bloqueantes en esos navegadores (RNF-01). \\
 Reglas de negocio & RN-01 (Expiración y vigencia de enlaces).
 Portabilidad: RNF-01. \\
 Wireframe & W-04 (Figura 4.8) \\
@@ -1515,12 +1528,14 @@ Historia & Como gerente, quiero generar reportes mensuales de ingresos,
 servicios realizados y tiempos de ocupación de las 4 bahías, para
 evaluar el rendimiento general del taller. \\
 Criterio de aceptación 1 & Dado que el gerente ingresa al módulo de
-reportes, cuando selecciona el intervalo de fechas mensual, entonces el
-sistema genera métricas consolidadas de ingresos y servicios
-completados. \\
+reportes, cuando selecciona un mes, entonces el sistema muestra el
+total de ingresos y el número de servicios completados de ese mes, que
+coinciden con la suma de las órdenes cerradas en esas fechas. \\
 Criterio de aceptación 2 & Dado que se consultan los tiempos operativos,
-cuando el sistema procesa las órdenes, entonces muestra gráficos de
-ocupación de las 4 bahías para medir la eficiencia del taller. \\
+cuando el sistema procesa las órdenes, entonces muestra, para cada una
+de las 4 bahías, las horas ocupadas en el mes y su porcentaje de
+ocupación, calculados a partir de las fechas de asignación y liberación
+de las órdenes. \\
 Reglas de negocio & Sin regla de negocio específica; ver RF-11. \\
 Wireframe & Se define en 4.10 (Review 2) \\
 Casos de prueba & Se definen en 5.2 (Review 2) \\
