@@ -530,10 +530,12 @@ nueva, entonces el sistema exige obligatoriamente adjuntar al menos 4
 fotografías (frente, parte trasera, costado izquierdo y costado
 derecho). \\
 Criterio de aceptación 2 & Dado que se capturan las evidencias, cuando
-se finaliza el formulario de inspección, entonces el sistema genera una
-firma visual o sello digital con fecha y hora exacta de recepción,
-bloqueando el avance al estado "Diagnosticada" si falta completar algún
-punto del checklist obligatorio. \\
+se finaliza el formulario de inspección, entonces el sistema guarda con
+el registro la fecha y hora UTC de recepción y la huella SHA-256 del
+registro y sus fotografías (como en RNF-04), de modo que cualquier
+cambio posterior se detecta al verificar la huella; y rechaza el paso
+al estado "Diagnosticada" mientras falte algún punto obligatorio del
+checklist o alguna de las 4 fotografías (RN-12). \\
 Reglas de negocio & RN-12 (Evidencia fotográfica de recepción), RN-07
 (Clasificación de vehículos autorizados). \\
 Wireframe & W-01 (Figura 4.5) \\
@@ -566,14 +568,17 @@ físicamente al taller \\
 Criterio de aceptación 1 & Dado que la cotización ha sido generada por
 el taller, cuando el sistema envía el aviso, entonces el cliente recibe
 un enlace por correo electrónico (o por SMS cuando se habilite RF-02.3)
-que no requiere registro previo ni contraseña, operando mediante un
-token temporal firmado. \\
+que abre la cotización sin pedir registro ni contraseña; el enlace
+funciona mientras el vehículo está en el taller y deja de abrir la
+cotización al entregar y saldar la unidad (RN-01). \\
 Criterio de aceptación 2 & Dado que el cliente revisa el desglose en su
 dispositivo móvil, cuando presiona el botón "Autorizar" e ingresa un
-código 2FA válido (HU-14), entonces el sistema registra de forma
-inalterable la dirección IP, fecha, hora y el monto final aceptado,
-cambiando automáticamente el estado de la orden a "Autorizada" y
-notificando al mecánico responsable. \\
+código 2FA válido (HU-14), entonces el sistema guarda la dirección
+IP, la fecha y hora UTC, el identificador de la orden, el monto final
+aceptado y la huella SHA-256 del documento (RNF-04), cambia el estado
+de la orden a "Autorizada" y envía un aviso al mecánico responsable.
+Si la cotización tiene más de 5 días naturales (RN-11), rechaza la
+autorización y la orden no cambia de estado. \\
 Reglas de negocio & RN-01 (Expiración y vigencia de enlaces), RN-02
 (Doble verificación en autorizaciones), RN-11 (Vigencia de
 cotizaciones). \\
@@ -604,7 +609,10 @@ seleccionando el día y la hora disponible, para apartar un espacio sin
 necesidad de realizar llamadas telefónicas. \\
 Criterio de aceptación 1 & Dado que el cliente accede al portal web,
 cuando selecciona fecha, hora y tipo de servicio, entonces el sistema
-valida que exista disponibilidad en la agenda del taller. \\
+solo acepta horarios con menos de 4 citas confirmadas (una por bahía,
+RN-05) y rechaza con un mensaje los horarios ya completos; las
+solicitudes en estado "Pendiente" no ocupan lugar en la agenda
+(RN-08). \\
 Criterio de aceptación 2 & Dado que se envía la solicitud, cuando se
 registra con éxito, entonces queda en estado "Pendiente" a la espera de
 la confirmación manual de la recepcionista. \\
@@ -669,12 +677,17 @@ Historia & Como recepcionista del taller, quiero buscar a un cliente o
 vehículo registrado mediante su número telefónico o placas, para
 agilizar el proceso de recepción en visitas recurrentes. \\
 Criterio de aceptación 1 & Dado que la recepcionista se encuentra en el
-módulo de búsqueda, cuando ingresa los dígitos de las placas o el
-teléfono, entonces el sistema filtra instantáneamente la base de datos
-de clientes recurrentes. \\
+módulo de búsqueda, cuando escribe los dígitos de las placas o el
+teléfono, entonces el sistema actualiza la lista con cada carácter
+escrito, sin presionar un botón de búsqueda, y muestra solo los
+clientes y vehículos cuyo teléfono o placas contienen esos caracteres
+(0 resultados que no coincidan); si ninguno coincide, la lista queda
+vacía. \\
 Criterio de aceptación 2 & Dado que se localiza el expediente, cuando el
-usuario lo selecciona, entonces el sistema precarga los datos generales
-del cliente y del auto para evitar duplicidad de registros. \\
+usuario lo selecciona, entonces el sistema precarga los datos del
+cliente (nombre, teléfono y correo) y del vehículo (placas, marca y
+modelo) y, al guardar la recepción, no crea un nuevo registro de
+cliente ni de vehículo (0 duplicados en la base de datos). \\
 Reglas de negocio & Sin regla de negocio específica; ver RF-03.1. \\
 Wireframe & Se define en 4.10 (Review 2) \\
 Casos de prueba & Se definen en 5.2 (Review 2) \\
@@ -703,10 +716,13 @@ con cita previa seleccionando su folio de origen, para que el sistema
 precargue automáticamente los datos del cliente y del auto. \\
 Criterio de aceptación 1 & Dado que el cliente llega al taller con cita
 agendada, cuando la recepcionista introduce el número de folio de la
-cita, entonces el sistema recupera la información asociada. \\
+cita, entonces el sistema llena el formulario de recepción con los
+datos del cliente y del vehículo guardados en esa cita; si el folio no
+existe, muestra un mensaje de error y no llena ningún campo. \\
 Criterio de aceptación 2 & Dado que los datos están precargados, cuando
-se procede con el ingreso, entonces el sistema vincula la cita
-directamente con la nueva orden de servicio abierta. \\
+se procede con el ingreso, entonces la nueva orden de servicio queda
+guardada con el folio de la cita, y la cita muestra el folio de esa
+orden. \\
 Reglas de negocio & RN-08 (Confirmación manual de citas web). \\
 Wireframe & W-01 (Figura 4.5) \\
 Casos de prueba & CPA-33 \\
@@ -738,9 +754,10 @@ registran una orden activa, cuando la recepcionista intenta registrar la
 entrada de un nuevo vehículo, entonces el sistema emite una advertencia
 visual en pantalla indicando "Sin Bahías Disponibles". \\
 Criterio de aceptación 2 & Dado que se activa la alerta de saturación,
-cuando el usuario acepta la notificación, entonces el sistema permite
-guardar el registro temporal asignando la unidad al estacionamiento de
-espera. \\
+cuando el usuario acepta la notificación, entonces el sistema guarda
+el registro con la unidad asignada al estacionamiento de espera; si ya
+hay 5 vehículos en espera (RN-05), rechaza el registro con un mensaje y
+no lo guarda. \\
 Reglas de negocio & RN-05 (Capacidad física del taller). \\
 Wireframe & W-01 (Figura 4.5) \\
 Casos de prueba & CPA-05, CPA-06 \\
@@ -772,8 +789,9 @@ cuando el jefe de mecánicos selecciona una de las 4 bahías físicas
 libres, entonces el sistema actualiza el estado de la bahía a
 "Ocupada". \\
 Criterio de aceptación 2 & Dado que las 4 bahías están ocupadas, cuando
-se intenta una asignación, entonces el sistema emite una alerta
-impidiendo el cruce de unidades en la misma bahía. \\
+se intenta una asignación, entonces el sistema rechaza la asignación,
+muestra el aviso "Sin Bahías Disponibles" y ninguna bahía queda con más
+de 1 vehículo (RN-05). \\
 Reglas de negocio & RN-05 (Capacidad física del taller), RN-09
 (Asignación y colaboración de mecánicos). \\
 Wireframe & W-02 (Figura 4.6) \\
@@ -803,8 +821,9 @@ técnico y las observaciones iniciales en la tableta, para cambiar el
 estado de la orden a "Diagnosticada". \\
 Criterio de aceptación 1 & Dado que el jefe de mecánicos se encuentra
 autenticado en la tableta, cuando selecciona una orden con vehículo en
-bahía, entonces visualiza un formulario táctil optimizado con campos
-amplios para el dictamen técnico. \\
+bahía, entonces visualiza el formulario del dictamen técnico con
+botones y campos de al menos 48 × 48 px, separados al menos 8 px, y
+texto con contraste de al menos 7:1 (RNF-02). \\
 Criterio de aceptación 2 & Dado que se ingresan las observaciones de la
 revisión, cuando se presiona "Guardar Diagnóstico", entonces el sistema
 actualiza automáticamente el estado de la orden a "Diagnosticada" y
@@ -838,8 +857,9 @@ insumos que los mecánicos detecten durante la revisión, para que el área
 de almacén gestione su cotización o pedido. \\
 Criterio de aceptación 1 & Dado que un mecánico reporta piezas
 necesarias en la bahía, cuando el jefe de mecánicos las añade desde la
-tableta y las vincula a la orden, entonces la solicitud se envía
-automáticamente al módulo de almacén. \\
+tableta y las vincula a la orden, entonces, sin otro paso del usuario,
+cada pieza aparece en la lista de solicitudes del almacén con el folio
+de la orden y el estatus "Solicitada". \\
 Criterio de aceptación 2 & Dado que el almacén recibe el requerimiento,
 cuando se procesa, entonces el sistema refleja el estatus de la
 refacción como "Solicitada" o "Pedida". \\
@@ -872,11 +892,12 @@ de las 4 bahías de trabajo en una interfaz simplificada para tabletas,
 para conocer rápidamente qué unidades están listas o en proceso. \\
 Criterio de aceptación 1 & Dado que el jefe de mecánicos accede al
 tablero de control, cuando visualiza la sección de bahías, entonces
-identifica mediante códigos de color las unidades activas, en
-diagnóstico o listas. \\
+ve las 4 bahías, cada una con el folio de su orden y su estado (libre,
+en diagnóstico, en reparación o lista) escrito con texto y con un color
+distinto por estado, con contraste de al menos 7:1 (RNF-02). \\
 Criterio de aceptación 2 & Dado que se actualiza el estado de una
-reparación, cuando cambia de fase, entonces el tablero refresca la
-información en tiempo real para optimizar la supervisión del taller. \\
+reparación, cuando cambia de fase, entonces el tablero muestra el nuevo estado de
+esa bahía sin que el usuario recargue la página. \\
 Reglas de negocio & RN-05 (Capacidad física del taller). Usabilidad en
 tableta: RNF-02. \\
 Wireframe & W-02 (Figura 4.6) \\
@@ -941,8 +962,9 @@ servicios opcionales dentro de mi cotización antes de aprobarla, para
 adaptar el presupuesto a mis necesidades financieras. \\
 Criterio de aceptación 1 & Dado que el cliente revisa el presupuesto
 desglosado en su celular, cuando marca o desmarca las casillas de
-servicios opcionales o sugeridos, entonces el sistema recalcula el costo
-total en tiempo real. \\
+servicios opcionales o sugeridos, entonces, sin recargar la página, el
+total mostrado es igual a la suma de los conceptos marcados más IVA, y
+los conceptos desmarcados no se suman. \\
 Criterio de aceptación 2 & Dado que se ajustan los opcionales, cuando el
 cliente procede a la firma, entonces el sistema guarda únicamente los
 conceptos seleccionados como parte oficial de la orden. \\
@@ -974,13 +996,15 @@ aprobación mediante un código de verificación de 2 pasos enviado a mi
 correo, para autorizar los trabajos de forma segura ya sea de forma
 presencial o remota. \\
 Criterio de aceptación 1 & Dado que el cliente accede al enlace web de
-cotización, when solicita el código de autorización, entonces el sistema
-envía un token numérico de 6 dígitos al correo electrónico registrado
-del cliente. \\
+cotización, cuando solicita el código de autorización, entonces el
+sistema envía al correo electrónico registrado del cliente un código
+numérico de 6 dígitos, de un solo uso y vigente 5 minutos (RN-02). \\
 Criterio de aceptación 2 & Dado que el cliente ingresa el código
 recibido en la interfaz, cuando presiona "Autorizar Presupuesto",
-entonces el sistema valida el token, registra la dirección IP y la marca
-de tiempo, cambiando la orden a "Autorizada". \\
+entonces el sistema valida el código, guarda la dirección IP, la fecha
+y hora UTC y la huella SHA-256 del documento (RNF-04) y cambia la orden
+a "Autorizada"; si el código es incorrecto, ya se usó o tiene más de 5
+minutos, rechaza la autorización y la orden no cambia de estado. \\
 Reglas de negocio & RN-02 (Doble verificación en autorizaciones). No
 repudio: RNF-04. \\
 Wireframe & W-04 (Figura 4.8) \\
@@ -1012,9 +1036,9 @@ Criterio de aceptación 1 & Dado que el cliente evalúa la cotización en
 su dispositivo, cuando presiona el botón "Rechazar", entonces el sistema
 solicita una confirmación de la acción. \\
 Criterio de aceptación 2 & Dado que se confirma el rechazo, cuando se
-procesa, entonces la orden cambia a estatus "Rechazada" y notifica a
-recepción para coordinar la entrega física del auto sin costo de
-reparación. \\
+procesa, entonces la orden cambia a estatus "Rechazada", recepción
+recibe un aviso con el folio de la orden y la orden queda con \$0 de
+cargo por reparación. \\
 Reglas de negocio & RN-02 (Doble verificación en autorizaciones). Flujo
 de rechazo: CU-11 (A1). \\
 Wireframe & W-04 (Figura 4.8) \\
@@ -1047,8 +1071,10 @@ cuando el incremento total supera el 10\% del presupuesto aprobado,
 entonces el sistema bloquea el flujo y solicita una nueva autorización
 con código 2FA. \\
 Criterio de aceptación 2 & Dado que el cliente recibe la notificación
-del sobrecosto, cuando aprueba mediante el código digital, entonces se
-actualiza el monto total e historial de la orden. \\
+del sobrecosto, cuando aprueba mediante el código 2FA, entonces el
+monto total de la orden pasa al nuevo monto aprobado, el historial
+conserva el monto anterior y la nueva autorización (con fecha y hora
+UTC, IP y huella SHA-256, RNF-04) y la orden vuelve a avanzar. \\
 Reglas de negocio & RN-04 (Re-cotización obligatoria por sobrecostos),
 RN-02 (Doble verificación en autorizaciones). \\
 Wireframe & W-03 (Figura 4.7) \\
