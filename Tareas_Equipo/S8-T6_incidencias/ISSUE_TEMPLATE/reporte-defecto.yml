@@ -1,0 +1,63 @@
+name: Reporte de defecto
+description: Algo no se comporta como dice el requisito, o el documento se contradice
+labels: ["tipo:defecto", "estado:triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Un reporte describe un solo problema. Si encontraste tres, abre tres issues.
+        Se reporta sobre el producto, nunca sobre las personas.
+  - type: input
+    id: version
+    attributes:
+      label: Versión probada
+      description: Commit, rama o versión del documento (por ejemplo v0.2.19)
+    validations:
+      required: true
+  - type: input
+    id: requisito
+    attributes:
+      label: Requisito, historia o caso de prueba
+      description: Por ejemplo RF-06, HU-14 o CPA-42
+    validations:
+      required: true
+  - type: textarea
+    id: pasos
+    attributes:
+      label: Pasos para reproducir
+      description: Numerados y con datos concretos (solo datos ficticios)
+      placeholder: |
+        1. Abrir la orden OS-0001
+        2. ...
+    validations:
+      required: true
+  - type: textarea
+    id: esperado
+    attributes:
+      label: Resultado esperado (cita el requisito)
+    validations:
+      required: true
+  - type: textarea
+    id: obtenido
+    attributes:
+      label: Resultado obtenido
+      description: Lo que pasó exactamente, sin interpretarlo
+    validations:
+      required: true
+  - type: textarea
+    id: evidencia
+    attributes:
+      label: Evidencia
+      description: Captura, registro o enlace a la línea del documento
+  - type: dropdown
+    id: severidad
+    attributes:
+      label: Severidad propuesta
+      description: La prioridad la decide el Product Owner en el triage
+      options:
+        - "S1 Bloqueante"
+        - "S2 Alta"
+        - "S3 Media"
+        - "S4 Baja"
+    validations:
+      required: true

@@ -1,0 +1,52 @@
+name: Solicitud de cambio
+description: El cliente pide algo nuevo o distinto a lo que dice el SRS
+labels: ["tipo:cambio", "estado:triage"]
+body:
+  - type: input
+    id: solicita
+    attributes:
+      label: Quién lo pide
+    validations:
+      required: true
+  - type: textarea
+    id: solicitud
+    attributes:
+      label: Solicitud
+      description: Qué pide el cliente, en sus palabras
+    validations:
+      required: true
+  - type: textarea
+    id: motivo
+    attributes:
+      label: Motivo
+      description: Qué problema resuelve
+    validations:
+      required: true
+  - type: textarea
+    id: afectados
+    attributes:
+      label: Elementos afectados
+      description: RF, RNF, RN, historias, casos de uso, diagramas y casos de prueba
+  - type: input
+    id: esfuerzo
+    attributes:
+      label: Esfuerzo
+      description: Puntos de historia nuevos o modificados
+  - type: textarea
+    id: riesgo
+    attributes:
+      label: Riesgo
+  - type: textarea
+    id: opciones
+    attributes:
+      label: Opciones
+      description: Dos o tres alternativas con su costo. Nunca solo «sí» o «no»
+  - type: textarea
+    id: recomendacion
+    attributes:
+      label: Recomendación del equipo
+  - type: textarea
+    id: decision
+    attributes:
+      label: Decisión del cliente
+      description: Opción elegida, fecha y referencia a la minuta. Se llena después de la sesión
