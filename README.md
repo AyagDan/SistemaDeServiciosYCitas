@@ -176,6 +176,7 @@ Versión vigente: **v0.2.20**.
 | v0.2.10 | B7 · Máquina de estados de la Orden | #68 | #77 |
 | v0.2.11 | B2 · Guion de la sesión con el cliente (segunda parte) | #29 | #82 |
 | v0.2.12 | B10 · Procedimientos de contingencia en la sesión con el cliente | #81 | #82 |
+| v0.2.13 | B8 · Reclasificación y complemento de los RNF | #83 | #84 |
 | v0.2.20 | B9 · Criterios de aceptación verificables | #94 | #95 |
 
 ## Contenido del repositorio
