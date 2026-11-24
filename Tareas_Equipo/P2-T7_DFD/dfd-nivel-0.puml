@@ -1,0 +1,113 @@
+@startuml dfd-nivel-0
+' P2-T7 · Diagrama 0: abre el proceso 0 del diagrama de contexto.
+' Balanceado: los 23 flujos con entidades externas son los mismos del contexto.
+' Exportar con: java -jar plantuml.jar -charset UTF-8 -tpng dfd-nivel-0.puml
+!pragma layout smetana
+skinparam shadowing false
+skinparam rectangle {
+  BorderColor #1F4E9A
+  BackgroundColor #FFFFFF
+}
+skinparam rectangle<<entidad>> {
+  BackgroundColor #EAF0FA
+}
+skinparam rectangle<<proceso>> {
+  RoundCorner 30
+  BackgroundColor #FFF7E0
+}
+skinparam rectangle<<almacen>> {
+  BackgroundColor #F2F2F2
+}
+hide stereotype
+
+' Entidades externas
+rectangle "Cliente" <<entidad>> as cliente
+rectangle "Recepcionista" <<entidad>> as recep
+rectangle "Jefe de mecánicos" <<entidad>> as jefe
+rectangle "Gerente" <<entidad>> as gerente
+rectangle "Encargado de almacén" <<entidad>> as almacen
+rectangle "Servicio de correo" <<entidad>> as correo
+
+' Procesos
+rectangle "1\n\nGestionar citas" <<proceso>> as P1
+rectangle "2\n\nRecibir vehículo\ny abrir orden" <<proceso>> as P2
+rectangle "3\n\nDiagnosticar\ny asignar" <<proceso>> as P3
+rectangle "4\n\nCotizar\ny autorizar" <<proceso>> as P4
+rectangle "5\n\nGestionar\nrefacciones" <<proceso>> as P5
+rectangle "6\n\nCobrar\ny entregar" <<proceso>> as P6
+rectangle "7\n\nConsultar\ny monitorear" <<proceso>> as P7
+rectangle "8\n\nAdministrar\npersonal" <<proceso>> as P8
+
+' Almacenes
+rectangle "D1 | Clientes y vehículos" <<almacen>> as D1
+rectangle "D2 | Citas" <<almacen>> as D2
+rectangle "D3 | Órdenes de servicio" <<almacen>> as D3
+rectangle "D4 | Recepciones" <<almacen>> as D4
+rectangle "D5 | Cotizaciones y autorizaciones" <<almacen>> as D5
+rectangle "D6 | Refacciones y compras" <<almacen>> as D6
+rectangle "D7 | Pagos" <<almacen>> as D7
+rectangle "D8 | Personal" <<almacen>> as D8
+
+' 1 Gestionar citas
+cliente --> P1 : solicitud de cita
+recep --> P1 : confirmación de cita
+P1 --> recep : agenda del día
+P1 --> D2 : cita
+D2 --> P1 : citas del día
+D1 --> P1 : datos del cliente
+
+' 2 Recibir vehículo y abrir orden
+recep --> P2 : datos del cliente y vehículo
+recep --> P2 : datos de recepción
+P2 --> recep : alerta de bahías ocupadas
+D2 --> P2 : cita confirmada
+P2 --> D1 : cliente y vehículo
+P2 --> D4 : recepción con fotografías
+P2 --> D3 : orden abierta
+D3 --> P2 : bahías ocupadas
+
+' 3 Diagnosticar y asignar
+jefe --> P3 : asignación de bahía y mecánico
+jefe --> P3 : diagnóstico
+P3 --> jefe : órdenes asignadas
+D8 --> P3 : mecánicos activos
+D3 --> P3 : orden abierta
+P3 --> D3 : orden diagnosticada
+
+' 4 Cotizar y autorizar
+jefe --> P4 : conceptos de la cotización
+cliente --> P4 : respuesta a la cotización
+cliente --> P4 : código de verificación
+P4 --> cliente : cotización
+P4 --> correo : notificación al cliente
+D1 --> P4 : correo del cliente
+D3 --> P4 : orden diagnosticada
+P4 --> D5 : cotización y autorización
+D5 --> P4 : cotización vigente
+P4 --> D3 : estado de la orden
+
+' 5 Gestionar refacciones
+jefe --> P5 : solicitud de refacciones
+almacen --> P5 : datos de la compra
+P5 --> almacen : solicitudes pendientes
+P5 --> D6 : solicitud y compra
+D6 --> P5 : existencias
+
+' 6 Cobrar y entregar
+recep --> P6 : datos del pago
+gerente --> P6 : autorización de crédito
+P6 --> recep : comprobante de entrega
+D5 --> P6 : monto autorizado
+P6 --> D7 : pago
+P6 --> D3 : orden cerrada
+
+' 7 Consultar y monitorear
+D3 --> P7 : órdenes y estados
+D7 --> P7 : pagos
+P7 --> cliente : estado del vehículo
+P7 --> gerente : panel del taller
+
+' 8 Administrar personal
+gerente --> P8 : datos del personal
+P8 --> D8 : usuario
+@enduml

@@ -1,0 +1,61 @@
+@startuml dfd-nivel-1-proceso-4
+' P2-T7 · Diagrama de nivel 1 del proceso 4 «Cotizar y autorizar».
+' Balanceado con el diagrama 0: entran conceptos de la cotización, respuesta a la
+' cotización y código de verificación; salen cotización y notificación al cliente;
+' usa los almacenes D1, D3 y D5.
+' Exportar con: java -jar plantuml.jar -charset UTF-8 -tpng dfd-nivel-1-proceso-4.puml
+!pragma layout smetana
+skinparam shadowing false
+skinparam rectangle {
+  BorderColor #1F4E9A
+  BackgroundColor #FFFFFF
+}
+skinparam rectangle<<entidad>> {
+  BackgroundColor #EAF0FA
+}
+skinparam rectangle<<proceso>> {
+  RoundCorner 30
+  BackgroundColor #FFF7E0
+}
+skinparam rectangle<<almacen>> {
+  BackgroundColor #F2F2F2
+}
+hide stereotype
+
+rectangle "Jefe de mecánicos" <<entidad>> as jefe
+rectangle "Cliente" <<entidad>> as cliente
+rectangle "Servicio de correo" <<entidad>> as correo
+
+rectangle "4.1\n\nElaborar\ncotización" <<proceso>> as P41
+rectangle "4.2\n\nPublicar\ncotización" <<proceso>> as P42
+rectangle "4.3\n\nRegistrar decisión\ndel cliente" <<proceso>> as P43
+rectangle "4.4\n\nVerificar\ncódigo" <<proceso>> as P44
+rectangle "4.5\n\nRegistrar\nresultado" <<proceso>> as P45
+
+rectangle "D1 | Clientes y vehículos" <<almacen>> as D1
+rectangle "D3 | Órdenes de servicio" <<almacen>> as D3
+rectangle "D5 | Cotizaciones y autorizaciones" <<almacen>> as D5
+
+jefe --> P41 : conceptos de la cotización
+D3 --> P41 : orden diagnosticada
+P41 --> D5 : cotización emitida
+
+D5 --> P42 : cotización vigente
+D1 --> P42 : correo del cliente
+P42 --> cliente : cotización
+P42 --> correo : notificación al cliente
+
+cliente --> P43 : respuesta a la cotización
+D5 --> P43 : cotización vigente
+P43 --> D5 : conceptos seleccionados
+P43 --> P44 : monto a autorizar
+P43 --> P45 : rechazo
+
+cliente --> P44 : código de verificación
+D1 --> P44 : correo del cliente
+P44 --> correo : notificación al cliente
+P44 --> P45 : autorización verificada
+
+P45 --> D5 : cotización y autorización
+P45 --> D3 : estado de la orden
+@enduml
