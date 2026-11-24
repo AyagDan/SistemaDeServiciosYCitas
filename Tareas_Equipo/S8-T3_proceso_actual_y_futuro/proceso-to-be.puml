@@ -1,0 +1,92 @@
+@startuml proceso-to-be
+' S8-T3 · Proceso futuro (to-be) del flujo núcleo con el sistema.
+' Es el mismo flujo del proceso actual (docs/03-vision/proceso-as-is.puml):
+' recepción, diagnóstico y asignación, cotización y autorización.
+' Las notas verdes indican qué punto de dolor (PD) resuelve cada paso; la tabla
+' completa está en puntos-de-dolor.md.
+' Exportar con: java -jar plantuml.jar -charset UTF-8 -tpng proceso-to-be.puml
+title Proceso futuro (con el Sistema de Órdenes de Servicio y Citas)
+
+skinparam activity {
+  BackgroundColor #FFFFFF
+  BorderColor #1F4E9A
+}
+skinparam note {
+  BackgroundColor #E3F4E1
+  BorderColor #2E7D32
+}
+
+|Cliente|
+start
+:Llegar al taller con el vehículo;
+|Recepcionista|
+:Buscar o registrar al cliente y el vehículo;
+:Capturar kilometraje, combustible y checklist;
+:Tomar las 4 fotografías del vehículo;
+note right
+  Resuelve PD-02
+end note
+|Sistema|
+if (¿Checklist completo y 4 fotografías?) then ([sí])
+  :Abrir la orden con folio y sello de fecha y hora;
+else ([no])
+  :Indicar lo que falta;
+  |Recepcionista|
+  :Completar la recepción;
+  |Sistema|
+  :Abrir la orden con folio y sello de fecha y hora;
+endif
+if (¿Hay bahía libre?) then ([sí])
+else ([las 4 ocupadas])
+  :Mostrar «Sin bahías disponibles»;
+  |Recepcionista|
+  :Ubicar el vehículo en el estacionamiento;
+  |Sistema|
+  :Esperar a que se libere una bahía;
+endif
+|Jefe de mecánicos|
+:Asignar bahía y mecánico responsable;
+note right
+  Resuelve PD-04
+end note
+:Registrar el diagnóstico en la tableta;
+:Capturar los conceptos de la cotización;
+|Sistema|
+:Generar la cotización desglosada con vigencia de 5 días;
+:Enviar al cliente el enlace de seguimiento;
+note right
+  Resuelve PD-03 y PD-07
+end note
+|Cliente|
+:Revisar la cotización y elegir los opcionales;
+if (¿Aprueba?) then ([sí])
+  repeat
+    |Sistema|
+    :Enviar código de 6 dígitos al correo;
+    |Cliente|
+    :Escribir el código;
+  repeat while (¿Código válido y vigente?) is ([no]) not ([sí])
+  |Sistema|
+  :Registrar la autorización y pasar la orden a «Autorizada»;
+  note right
+    Resuelve PD-01
+  end note
+  |Jefe de mecánicos|
+  :Iniciar la reparación;
+  :Terminar los trabajos;
+  |Recepcionista|
+  :Cobrar y entregar el vehículo;
+  note right
+    En la Fase 1 el cobro y el cierre
+    siguen como hoy (propuesta del
+    release, pendiente del cliente)
+  end note
+  stop
+else ([no])
+  |Sistema|
+  :Cancelar la orden;
+  |Recepcionista|
+  :Coordinar la entrega sin reparar;
+  stop
+endif
+@enduml
