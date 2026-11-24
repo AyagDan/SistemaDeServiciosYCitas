@@ -1,0 +1,81 @@
+PENDIENTES DE LAS TAREAS EN EQUIPO
+Actualizado el 24 de noviembre de 2026
+
+En esta carpeta ya está lo que pudimos hacer sin el cliente. Lo que sigue es lo que falta, tarea por tarea.
+Ojo: las tareas que eran para la Review 2 (17 al 20 de noviembre) ya se pasaron de fecha. Las de la Review 3
+(P2-T6, P2-T7 y P2-T8) son para el 7 de diciembre a más tardar.
+
+
+Antes que nada
+
+Hay 5 PR abiertos sin integrar (#86, #88, #92, #93 y #95). Varias cosas de aquí dependen de ellos, sobre todo
+las minutas del #86 y el diagrama E-R del #92. Conviene integrarlos primero.
+
+Ninguno de los diagramas trae su imagen. Están los .puml, pero no pudimos exportar los PNG porque en la
+computadora donde se armaron no está instalado PlantUML. Hay que correr
+java -jar plantuml.jar -charset UTF-8 -tpng *.puml en cada carpeta y subir las imágenes.
+
+
+P2-T1 Matriz de interesados y guion
+- Hacer la entrevista con el encargado de almacén, el jefe de mecánicos, la recepcionista y alguien de
+  flotillas usando el guion. Nadie ha hablado con ellos todavía.
+- Escribir la minuta ese mismo día y pedir que la confirmen.
+- La tarea pedía guardar todo en docs/requisitos/. Lo dejamos aquí mientras el equipo lo revisa.
+
+P2-T3 Casos de uso
+- Preguntarle al cliente qué pasa si no hay bahía ni lugar en el estacionamiento, y cuántos intentos tiene el
+  cliente para escribir bien el código. Sin eso los dos casos quedan con una extensión abierta.
+- Pasar los dos casos a la sección 4.9 del documento.
+
+P2-T4 SRS v1.0 y trazabilidad
+- No podemos ponerle v1.0 al SRS hasta que el cliente lo firme, y el documento todavía no tiene la sección de
+  Aprobación del cliente que pide el machote.
+- Corregir los casos de prueba repetidos: CPA-02 y CPA-03 aparecen en HU-01 y en HU-09, CPA-10 en HU-02 y en
+  HU-12, y CPA-31 en HU-03 y en HU-30.
+- HU-28 es Must y no tiene ningún caso de prueba.
+- Buscar de dónde salieron RF-02.3, RF-08.1 y RF-08.3, o marcarlos como propuesta nuestra.
+- Agregar al documento la sección 5 con la matriz.
+
+P2-T6 Plan de pruebas
+- Ejecutar los 16 casos cuando estén construidas las historias y anotar el resultado.
+- Faltan los casos de los requisitos no funcionales (los CPN).
+
+P2-T7 DFD y P2-T8 modelo de datos
+- Exportar las imágenes y pasarlas a las secciones 6.1 y 6.2 del documento.
+- Cuando se integre el #92, revisar que nuestro E-R del flujo núcleo coincida con el que trae ese PR.
+
+S8-T2 Entrevista con el cliente
+- Agendar la entrevista con el profe. Esto no lo podemos hacer nosotros solos.
+- Hacerla con el guion de seguimiento, escribir la minuta en las siguientes 24 horas con la plantilla y
+  conseguir la confirmación por escrito.
+
+S8-T3 Proceso actual y futuro
+- Enseñarle el proceso futuro al cliente y que nos diga si así quiere trabajar.
+- Si no acepta el corte del release, hay que meter al diagrama el historial digital y las citas en línea.
+
+S8-T4 Prioridad, corte y cambio
+- La repriorización es una propuesta. El Product Owner tiene que decidir si la acepta; no cambiamos ninguna
+  prioridad ni en el documento ni en los issues.
+- La minuta del 20 de noviembre sigue sin fecha, sin asistentes y sin decisiones. Mientras el cliente no
+  decida, el corte del release sigue siendo propuesta.
+- Todavía no hay velocidad. Hay que sacarla al cerrar el Sprint 2 y volver a hacer la cuenta de los Must, que
+  ahorita pasan del 60 por ciento.
+- Si el profe manda otra solicitud de cambio, se analiza con la misma plantilla.
+
+S8-T6 Incidencias
+- Copiar los dos formularios a .github/ISSUE_TEMPLATE para que GitHub los muestre.
+- Las etiquetas que faltaban ya se crearon.
+- Falta el tablero de Projects. La sesión de GitHub CLI no tiene el permiso de proyectos y al intentar darle
+  el permiso el navegador estaba abierto con la cuenta de Abdías en vez de la de Ángel.
+- Hacer el primer triage para ponerle prioridad a los hallazgos de la Review 1 que siguen abiertos.
+- Abrir los issues tipo:cambio de D-1 y D-2.
+- La guía pide al menos dos triages por sprint registrados.
+
+S8-T8 Evidencia del proceso
+- Decidir si se protege main. El CONTRIBUTING dice que ya está protegida y que todo PR lleva revisión, pero no
+  es cierto. Si se activa, ya nada se integra sin que alguien apruebe.
+- Registrar fechas y puntos del Sprint 2.
+- Ponerle asignado y estimación a los issues de las historias.
+
+
+Las individuales no están aquí porque le tocan a cada quien: P2-T2, P2-T5, S8-T1, S8-T5 y S8-T7.
