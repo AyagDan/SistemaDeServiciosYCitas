@@ -1,0 +1,80 @@
+name: Hallazgo en un requisito
+description: Hallazgo de la revisión cruzada del SRS (prueba estática)
+labels: ["requisitos", "tipo:defecto-doc", "estado:triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Un issue por hallazgo, y solo los que se confirmaron en la reunión de revisión.
+        Se reporta sobre el producto, nunca sobre las personas.
+  - type: input
+    id: requisito
+    attributes:
+      label: ID del requisito
+      description: Por ejemplo RF-06, HU-14, RNF-04 o RN-11
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Versión revisada
+      description: Versión del documento (por ejemplo v0.2.20)
+    validations:
+      required: true
+  - type: dropdown
+    id: caracteristica
+    attributes:
+      label: Característica que falla (ISO/IEC/IEEE 29148)
+      options:
+        - Necesario
+        - Sin ambigüedad
+        - Completo
+        - Singular
+        - Factible
+        - Verificable
+        - Consistente
+    validations:
+      required: true
+  - type: dropdown
+    id: tecnica
+    attributes:
+      label: Técnica con la que se encontró
+      options:
+        - Inspección con lista de verificación
+        - Caso de prueba en papel
+        - Recorrido con un escenario real
+        - Validación con el cliente mediante un prototipo
+    validations:
+      required: true
+  - type: textarea
+    id: descripcion
+    attributes:
+      label: Descripción
+      description: Cita el texto del requisito y explica qué falla. Si es un caso en papel, di qué dato tuviste que inventar.
+    validations:
+      required: true
+  - type: textarea
+    id: propuesta
+    attributes:
+      label: Propuesta
+      description: Qué agregarías o cambiarías (por ejemplo, la fórmula y un ejemplo con números)
+    validations:
+      required: true
+  - type: dropdown
+    id: severidad
+    attributes:
+      label: Severidad propuesta
+      description: La prioridad la decide el Product Owner en el triage
+      options:
+        - "S1 Bloqueante"
+        - "S2 Alta"
+        - "S3 Media"
+        - "S4 Baja"
+    validations:
+      required: true
+  - type: input
+    id: revisor
+    attributes:
+      label: Revisor (Equipo A)
+    validations:
+      required: true
