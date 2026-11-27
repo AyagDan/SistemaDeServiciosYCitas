@@ -1,0 +1,57 @@
+@startuml dfd-contexto
+' P2-T7 · Diagrama de flujo de datos de contexto (notación aproximada de Gane y Sarson).
+' Todo el sistema es el proceso 0. No lleva almacenes.
+' Exportar con: java -jar plantuml.jar -charset UTF-8 -tpng dfd-contexto.puml
+!pragma layout smetana
+skinparam shadowing false
+skinparam rectangle {
+  BorderColor #1F4E9A
+  BackgroundColor #FFFFFF
+}
+skinparam rectangle<<entidad>> {
+  BackgroundColor #EAF0FA
+}
+skinparam rectangle<<proceso>> {
+  RoundCorner 30
+  BackgroundColor #FFF7E0
+}
+hide stereotype
+
+rectangle "Cliente" <<entidad>> as cliente
+rectangle "Recepcionista" <<entidad>> as recep
+rectangle "Jefe de mecánicos" <<entidad>> as jefe
+rectangle "Gerente" <<entidad>> as gerente
+rectangle "Encargado de almacén" <<entidad>> as almacen
+rectangle "Servicio de correo" <<entidad>> as correo
+
+rectangle "0\n\nSistema de Órdenes\nde Servicio y Citas" <<proceso>> as P0
+
+cliente --> P0 : solicitud de cita
+cliente --> P0 : respuesta a la cotización
+cliente --> P0 : código de verificación
+P0 --> cliente : cotización
+P0 --> cliente : estado del vehículo
+
+recep --> P0 : datos del cliente y vehículo
+recep --> P0 : datos de recepción
+recep --> P0 : confirmación de cita
+recep --> P0 : datos del pago
+P0 --> recep : agenda del día
+P0 --> recep : alerta de bahías ocupadas
+P0 --> recep : comprobante de entrega
+
+jefe --> P0 : asignación de bahía y mecánico
+jefe --> P0 : diagnóstico
+jefe --> P0 : conceptos de la cotización
+jefe --> P0 : solicitud de refacciones
+P0 --> jefe : órdenes asignadas
+
+almacen --> P0 : datos de la compra
+P0 --> almacen : solicitudes pendientes
+
+gerente --> P0 : datos del personal
+gerente --> P0 : autorización de crédito
+P0 --> gerente : panel del taller
+
+P0 --> correo : notificación al cliente
+@enduml
