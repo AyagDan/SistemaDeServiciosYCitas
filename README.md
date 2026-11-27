@@ -17,7 +17,7 @@ cotización con autorización del cliente por código de verificación, refaccio
 | Profesor(a) | Florentino Ruiz Aquino |
 | Equipo | B (5 integrantes) |
 | Cliente | Servicio Automotriz Hermanos Ruiz, S.A. de C.V. |
-| Entrega | Review 1 corregida · versión **v0.2.10** · 18/11/2026 |
+| Entrega | Review 1 corregida · versión **v0.2.20** · 27/11/2026 |
 
 ## Problema que resuelve
 
@@ -158,6 +158,7 @@ La evidencia de la última ejecución está en [`docs/pruebas/resultado-pruebas.
 |---|---|---|---|
 | Review 0 | v0.1 | Portada, 1, 2.1–2.4, 3 | `docs/entregas/IS1-Fase1-EquipoB-v0.1.docx` (versión en Word, antes de migrar a LaTeX) |
 | Review 1 (corregida) | v0.2.10 | + 4.1–4.7, 6.5 y 13 | `docs/entregas/IS1-Fase1-EquipoB-v0.2.10.pdf` |
+| Review 1 (integración) | v0.2.20 | Documento completo con las correcciones integradas hasta v0.2.20 | `docs/entregas/IS1-Fase1-EquipoB-v0.2.20.pdf` y `docs/entregas/IS1-Fase1-EquipoB-v0.2.20.docx` |
 
 Cada corrección aumenta en uno el tercer dígito de la versión y tiene una etiqueta de Git con ese nombre.
 Versión vigente: **v0.2.20**.
