@@ -29,12 +29,13 @@ CREATE TYPE tipo_vehiculo       AS ENUM ('Automovil', 'Motocicleta', 'Camioneta'
 CREATE TYPE estado_cita         AS ENUM ('Pendiente', 'Confirmada', 'Cancelada');
 CREATE TYPE estado_bahia        AS ENUM ('Libre', 'Ocupada');
 CREATE TYPE estado_orden        AS ENUM ('Abierta', 'EnEsperaDeBahia', 'Diagnosticada', 'Autorizada', 'EnReparacion', 'EsperandoRefaccion', 'EsperandoAutorizacionAdicional', 'ListaParaEntrega', 'Cerrada', 'Cancelada');
-CREATE TYPE nivel_combustible   AS ENUM ('Reserva', 'UnCuarto', 'Mitad', 'TresCuartos', 'Lleno');
+CREATE TYPE nivel_combustible   AS ENUM ('Reserva', 'UnCuarto', 'Mitad', 'TresCuartos', 'Lleno', 'NoVerificable');
+CREATE TYPE metodo_combustible  AS ENUM ('OBDII', 'ComputadoraViaje', 'MedicionLitros', 'DeclaracionCliente');
 CREATE TYPE posicion_foto       AS ENUM ('Frente', 'Trasera', 'Izquierda', 'Derecha', 'Otra');
 CREATE TYPE canal               AS ENUM ('Correo', 'SMS');
 CREATE TYPE estado_cotizacion   AS ENUM ('Pendiente', 'Autorizada', 'Rechazada', 'Vencida');
 CREATE TYPE tipo_concepto       AS ENUM ('ManoDeObra', 'Refaccion', 'Insumo');
-CREATE TYPE medio_autorizacion  AS ENUM ('Remoto', 'Presencial');
+CREATE TYPE medio_autorizacion  AS ENUM ('Remoto', 'Presencial', 'FirmaEnPapel');
 CREATE TYPE tipo_autorizacion   AS ENUM ('Inicial', 'IncrementoMayor10');
 CREATE TYPE estado_autorizacion AS ENUM ('Pendiente', 'Confirmada', 'Rechazada', 'Expirada');
 CREATE TYPE estado_solicitud    AS ENUM ('Solicitada', 'Pedida', 'RecibidaParcial', 'Recibida');
@@ -152,6 +153,8 @@ CREATE TABLE orden_servicio (
     id_usuario_responsable      INTEGER      REFERENCES usuario (id_usuario),
     numero_bahia                SMALLINT     REFERENCES bahia (numero),
     id_usuario_autoriza_credito INTEGER      REFERENCES usuario (id_usuario),
+    -- RN-15: folio de la Bitácora de Contingencia de una orden capturada después del corte.
+    folio_provisional           VARCHAR(14)  UNIQUE CHECK (folio_provisional ~ '^C-[0-9]{8}-[0-9]{2}$'),
     CONSTRAINT ck_orden_entrega CHECK (fecha_entrega IS NULL OR fecha_entrega >= fecha_apertura),
     CONSTRAINT ck_orden_credito CHECK (NOT entrega_a_credito OR id_usuario_autoriza_credito IS NOT NULL)
 );
@@ -227,7 +230,14 @@ CREATE TABLE recepcion_vehicular (
     id_cita           INTEGER           UNIQUE REFERENCES cita (id_cita),
     fecha_hora        TIMESTAMPTZ       NOT NULL,
     kilometraje       INTEGER           NOT NULL CHECK (kilometraje >= 0),
-    nivel_combustible nivel_combustible NOT NULL
+    nivel_combustible nivel_combustible NOT NULL,
+    -- RN-14 (4.7.1 A): método de estimación y litros medidos cuando el indicador no funciona.
+    metodo_combustible metodo_combustible,
+    litros_medidos     NUMERIC(5,1)      CHECK (litros_medidos > 0),
+    CONSTRAINT ck_recepcion_no_verificable CHECK (
+        (nivel_combustible = 'NoVerificable') = (metodo_combustible IS NOT NULL)),
+    CONSTRAINT ck_recepcion_litros CHECK (
+        (metodo_combustible IS NOT DISTINCT FROM 'MedicionLitros') = (litros_medidos IS NOT NULL))
 );
 
 -- ChecklistInspeccion (RecepcionVehicular ◆ 1)
@@ -328,13 +338,15 @@ CREATE TABLE autorizacion (
     medio                    medio_autorizacion  NOT NULL,
     tipo                     tipo_autorizacion   NOT NULL DEFAULT 'Inicial',
     monto_aceptado           NUMERIC(10,2)       NOT NULL CHECK (monto_aceptado >= 0),
-    codigo_verificacion_hash VARCHAR(255)        NOT NULL,
+    codigo_verificacion_hash VARCHAR(255),
     estado                   estado_autorizacion NOT NULL DEFAULT 'Pendiente',
     token_hash               CHAR(64)            REFERENCES token_acceso (token_hash),
     -- RNF-04: huella SHA-256 de lo aceptado (conceptos, monto, fecha, IP, medio);
     -- la API la recalcula para detectar alteraciones del registro.
     huella_sha256            CHAR(64),
     CONSTRAINT ck_autorizacion_huella CHECK (estado <> 'Confirmada' OR huella_sha256 IS NOT NULL),
+    -- Solo la firma en papel (RN-15) prescinde del código 2FA.
+    CONSTRAINT ck_autorizacion_codigo CHECK (medio = 'FirmaEnPapel' OR codigo_verificacion_hash IS NOT NULL),
     -- La autorización remota llega por el enlace del cliente y registra su IP.
     CONSTRAINT ck_autorizacion_remota CHECK (
         medio <> 'Remoto' OR (token_hash IS NOT NULL AND ip IS NOT NULL))

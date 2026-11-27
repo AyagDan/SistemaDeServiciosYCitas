@@ -139,6 +139,13 @@ Diagrama de clases del dominio, generado a partir de `backend/app/models.py` con
 - [`clases-1-operacion.png`](docs/06-analisis/clases/clases-1-operacion.png): clientes, citas, recepción y orden de servicio.
 - [`clases-2-cotizacion-cobro.png`](docs/06-analisis/clases/clases-2-cotizacion-cobro.png): cotización, autorización, cobro y garantía.
 
+Diagrama entidad-relación de las 20 tablas que usa el backend, generado a partir de los mismos modelos con
+`docs/06-analisis/er/generar_er.py`. Las 6 tablas de refacciones, compras y proveedores (Fase 2) solo están en
+`db/schema.sql`.
+
+- [`er-1-operacion.png`](docs/06-analisis/er/er-1-operacion.png): clientes, citas, recepción y orden de servicio.
+- [`er-2-cotizacion-cobro.png`](docs/06-analisis/er/er-2-cotizacion-cobro.png): cotización, autorización, cobro y garantía.
+
 Mapa de tecnologías y cómo se comunican:
 
 ![Mapa de tecnologías](docs/07-arquitectura/tecnologias/diagrama-tecnologias.png)
@@ -147,7 +154,7 @@ Mapa de tecnologías y cómo se comunican:
 
 ```bash
 cd backend
-python -m pytest              # 42 pruebas
+python -m pytest              # 46 pruebas
 ```
 
 La evidencia de la última ejecución está en [`docs/pruebas/resultado-pruebas.txt`](docs/pruebas/resultado-pruebas.txt).

@@ -1,4 +1,4 @@
-# Versiones con las que pasan las 42 pruebas en un clon limpio (Python 3.13).
+# Versiones con las que pasan las 46 pruebas en un clon limpio (Python 3.13).
 # Requiere Python 3.12 o superior.
 fastapi==0.164.0
 uvicorn[standard]==0.54.0

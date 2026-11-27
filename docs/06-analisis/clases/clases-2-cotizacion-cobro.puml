@@ -78,6 +78,7 @@ enum TipoConcepto {
 enum MedioAutorizacion {
   Remoto
   Presencial
+  FirmaEnPapel
 }
 enum TipoAutorizacion {
   Inicial

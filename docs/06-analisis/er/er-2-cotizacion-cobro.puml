@@ -1,0 +1,78 @@
+@startuml er-2-cotizacion-cobro
+' Generado por docs/06-analisis/er/generar_er.py a partir de backend/app/models.py.
+title Diagrama entidad-relación · Cotización, autorización, cobro y garantía
+!pragma layout smetana
+skinparam shadowing false
+skinparam linetype ortho
+hide circle
+
+entity orden_servicio {
+}
+
+entity cotizacion {
+  * id_cotizacion : integer <<PK>>
+  --
+  * folio : varchar(20) <<FK>>
+  * version : integer
+  * fecha_emision : date
+  * vigencia_dias : integer
+  * estado : estado_cotizacion
+  id_cotizacion_reemplazada : integer <<FK>> <<UQ>>
+}
+
+entity detalle_cotizacion {
+  * id_detalle : integer <<PK>>
+  --
+  * id_cotizacion : integer <<FK>>
+  * concepto : varchar(200)
+  * tipo : tipo_concepto
+  * cantidad : integer
+  * precio_unitario : numeric(10, 2)
+  * opcional : boolean
+  * seleccionado : boolean
+}
+
+entity autorizacion {
+  * id_autorizacion : integer <<PK>>
+  --
+  * id_cotizacion : integer <<FK>>
+  * fecha_hora : datetime
+  ip : varchar(45)
+  * medio : medio_autorizacion
+  * tipo : tipo_autorizacion
+  * monto_aceptado : numeric(10, 2)
+  codigo_verificacion_hash : varchar(255)
+  * estado : estado_autorizacion
+  token_hash : varchar(64) <<FK>>
+  huella_sha256 : varchar(64)
+}
+
+entity pago {
+  * id_pago : integer <<PK>>
+  --
+  * id_cotizacion : integer <<FK>>
+  * monto : numeric(10, 2)
+  * fecha_hora : datetime
+  * metodo : varchar(30)
+}
+
+entity garantia {
+  * folio : varchar(20) <<PK>> <<FK>>
+  --
+  * fecha_inicio : date
+  * duracion_dias : integer
+  * alcance : varchar(20)
+}
+
+cotizacion ||--o{ autorizacion : id_cotizacion
+orden_servicio ||--o{ cotizacion : folio
+cotizacion |o--o| cotizacion : id_cotizacion_reemplazada
+cotizacion ||--o{ detalle_cotizacion : id_cotizacion
+orden_servicio ||--o| garantia : folio
+cotizacion ||--o{ pago : id_cotizacion
+
+legend right
+  * columna obligatoria (NOT NULL)
+  PK llave primaria · FK llave foránea · UQ única
+endlegend
+@enduml

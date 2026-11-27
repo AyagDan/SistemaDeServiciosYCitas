@@ -43,7 +43,7 @@ backend/
 │   │                     cotizaciones, cobro, panel), portal.py (enlace seguro del cliente)
 │   ├── servicios/        ordenes.py, cotizaciones.py, cobro.py, citas.py
 │   └── models.py, schemas.py, seguridad.py, config.py, db.py, ...
-├── tests/                42 pruebas automatizadas
+├── tests/                46 pruebas automatizadas
 ├── requirements.txt      dependencias con sus versiones
 └── .env.example          plantilla de configuración
 ```
@@ -62,6 +62,9 @@ en la sección 6.5 del documento y su fuente en `docs/06-analisis/estados/orden-
 `cita`, `orden_servicio`, `asignacion_colaborador`, `historial_estado`, `diagnostico`, `recepcion_vehicular`,
 `checklist_inspeccion`, `fotografia`, `token_acceso`, `cotizacion`, `detalle_cotizacion`, `autorizacion`, `pago`,
 `garantia`, `proveedor`, `refaccion`, `solicitud_refaccion`, `compra`, `detalle_compra` y `entrega_refaccion`.
+
+El diagrama entidad-relación de las 20 tablas que usa el backend está en `docs/06-analisis/er/` y se genera a partir
+de `models.py` con `python docs/06-analisis/er/generar_er.py`. Las 6 tablas de refacciones y compras son de la Fase 2.
 
 Las reglas de integridad viven también en la base de datos: tipos enumerados para los estados, restricciones
 `CHECK` (por ejemplo, una cita confirmada exige bahía y usuario que la confirma, y un crédito exige quién lo

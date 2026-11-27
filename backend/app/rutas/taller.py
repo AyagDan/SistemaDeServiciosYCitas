@@ -28,6 +28,7 @@ def abrir_orden(datos: schemas.Recepcion, db: Session = Depends(get_db),
     """Registra la recepción del vehículo y abre la orden (HU-01, HU-07, RN-05)."""
     orden, sin_bahias = ordenes.abrir_orden(
         db, usuario, kilometraje=datos.kilometraje, nivel_combustible=datos.nivel_combustible,
+        metodo_combustible=datos.metodo_combustible, litros_medidos=datos.litros_medidos,
         id_vehiculo=datos.id_vehiculo, id_cita=datos.id_cita, checklist=datos.checklist.model_dump())
     db.commit()
     return schemas.OrdenAbierta(orden=detalle_orden(orden), alerta_sin_bahias=sin_bahias)

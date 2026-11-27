@@ -32,7 +32,7 @@ DIAGRAMAS = {
          "AsignacionColaborador", "HistorialEstado", "Diagnostico", "RecepcionVehicular", "ChecklistInspeccion",
          "Fotografia", "TokenAcceso"],
         ["RolUsuario", "TipoVehiculo", "EstadoCita", "EstadoBahia", "EstadoOrden", "NivelCombustible",
-         "PosicionFoto", "Canal"],
+         "MetodoCombustible", "PosicionFoto", "Canal"],
     ),
     "clases-2-cotizacion-cobro": (
         "Cotización, autorización, cobro y garantía",
