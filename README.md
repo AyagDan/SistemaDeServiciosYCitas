@@ -178,6 +178,8 @@ Versión vigente: **v0.2.20**.
 | v0.2.11 | B2 · Guion de la sesión con el cliente (segunda parte) | #29 | #82 |
 | v0.2.12 | B10 · Procedimientos de contingencia en la sesión con el cliente | #81 | #82 |
 | v0.2.13 | B8 · Reclasificación y complemento de los RNF | #83 | #84 |
+| v0.2.14 | B10 · Aceptación del cliente de los procedimientos de contingencia | #81 | #86 |
+| v0.2.15 | B3 · Minuta de la entrevista con la transcripción y registro de reuniones | #85 | #86 |
 | v0.2.20 | B9 · Criterios de aceptación verificables | #94 | #95 |
 
 ## Contenido del repositorio
@@ -194,7 +196,7 @@ Versión vigente: **v0.2.20**.
 | `db/` | Esquema de PostgreSQL (`schema.sql`) |
 | `docs/pruebas/` | Evidencia de la ejecución de las pruebas automatizadas |
 | `informacion/` | Material de referencia del curso: machote del documento, observaciones de la Review 1 y su plan de atención, reglas de negocio y de datos, propuesta de solución (resumen en `contexto.md` y original en Word) e indicaciones de clase |
-| `docs/minutas/` | Minutas de las Sprint Reviews |
+| `docs/minutas/` | Minutas de las reuniones con el cliente, del equipo y de las Sprint Reviews, con su cronología (`README.md`) |
 | `CONTRIBUTING.md` | Acuerdos de trabajo del equipo |
 
 Las historias de usuario (HU-01 a HU-30) están registradas como issues del repositorio (#31 a #60),

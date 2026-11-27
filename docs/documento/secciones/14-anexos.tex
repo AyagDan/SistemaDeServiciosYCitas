@@ -134,22 +134,30 @@ se cita como fuente en las reglas de negocio de la sección 4.7.
 \endhead
 \bottomrule
 \endlastfoot
-E-01 & Toda autorización de cotización, remota o presencial, debe tener
-una doble verificación con un código de 6 dígitos. & RN-02 \\
+E-01 & Toda autorización de cotización, remota o presencial, debe
+verificarse dos veces: después de «Aceptar», el cliente confirma de nuevo
+su decisión («sí, acepto»), para que después no diga que no lo verificó.
+El equipo implementa esa segunda verificación con un código de 6
+dígitos. & RN-02 \\
 E-02 & El cliente puede aprobar o rechazar por separado los conceptos
-opcionales de una cotización; solo se ejecuta lo autorizado. & RN-03 \\
+de una cotización (por ejemplo, cambiar solo los brazos y dejar las
+rótulas para después); solo se ejecuta lo autorizado y el cliente firma
+lo que autoriza y lo que no. & RN-03 \\
 E-03 & El enlace de seguimiento del cliente funciona mientras el vehículo
-está en el taller y vence al entregarlo y saldarlo. & RN-01 \\
+está en el taller y vence al entregarlo y saldarlo. Si después el
+cliente pide su historial, se genera un enlace nuevo. & RN-01 \\
 E-04 & El taller tiene 4 bahías (un vehículo por bahía) y un
 estacionamiento de espera para 5 vehículos. & RN-05 \\
 E-05 & Si una refacción tarda varios días, el vehículo pasa al
-estacionamiento para liberar la bahía. & RN-06 \\
-E-06 & Solo se atienden vehículos ligeros: automóviles, motocicletas y
-camionetas de hasta 3 toneladas. & RN-07 \\
+estacionamiento, en espera, para liberar la bahía. & RN-06 \\
+E-06 & Solo se atienden vehículos automotrices ligeros: automóviles,
+motocicletas y camionetas de hasta 3 toneladas. Tractocamiones, tráilers y
+tortons son pesados, y las bicicletas no se atienden. & RN-07 \\
 E-07 & Las citas pedidas en línea no apartan lugar hasta que la
 recepcionista las confirma. & RN-08 \\
 E-08 & Varios mecánicos pueden colaborar en una orden, pero siempre hay
-un responsable. & RN-09 \\
+un responsable; la orden solo se reasigna a otro mecánico si el
+responsable deja el trabajo. & RN-09 \\
 E-09 & No se entrega un vehículo con saldo pendiente; solo el gerente
 puede autorizar la entrega a crédito a flotillas empresariales
 registradas. & RN-10 \\
@@ -157,8 +165,44 @@ E-10 & Hay cortes de luz e internet; el personal necesita seguir
 capturando sin conexión. & RNF-08, RNF-09 \\
 E-11 & El jefe de mecánicos trabajará con 1 o 2 tabletas en un ambiente
 con ruido, polvo y manos sucias. & 4.3.1, RNF-02, RNF-03 \\
+E-12 & La cotización se explica y se autoriza en persona en la sucursal,
+por WhatsApp o por correo electrónico. & RF-06 \\
+E-13 & Integrar la API de WhatsApp tiene costo (Meta solo da gratis una
+parte); la de Telegram es gratuita. Si se usa una API con costo, debe
+contemplarse en el presupuesto. & 4.3.2 \\
+E-14 & El correo electrónico es el canal mínimo indispensable, pero
+también se pide el teléfono: si el cliente no responde el correo, se le
+avisa por WhatsApp o SMS. & RF-02.3, 4.3.2 \\
+E-15 & La recepcionista toma las fotografías con su celular; si el
+proyecto lo requiere, la empresa puede otorgar un dispositivo móvil. El
+equipo debe proponer qué se necesita además de lo que ya hay. & RF-04 \\
+E-16 & Proceso actual, todo manual: la recepción registra a mano los
+datos del vehículo, que pasa al estacionamiento; desde ahí solo los
+mecánicos lo mueven a la bahía. El mecánico diagnostica y pasa los datos
+a la recepcionista, que calcula la cotización y llama al cliente si no
+está esperando. Al terminar, el mecánico avisa y la recepcionista llama
+al cliente para que salde y recoja su vehículo. & 3.5 \\
+E-17 & El almacén tiene insumos y refacciones de uso general: aceites,
+filtros de gasolina y de aceite, y brazos estabilizadores, entre
+otros. & RF-08.1, RF-08.2 \\
+E-18 & La recepcionista no necesita conocimientos técnicos de
+mecánica. & 4.3.1 \\
+E-19 & En las flotillas empresariales, la autorización la valida el
+gerente. & RN-16 \\
+E-20 & El cliente no tiene más reglas que agregar y acepta cambiar el
+flujo de trabajo del taller siempre que lo haga más efectivo. & 3.6
+(Operativa) \\
 \end{longtable}
 }
+
+Los hallazgos E-01 a E-09 y E-12 a E-20 se contrastaron con la
+transcripción de la entrevista. E-10 responde a la pregunta 22 del guion
+(equipos y cortes de luz o de internet), que queda después del fragmento
+transcrito; lo confirma la duda D-1 que el cliente planteó el 23/10/2026
+(\ruta{docs/minutas/2026-10-23-sesion-cliente-propuestas.md}). E-11
+proviene de la Propuesta de Solución Tecnológica (interfaz para tabletas en
+un área con ruido y manos sucias) y de la restricción de 4.3.2 (máximo 2
+tabletas).
 
 \textbf{Pendientes para la siguiente sesión con el cliente.} Confirmar el
 mínimo de 4 fotografías al recibir el vehículo (RN-12) y la fuente de la
@@ -238,6 +282,8 @@ B7 & v0.2.10 & \#68 & \#77 & Se agregaron los estados EnReparacion, EsperandoRef
 B2 & v0.2.11 & \#29 & \#82 & Segunda parte: se agregó el guion de la sesión con el cliente (\ruta{docs/minutas/2026-11-20-sesion-cliente-alcance.md}) con los cuatro puntos de decisión de la propuesta. Falta realizar la sesión, registrar las decisiones del cliente y, con lo aceptado, actualizar 3.3, 3.6, 4.5 y el story map; el issue sigue abierto. \\
 B10 & v0.2.12 & \#81 & \#82 & Los procedimientos de contingencia de 4.7.1 se incluyeron en el guion de la misma sesión, para que el cliente los acepte, los pase a la Fase 2 o los rechace. Falta registrar su decisión en la minuta y aplicarla en 4.7.1; el issue sigue abierto. \\
 B8 & v0.2.13 & \#83 & \#84 & RNF-07 se trasladó a las restricciones de 4.3.2; RNF-05 ya no pide cifrar datos sensibles (3.6 establece que no se tratan) y exige guardar los secretos solo como hash; se agregaron RNF-11 (adecuación funcional), RNF-12 (compatibilidad), RNF-13 (protección) y RNF-14 (mantenibilidad), con lo que 4.6 considera las nueve características de ISO/IEC 25010:2023. Falta comprobar los umbrales nuevos cuando existan la interfaz y sus casos de prueba. \\
+B10 & v0.2.14 & \#81 & \#86 & El cliente aceptó los dos procedimientos de 4.7.1 el 09/11/2026 (\ruta{docs/minutas/2026-11-09-sesion-cliente-soluciones.md}); se mantienen en el SRS y RN-14 y RN-15 citan esa aceptación. Falta confirmar el umbral de 4 horas y el plazo de 24 horas de la contingencia en papel. \\
+B3 & v0.2.15 & \#85 & \#86 & Seguimiento: la minuta A.2 se contrastó con la transcripción de la entrevista; E-01 registra la doble confirmación que pidió el cliente y se agregaron los hallazgos E-12 a E-20. Se registraron las minutas del 23/10, 24/10 y 09/11/2026 y la cronología de reuniones (\ruta{docs/minutas/README.md}). E-19 se refleja en la nueva regla RN-16 (autorización de flotillas por el Gerente) y se indicó la fuente de E-10 y E-11. Faltan la hora, la modalidad y los asistentes de las reuniones con el cliente. \\
 B9 & v0.2.20 & \#94 & \#95 & Se reescribieron en 4.5 los criterios de aceptación vagos (HU-01 a HU-03, HU-05 a HU-11, HU-13 a HU-18, HU-20, HU-21, HU-25, HU-26, HU-28 y HU-29) con resultados comprobables, usando los valores de RNF-01, RNF-02, RNF-03, RNF-04, RNF-06, RNF-08, RNF-09 y de RN-01, RN-02, RN-05, RN-08, RN-10, RN-11 y RN-12. El tiempo máximo de actualización del tablero de HU-11 (30 s) es el de RNF-03. \\
 \end{longtable}
 }

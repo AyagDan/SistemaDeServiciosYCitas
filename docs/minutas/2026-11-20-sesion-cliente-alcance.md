@@ -10,8 +10,10 @@
 | Fecha, hora y modalidad | Pendiente: se registra al realizar la sesión |
 | Asistentes | Pendiente: se registran al realizar la sesión |
 
-Las secciones 3.3, 3.6, 4.5, 4.7.1 y el story map no cambian hasta que el cliente decida y su decisión
-conste en esta minuta.
+Las secciones 3.3, 3.6, 4.5 y el story map no cambian hasta que el cliente decida y su decisión conste en
+esta minuta. Los procedimientos de contingencia de 4.7.1 (B10) ya los aceptó el cliente el 09/11/2026
+([minuta](2026-11-09-sesion-cliente-soluciones.md)); aquí solo quedan por confirmar el umbral de 4 horas y el
+plazo de 24 horas.
 
 ## 1. Alcance del Release v0.1.0 (B2)
 
@@ -75,7 +77,7 @@ usó:
 En el sistema, el selector de combustible de la recepción gana la opción «No verificable», con el método,
 el valor obtenido y una fotografía del tablero.
 
-Decisión del cliente: Pendiente.
+Decisión del cliente: aceptado el 09/11/2026 ([minuta](2026-11-09-sesion-cliente-soluciones.md)).
 
 ### 2.2 Cortes prolongados de luz o de internet (RN-15, parte B)
 
@@ -85,9 +87,9 @@ Contingencia impresa, con folios provisionales `C-AAAAMMDD-NN`, autorización so
 cliente y recibos provisionales en efectivo. Al restablecerse el servicio, todo se captura en el sistema en
 las 24 horas siguientes.
 
-Decisión del cliente: Pendiente.
+Decisión del cliente: aceptado el 09/11/2026 ([minuta](2026-11-09-sesion-cliente-soluciones.md)).
 
-Preguntas de detalle, si el cliente acepta el procedimiento:
+Preguntas de detalle, que no constan en la sesión del 09/11/2026:
 
 - ¿El umbral de 4 horas para pasar a papel es adecuado? Decisión del cliente: Pendiente.
 - ¿El plazo de 24 horas para capturar en el sistema lo registrado en papel es adecuado? Decisión del
@@ -107,7 +109,7 @@ Se hacen después de la sesión, solo con lo que el cliente haya aceptado:
 
 - **B2:** el alcance del Release v0.1.0 en 3.3, las restricciones de 3.6, el release de cada historia en
   4.5 y el story map (Figura 4.1).
-- **B10:** los procedimientos aceptados se quedan en 4.7.1 y RN-14 y RN-15 dejan de decir «Propuesta del
-  equipo; validar con el cliente». Los que pasen a la Fase 2 o se rechacen se mueven o se retiran del SRS.
+- **B10:** aplicado. Los dos procedimientos se quedan en 4.7.1 y RN-14 y RN-15 citan la aceptación del
+  09/11/2026 en lugar de «Propuesta del equipo; validar con el cliente».
 
 Firma de conformidad del cliente: Pendiente.
