@@ -1,0 +1,74 @@
+@startuml diagrama-casos-de-uso
+' P2-T3 · Diagrama de casos de uso del sistema completo.
+' Reúne en una sola vista los casos CU-01 a CU-13 de las figuras 4.2, 4.3 y 4.4
+' del Documento de Ingeniería. Exportar con:
+'   java -jar plantuml.jar -charset UTF-8 -tpng diagrama-casos-de-uso.puml
+!pragma layout smetana
+left to right direction
+skinparam packageStyle rectangle
+skinparam usecase {
+  BackgroundColor #FFFFFF
+  BorderColor #1F4E9A
+}
+
+actor "Cliente" as cliente
+actor "Recepcionista" as recep
+actor "Jefe de mecánicos" as jefe
+actor "Gerente" as gerente
+actor "Encargado de almacén" as almacen
+actor "Servicio de correo" as correo
+
+rectangle "Sistema de Órdenes de Servicio y Citas" {
+  usecase "CU-09 Solicitar cita\ndesde la web" as CU09
+  usecase "CU-10 Consultar el estado\ndel vehículo" as CU10
+  usecase "CU-11 Aprobar la cotización\nde forma remota (2FA)" as CU11
+  usecase "Rechazar cotización" as RECH
+  usecase "Seleccionar servicios\nopcionales" as OPC
+
+  usecase "CU-01 Confirmar cita web" as CU01
+  usecase "CU-02 Recibir el vehículo\ny abrir la orden" as CU02
+  usecase "CU-03 Firmar el contrato\nde forma presencial (2FA)" as CU03
+  usecase "CU-04 Cobrar y entregar\nel vehículo" as CU04
+  usecase "CU-07 Finalizar el trabajo\ny sellar el historial" as CU07
+
+  usecase "CU-05 Diagnosticar, cotizar\ny asignar el trabajo" as CU05
+  usecase "CU-06 Solicitar refacciones" as CU06
+
+  usecase "CU-08 Atender la solicitud de\nrefacciones y registrar la compra" as CU08
+
+  usecase "CU-12 Monitorear el taller" as CU12
+  usecase "CU-13 Autorizar la entrega\na crédito (flotillas)" as CU13
+
+  usecase "Autenticarse" as AUT
+}
+
+cliente --> CU09
+cliente --> CU10
+cliente --> CU11
+RECH .> CU11 : <<extend>>
+OPC .> CU11 : <<extend>>
+
+recep --> CU01
+recep --> CU02
+recep --> CU03
+recep --> CU04
+recep --> CU07
+
+jefe --> CU05
+jefe --> CU06
+
+almacen --> CU08
+
+gerente --> CU12
+gerente --> CU13
+
+CU01 ..> AUT : <<include>>
+CU02 ..> AUT : <<include>>
+CU05 ..> AUT : <<include>>
+CU08 ..> AUT : <<include>>
+CU12 ..> AUT : <<include>>
+CU13 ..> AUT : <<include>>
+
+CU11 --> correo
+CU03 --> correo
+@enduml
