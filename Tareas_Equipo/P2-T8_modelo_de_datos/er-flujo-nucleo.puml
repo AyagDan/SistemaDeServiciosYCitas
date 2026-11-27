@@ -1,0 +1,157 @@
+@startuml er-flujo-nucleo
+' P2-T8 · Modelo entidad-relación del flujo núcleo en notación de pata de gallo.
+' Corresponde a las tablas de db/schema.sql que usa el Release v0.1.0.
+' Exportar con: java -jar plantuml.jar -charset UTF-8 -tpng er-flujo-nucleo.puml
+!pragma layout smetana
+hide circle
+skinparam linetype ortho
+skinparam shadowing false
+skinparam class {
+  BorderColor #1F4E9A
+  BackgroundColor #FFFFFF
+}
+
+entity cliente {
+  * id_cliente : integer <<PK>>
+  --
+  * tipo_cliente : varchar(10)
+  * telefono : varchar
+  * correo : varchar
+}
+entity cliente_particular {
+  * id_cliente : integer <<PK, FK>>
+  --
+  * nombre : varchar
+}
+entity flotilla {
+  * id_cliente : integer <<PK, FK>>
+  --
+  * razon_social : varchar
+  * credito_habilitado : boolean
+}
+entity vehiculo {
+  * id_vehiculo : integer <<PK>>
+  --
+  * id_cliente : integer <<FK>>
+  * placas : varchar(15) <<UQ>>
+  * marca : varchar
+  * modelo : varchar
+  * anio : smallint
+  vin : varchar(17) <<UQ>>
+  * tipo : tipo_vehiculo
+}
+entity usuario {
+  * id_usuario : integer <<PK>>
+  --
+  * nombre : varchar
+  * correo : varchar <<UQ>>
+  contrasena_hash : varchar
+  * rol : rol_usuario
+  * activo : boolean
+}
+entity bahia {
+  * numero : smallint <<PK>> (1 a 4)
+  --
+  * estado : estado_bahia
+}
+entity orden_servicio {
+  * folio : varchar(20) <<PK>>
+  --
+  * fecha_apertura : timestamp
+  * estado : estado_orden
+  fecha_entrega : timestamp
+  * entrega_a_credito : boolean
+  * id_vehiculo : integer <<FK>>
+  * id_usuario_abre : integer <<FK>>
+  id_usuario_responsable : integer <<FK>>
+  numero_bahia : smallint <<FK>>
+  id_usuario_autoriza_credito : integer <<FK>>
+}
+entity asignacion_colaborador {
+  * folio : varchar(20) <<PK, FK>>
+  * id_usuario : integer <<PK, FK>>
+  --
+  * fecha_asignacion : timestamp
+}
+entity recepcion_vehicular {
+  * id_recepcion : integer <<PK>>
+  --
+  * folio : varchar(20) <<FK, UQ>>
+  * fecha_hora : timestamp
+  * kilometraje : integer
+  * nivel_combustible : nivel_combustible
+}
+entity checklist_inspeccion {
+  * id_checklist : integer <<PK>>
+  --
+  * id_recepcion : integer <<FK, UQ>>
+  * carroceria : text
+  * interiores : text
+  observaciones : text
+  * completo : boolean
+}
+entity fotografia {
+  * id_foto : integer <<PK>>
+  --
+  * id_recepcion : integer <<FK>>
+  * archivo : varchar
+  * posicion : posicion_foto
+  * fecha_hora : timestamp
+}
+entity diagnostico {
+  * id_diagnostico : integer <<PK>>
+  --
+  * folio : varchar(20) <<FK>>
+  * id_usuario : integer <<FK>>
+  * fecha_hora : timestamp
+  * descripcion : text
+}
+entity cotizacion {
+  * id_cotizacion : integer <<PK>>
+  --
+  * folio : varchar(20) <<FK>>
+  * version : integer
+  * fecha_emision : date
+  * vigencia_dias : integer
+  * estado : estado_cotizacion
+}
+entity detalle_cotizacion {
+  * id_detalle : integer <<PK>>
+  --
+  * id_cotizacion : integer <<FK>>
+  * concepto : varchar
+  * tipo : tipo_concepto
+  * cantidad : integer
+  * precio_unitario : numeric(10,2)
+  * opcional : boolean
+  * seleccionado : boolean
+}
+entity autorizacion {
+  * id_autorizacion : integer <<PK>>
+  --
+  * id_cotizacion : integer <<FK>>
+  * fecha_hora : timestamp
+  * medio : medio_autorizacion
+  * tipo : tipo_autorizacion
+  * monto_aceptado : numeric(10,2)
+  * estado : estado_autorizacion
+}
+
+cliente ||--o| cliente_particular
+cliente ||--o| flotilla
+cliente ||--o{ vehiculo : tiene
+vehiculo ||--o{ orden_servicio : recibe
+usuario ||--o{ orden_servicio : abre
+usuario |o--o{ orden_servicio : es responsable
+bahia |o--o{ orden_servicio : ocupa
+orden_servicio ||--o{ asignacion_colaborador
+usuario ||--o{ asignacion_colaborador : colabora
+orden_servicio ||--o| recepcion_vehicular
+recepcion_vehicular ||--o| checklist_inspeccion
+recepcion_vehicular ||--o{ fotografia
+orden_servicio ||--o{ diagnostico
+usuario ||--o{ diagnostico : registra
+orden_servicio ||--o{ cotizacion
+cotizacion ||--|{ detalle_cotizacion
+cotizacion ||--o{ autorizacion
+@enduml
