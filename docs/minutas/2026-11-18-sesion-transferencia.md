@@ -7,9 +7,10 @@
 | Expone | Tech Lead (Abdías Daniel Chávez Cruz) |
 | Fecha límite | Miércoles 18 de noviembre de 2026 |
 | Fecha | Miércoles 18 de noviembre de 2026 |
-| Hora y modalidad | Pendiente |
+| Hora | 10:00 a 12:00 |
+| Modalidad | Presencial, en la universidad |
 | Temas expuestos | Estructura del backend, reglas de negocio implementadas y pruebas (1.1, 1.4 y 1.5) |
-| Asistentes | Pendiente |
+| Asistentes | Ángel Yael Avendaño Guzmán, Abdías Daniel Chávez Cruz, Dulce María Estudillo Rosado, Isis Alhelí González Maldonado, Isis Yamilet Meléndez Hernández |
 
 En la Review cualquier integrante puede ser preguntado sobre cualquier parte del documento o del
 repositorio. Por eso cada tema termina con preguntas de comprobación que responde alguien distinto de quien
@@ -85,8 +86,9 @@ Preguntas de comprobación:
 
 - La Definición de Terminado (2.2) exige pruebas automatizadas y la integración continua en verde para cada
   historia.
-- Hoy el repositorio no tiene código ni pruebas automatizadas: el plan de pruebas (sección 5) y la
-  implementación corresponden a cortes posteriores.
+- El backend FastAPI (`backend/app/`) separa rutas, servicios y modelos; sus 42 pruebas automatizadas
+  (`backend/tests/`) se ejecutan con `python -m pytest` y cubren acceso, recepción, cotización, estados de
+  la orden, cobro, citas y panel.
 - Se explica cómo se verificó cada cambio hecho con IA: compilación del documento sin errores y comprobación
   de los datos contra GitHub y contra `informacion/`.
 
@@ -97,20 +99,43 @@ Preguntas de comprobación:
 
 ## 2. Desarrollo de la sesión
 
-Pendiente: se registra al realizar la sesión.
+El Tech Lead expuso cada tema y después otro integrante respondió sus preguntas de comprobación.
 
 | Tema | Quién respondió las preguntas de comprobación | Dudas que surgieron | Resuelta (sí / no) |
 |---|---|---|---|
-| 1.1 Estructura del repositorio | Pendiente | Pendiente | Pendiente |
-| 1.2 Flujo de trabajo en GitHub | Pendiente | Pendiente | Pendiente |
-| 1.3 Correcciones integradas | Pendiente | Pendiente | Pendiente |
-| 1.4 Reglas de negocio | Pendiente | Pendiente | Pendiente |
-| 1.5 Pruebas | Pendiente | Pendiente | Pendiente |
+| 1.1 Estructura del repositorio | Isis Yamilet Meléndez Hernández | ¿Se sube el PDF que genera `pdflatex` en `docs/documento/`? No: los `.aux`, `.log`, `.toc` y ese PDF no se suben; la entrega va en `docs/entregas/`. | Sí |
+| 1.2 Flujo de trabajo en GitHub | Ángel Yael Avendaño Guzmán | ¿Quién borra la rama después del merge? Quien integra, en GitHub y en local, después de comprobar que no le quedan commits sin integrar. | Sí |
+| 1.3 Correcciones integradas | Dulce María Estudillo Rosado | ¿Por qué B6 tiene varias versiones? Porque se entrega por partes: la declaración (v0.2.6), el guion de la sesión (v0.2.7) y el complemento de la declaración (v0.2.9). | Sí |
+| 1.4 Reglas de negocio | Isis Alhelí González Maldonado | ¿El 10 % de RN-04 se mide contra la cotización anterior o contra la primera? Contra la primera cotización autorizada de la orden (`backend/app/servicios/cotizaciones.py`). | Sí |
+| 1.5 Pruebas | Dulce María Estudillo Rosado | Las pruebas usan SQLite en memoria: ¿cómo se comprueba que funcionan con PostgreSQL? Todavía no se comprueba; es el riesgo R-11 y se atiende cuando exista la integración continua. | No: responsable QA Lead |
+
+### Respuestas a las preguntas de comprobación
+
+**1.1 · Isis Yamilet Meléndez Hernández**
+- La versión se cambia en `\versiondoc` de `docs/documento/IS1-Fase1-EquipoB.tex` y aparece en la portada y el encabezado. Además se registra en el control de versiones, el Anexo F, el README y una etiqueta de Git.
+- El PDF se compila desde `docs/documento/` con `pdflatex -interaction=nonstopmode IS1-Fase1-EquipoB.tex`, dos veces. Si falla, se buscan en el `.log` las líneas que empiezan con `!`.
+
+**1.2 · Ángel Yael Avendaño Guzmán**
+- HU-12 es el issue #42, así que su rama sería `feat/42-presupuesto-desglosado`.
+- Después de la v0.2.10 sigue la v0.2.11. Se registra en la portada, el control de versiones, el Anexo F, el README, una etiqueta de Git y un comentario en el issue.
+
+**1.3 · Dulce María Estudillo Rosado**
+- La propuesta deja 11 historias (40 puntos) en el Release v0.1.0: HU-01, HU-02, HU-07, HU-08, HU-09, HU-12, HU-14, HU-15, HU-27, HU-28 y HU-30.
+- La operación sin conexión (HU-25 y HU-26, 16 puntos) pasa a la Fase 2 porque es el mayor riesgo técnico (R-02) y no forma parte del flujo núcleo del anteproyecto.
+- Cada fila de la declaración de IA sale de la declaración original de la v0.1 y del historial del repositorio. Responde por ellas Abdías Daniel Chávez Cruz.
+
+**1.4 · Isis Alhelí González Maldonado**
+- Si la cotización sube exactamente 10 %, el trabajo sigue: RN-04 solo detiene el avance cuando el aumento es mayor al 10 %. Si sube 10.06 %, se detiene hasta tener una nueva autorización del cliente.
+- RN-08 se respalda en el hallazgo E-07 de la minuta de la entrevista (Anexo A.2).
+
+**1.5 · Dulce María Estudillo Rosado**
+- Una historia está terminada cuando cumple la Definición de Terminado (2.2): Pull Request revisado, criterios de aceptación verificados por el Product Owner, pruebas automatizadas e integración continua sin errores, solo datos ficticios, documentación actualizada y, desde el Sprint 4, desplegada en el ambiente de pruebas.
+- La declaración de IA y la evidencia de 12.2 se comprobaron contra GitHub (commits, PR e issues) y contra `informacion/correcionesContexto.md`.
 
 ## 3. Acuerdos
 
-Pendiente: se registran al realizar la sesión. Como mínimo:
-
-- Cada autor declara en 2.6 si usó IA en el contenido original de las secciones 1 a 4 y cómo verificó el
-  resultado, para eliminar la fila «Pendiente».
-- Responsable y fecha de cada duda que quede sin resolver.
+| # | Acuerdo | Responsable | Fecha |
+|---|---|---|---|
+| 1 | Cada autor declara en 2.6 si usó IA en el contenido original de las secciones 1 a 4 y cómo verificó el resultado, para eliminar la fila «Pendiente». | Cada integrante | 25/11/2026 |
+| 2 | Comprobar con PostgreSQL las pruebas automatizadas cuando exista la integración continua (duda de 1.5, R-11). | QA Lead | Sprint 2 |
+| 3 | Las Developers y la QA Lead hacen los commits de contenido de su área; el Scrum Master se queda con issues, coordinación y versiones. | Scrum Master | 18/11/2026 |

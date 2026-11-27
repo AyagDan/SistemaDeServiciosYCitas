@@ -120,10 +120,10 @@ contraseñas en el repositorio.
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-S0 & \pendiente{} & Conocer al cliente, levantar los requisitos
+S0 & 14/10/2026 -- 29/10/2026 & Conocer al cliente, levantar los requisitos
 iniciales y preparar el repositorio y el documento base. &
 Sí & --- & --- \\
-S1 & \pendiente{} & SRS en borrador (4.1--4.7) para validarlo con el
+S1 & 30/10/2026 -- 10/11/2026 & SRS en borrador (4.1--4.7) para validarlo con el
 cliente. & Sí: el borrador se valida con el cliente en la Review 1 &
 0 & 0 \\
 \end{longtable}
@@ -160,8 +160,8 @@ terminadas según la DoD.
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-S0 & \pendiente{} & \pendiente{} & --- & --- \\
-S1 & \ruta{docs/minutas/2026-11-10-review-1.md} & \pendiente{} & --- & --- \\
+S0 & \ruta{docs/minutas/2026-10-29-review-0.md} & \ruta{docs/minutas/2026-10-29-retrospectiva-sprint-0.md} & A1: subir avances al menos dos veces por semana. A2: pasar el documento a un formato que git pueda fusionar. A3: revisar cada PR por otro integrante. & A1: no. A2: parcial (LaTeX desde el 11/11/2026). A3: no. \\
+S1 & \ruta{docs/minutas/2026-11-10-review-1.md} & \ruta{docs/minutas/2026-11-10-retrospectiva-sprint-1.md} & A1: un issue, una rama y un PR por observación. A2: sesión interna de transferencia. A3: repartir los commits entre Developers y QA. A4: revisar cada PR por otro integrante. & A1, A2 y A3: sí (Sprint 2). A4: no. \\
 \end{longtable}
 }
 
@@ -243,8 +243,8 @@ responsable: Developers & Abierto \\
 \subsection{2.6 Declaración de uso de inteligencia
 artificial}\label{declaracion-de-uso-de-ia}
 
-El equipo usó un asistente de inteligencia artificial antes de la v0.1 y después, para atender las
-observaciones de la Review 1. La tabla indica en qué se usó, cómo se verificó el resultado y quién
+El equipo usó asistentes de inteligencia artificial (Claude y Gemini) antes de la v0.1 y después, para
+atender las observaciones de la Review 1. La tabla indica en qué se usó, cómo se verificó el resultado y quién
 responde por él.
 
 {\small
@@ -280,8 +280,8 @@ sin errores y comprobación de que no quedan los stakeholders retirados ni las r
 Daniel Chávez Cruz \\
 Claude Code (Anthropic) & Corrección B3: Anexo A (guion y minuta de la entrevista) y fuentes de las
 reglas de 4.7 & Redactar el guion y la minuta, y ligar cada regla con su hallazgo & Cada regla de
-entrevista de 4.7 cita un hallazgo de la minuta. La minuta está pendiente de validar por el Product
-Owner contra sus notas de la entrevista & Abdías Daniel Chávez Cruz \\
+entrevista de 4.7 cita un hallazgo de la minuta. El Product Owner contrastó la minuta con la
+transcripción de la entrevista (v0.2.15) & Abdías Daniel Chávez Cruz \\
 Claude Code (Anthropic) & Corrección B4: issues de las 30 historias, números en 4.5, 2.3, minuta de la
 Review 1 y 12.2 & Registrar los issues a partir de 4.5, resumir la retroalimentación del profesor y
 contar commits, PR y revisiones & Datos comprobados contra GitHub y contra
@@ -298,12 +298,14 @@ Claude Code (Anthropic) & Versiones v0.2.1 en adelante: portada, control de vers
 README, etiquetas de Git, issues, ramas y Pull Requests & Aplicar los acuerdos de CONTRIBUTING.md en el
 repositorio & Estado del repositorio comprobado en GitHub después de cada cambio & Abdías Daniel Chávez
 Cruz \\
-Claude Code (Anthropic) & Corrección B1: diagramas de casos de uso (Figuras 4.2 a 4.4) y wireframes W-01 a W-06 (Figuras 4.5 a 4.10) con sus fuentes & Dibujar los diagramas y los wireframes a partir de la sección 4.9 y de la descripción de cada pantalla & Contenido comparado contra los casos de uso y la tabla de wireframes de 4.5; pendiente la validación del QA Lead & Abdías Daniel Chávez Cruz \\
+Claude Code (Anthropic) & Corrección B1: diagramas de casos de uso (Figuras 4.2 a 4.4) y wireframes W-01 a W-06 (Figuras 4.5 a 4.10) con sus fuentes & Dibujar los diagramas y los wireframes a partir de la sección 4.9 y de la descripción de cada pantalla & Contenido comparado contra los casos de uso y la tabla de wireframes de 4.5; validado por la QA Lead el 19/11/2026 & Abdías Daniel Chávez Cruz \\
 Claude Code (Anthropic) & Corrección B7: estados EnReparacion, EsperandoRefaccion y EsperandoAutorizacionAdicional en el modelo 6.5, la tabla TRANSICIONES del código y sus pruebas & Programar las transiciones y escribir 7 pruebas nuevas & Las 42 pruebas pasan (35 originales y 7 nuevas) & Abdías Daniel Chávez Cruz \\
 Claude Code (Anthropic) & Cumplimiento del checklist del repositorio: comentarios del backend, versiones fijadas, README, manual técnico (\ruta{docs/manual-tecnico.md}), sección 13, evidencia de pruebas y reporte en PDF & Redactar los textos a partir del código, del documento y de las fuentes del repositorio y generar el PDF & Instalación y ejecución probadas en un clon limpio; las 42 pruebas pasan; el documento compila sin errores & Abdías Daniel Chávez Cruz \\
-\pendiente{} & Secciones redactadas antes de la v0.1 que no aparecen en las filas anteriores y Propuesta
-de Solución Tecnológica & Cada autor declara la herramienta que usó o que no usó IA & \pendiente{} &
-Cada integrante \\
+Claude y Gemini & Versión v0.1: Propuesta de Solución Tecnológica y README iniciales & Apoyo en la redacción de su parte a partir del anteproyecto & Revisión del autor contra el anteproyecto y la entrevista del 19/10/2026, y revisión de la v0.1 por el Scrum Master / Tech Lead & Ángel Yael Avendaño Guzmán \\
+Claude y Gemini & Versión v0.1: requisitos funcionales y no funcionales y 3.4 (stakeholders) & Apoyo en la redacción de su parte a partir del anteproyecto & Revisión del autor contra el anteproyecto y la entrevista del 19/10/2026, y revisión de la v0.1 por el Scrum Master / Tech Lead & Dulce María Estudillo Rosado \\
+Claude y Gemini & Versión v0.1: historias de usuario (4.5) & Apoyo en la redacción de su parte a partir del anteproyecto & Revisión del autor contra el anteproyecto y la entrevista del 19/10/2026, y revisión de la v0.1 por el Scrum Master / Tech Lead & Isis Alhelí González Maldonado \\
+Claude y Gemini & Versión v0.1: estructura del documento según el machote y secciones 4.3, 4.7 y 4.8 & Apoyo en la redacción de su parte a partir del anteproyecto & Revisión del autor contra el anteproyecto y la entrevista del 19/10/2026, y revisión de la v0.1 por el Scrum Master / Tech Lead & Isis Yamilet Meléndez Hernández \\
+Claude y Gemini & Versión v0.1: diagrama inicial & Apoyo en la elaboración del diagrama a partir del anteproyecto & Revisión del autor contra el anteproyecto y la entrevista del 19/10/2026, y revisión de la v0.1 por el Scrum Master / Tech Lead & Abdías Daniel Chávez Cruz \\
 \end{longtable}
 }
 
@@ -311,7 +313,9 @@ Cada integrante \\
 datos ficticios. El asistente trabajó sobre el contenido del repositorio, que incluye los nombres y las
 matrículas de los integrantes (sección 1.1).
 
-\textbf{Concentración del trabajo.} Todo el uso del asistente estuvo a cargo de un solo integrante. Para
+\textbf{Concentración del trabajo.} En el contenido original de la v0.1 cada autor usó Claude y Gemini en su
+parte (últimas cinco filas), pero el uso de Claude Code en el repositorio y en las correcciones estuvo a cargo
+de un solo integrante. Para
 repartir ese conocimiento, el Tech Lead explica al equipo la estructura del repositorio, el flujo de
 trabajo, las correcciones integradas, las reglas de negocio y las pruebas en una sesión interna
 (observación B6). Su guion y su minuta están en

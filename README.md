@@ -180,6 +180,10 @@ Versión vigente: **v0.2.20**.
 | v0.2.13 | B8 · Reclasificación y complemento de los RNF | #83 | #84 |
 | v0.2.14 | B10 · Aceptación del cliente de los procedimientos de contingencia | #81 | #86 |
 | v0.2.15 | B3 · Minuta de la entrevista con la transcripción y registro de reuniones | #85 | #86 |
+| v0.2.16 | B4 · Fechas de sprints, retrospectivas, minutas internas y aportes (seguimiento) | #87 | #88 |
+| v0.2.17 | B1 · Validación de la QA Lead (seguimiento) | #87 | #88 |
+| v0.2.18 | B6 · Declaración de IA de cada integrante y minuta de la sesión interna (tercera parte) | #30 | #88 |
+| v0.2.19 | B10 · Campos del modelo y formatos de la Bitácora de Contingencia (implementación) | #81 | #88 |
 | v0.2.20 | B9 · Criterios de aceptación verificables | #94 | #95 |
 
 ## Contenido del repositorio
